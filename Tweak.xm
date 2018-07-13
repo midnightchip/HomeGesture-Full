@@ -1,7 +1,10 @@
 #import <SpringBoard/SpringBoard.h>
 #import <SpringBoard/SBApplication.h>
 #import <SparkAppList.h>
+
 #import "./prefs/libcolorpicker.h"
+
+#define isGreaterThanOrEqualTo(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 //ScreenShot Remap
 /*#import <IOKit/hid/IOHIDEventSystem.h>
 #import <IOKit/hid/IOHIDEventSystemClient.h>
@@ -11,6 +14,9 @@
 +(id)sharedApplication;
 -(void)takeScreenshot;
 @end*/
+
+@interface CCUIHeaderPocketView : UIView
+@end
 
 @interface NSUserDefaults (HomeGesture)
 - (id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
@@ -477,6 +483,74 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 		%orig;
 	}
 
+}
+%end
+
+%hook CCUIHeaderPocketView
+-(void)layoutSubviews{
+  %orig;
+  if ([self valueForKey:@"_headerBackgroundView"]) {
+    UIView *backgroundView = (UIView *)[self valueForKey:@"_headerBackgroundView"];
+    backgroundView.hidden = YES;
+  }
+  if ([self valueForKey:@"_headerLineView"]) {
+    UIView *lineView = (UIView *)[self valueForKey:@"_headerLineView"];
+    lineView.hidden = YES;
+  }
+}
+-(void)setBackgroundAlpha:(double)arg1{
+  %orig;
+  if (arg1==0){
+		//For iOS 11.1.2 and higher
+    if (isGreaterThanOrEqualTo(@"11.1.2")) {
+      if ([self valueForKey:@"_statusBar"]) {
+        UIView *statusBar = (UIView *)[self valueForKey:@"_statusBar"];
+        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+              [statusBar setAlpha:1.0];
+          } completion:nil];
+					//For iOS 11.0 through 11.1.1
+      } else if ([self valueForKey:@"_headerChevronView"]) {
+        UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
+        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+              [chevron setAlpha:1.0];
+          } completion:nil];
+      } else {
+
+      }
+    } else {
+      if ([self valueForKey:@"_headerChevronView"]) {
+      UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
+      [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [chevron setAlpha:1.0];
+        } completion:nil];
+      }
+    }
+  } else {
+		//For iOS 11.1.2 and higher
+    if (isGreaterThanOrEqualTo(@"11.1.2")) {
+      if ([self valueForKey:@"_statusBar"]) {
+        UIView *statusBar = (UIView *)[self valueForKey:@"_statusBar"];
+        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+              [statusBar setAlpha:0.0];
+          } completion:nil];
+					//For iOS 11.0 through 11.1.1
+      } else if ([self valueForKey:@"_headerChevronView"]) {
+        UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
+        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+              [chevron setAlpha:0.0];
+          } completion:nil];
+      } else {
+
+      }
+    } else {
+      if ([self valueForKey:@"_headerChevronView"]) {
+      UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
+      [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [chevron setAlpha:0.0];
+        } completion:nil];
+      }
+    }
+  }
 }
 %end
 /*%hook MTLumaDodgePillSettings

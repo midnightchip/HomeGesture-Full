@@ -4,21 +4,43 @@
 <dict>
 	<key>items</key>
 	<array>
-			<dict>
-    		<key>cell</key>
-    		<string>PSGroupCell</string>
-    		<key>headerCellClass</key>
-    		<string>HBImageTableCell</string>
-    		<key>height</key>
-    		<integer>150</integer>
-    		<key>icon</key>
-    		<string>banner.png</string>
-			</dict>
-		 	<dict>
+		<dict>
+  		<key>cell</key>
+  		<string>PSGroupCell</string>
+  		<key>headerCellClass</key>
+  		<string>HBImageTableCell</string>
+  		<key>height</key>
+  		<integer>150</integer>
+  		<key>icon</key>
+  		<string>banner.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>ENABLE</string>
+			<key>footerText</key>
+			<string>Disable HomeGestures, but keep the UI and button layout.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>disableGestures</string>
+			<key>label</key>
+			<string>Disable Gestures</string>
+		</dict>
+		 <dict>
  			<key>cell</key>
  			<string>PSGroupCell</string>
  			<key>label</key>
- 			<string>HomeGesture</string>
+ 			<string>EXTRAS</string>
 			<key>footerText</key>
 			<string>Disable Breadcrumbs to disable "◀Back to Search" on the status bar, for example. This setting effects all applications</string>
  		</dict>
@@ -65,6 +87,14 @@
 			<string>Breadcrumbs</string>
 		</dict>
 		<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>APP SWITCHER</string>
+		<key>footerText</key>
+		<string>Enable "Swipe up to close" to allow the ability to swipe cards up in the app switcher to close the app.</string>
+		</dict>
+		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
@@ -76,7 +106,7 @@
 			<key>key</key>
 			<string>enableKill</string>
 			<key>label</key>
-			<string>Swipe Up in AppSwitcher</string>
+			<string>Swipe up to close</string>
 		</dict>
 		<dict>
 		 <key>cell</key>
@@ -106,7 +136,7 @@
 		<key>label</key>
 		<string></string>
 		<key>footerText</key>
-	 <string>Turn off to disable the small bar on the top right of the lockscreen.</string>
+	 <string>Turn off to disable the small bar on the top right of the cover sheet (lockscreen and notification center).</string>
 	</dict>
 	<dict>
 		<key>cell</key>
@@ -187,6 +217,36 @@
 			<string>Hide Page Dots</string>
 		</dict>
 		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string></string>
+			<key>footerText</key>
+			<string>Color the HomeBar to anything you want! Applies to lockscreen only.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>enablePillColor</string>
+			<key>label</key>
+			<string>Custom HomeBar Color</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>selectColor</string>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>Select Color</string>
+		</dict>
+		<dict>
  			<key>cell</key>
  			<string>PSGroupCell</string>
  			<key>label</key>
@@ -209,32 +269,10 @@
 			<string>Disable Gestures With Keyboard</string>
 		</dict>
 		<dict>
- 			<key>cell</key>
- 			<string>PSGroupCell</string>
- 			<key>label</key>
- 			<string></string>
- 			<key>footerText</key>
- 	 		<string>Disable HomeGestures, but keep the UI and button layout.</string>
- 		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
-			<key>PostNotification</key>
-			<string>com.midnight.homegesture.plist/post</string>
-			<key>key</key>
-			<string>disableGestures</string>
-			<key>label</key>
-			<string>Disable Gestures</string>
-		</dict>
-		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>Select Apps that Prevent HomeGesture when in LandScape</string>
+			<string>Disable the gestures in selected applications. Only applies when device is in landscape mode.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -248,13 +286,13 @@
 			<key>key</key>
 			<string>enableBlacklist</string>
 			<key>label</key>
-			<string>Enable App BlackList</string>
+			<string>Blacklist Apps</string>
 		</dict>
 		<dict>
         <key>cell</key>
         <string>PSButtonCell</string>
         <key>label</key>
-        <string>Select BlackList Apps</string>
+        <string>Select Blacklisted Apps</string>
         <key>action</key>
         <string>selectExcludeApps</string>
     </dict>
@@ -263,28 +301,6 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
-			<key>PostNotification</key>
-			<string>com.midnight.homegesture.plist/post</string>
-			<key>key</key>
-			<string>enablePillColor</string>
-			<key>label</key>
-			<string>Enable HomeBar color on lockscreen</string>
-		</dict>
-		<dict>
-			<key>action</key>
-			<string>selectColor</string>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>label</key>
-			<string>Select Color</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -317,6 +333,20 @@
     	<string>PINPAL</string>
     	<key>user</key>
     	<string>TPinpal</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Other Contributors:</string>
+		</dict>
+		<dict>
+    	<key>cellClass</key>
+    	<string>HBTwitterCell</string>
+    	<key>label</key>
+    	<string>Simalary: No Pocket</string>
+    	<key>user</key>
+    	<string>simalary_ch</string>
 		</dict>
 	</array>
 	<key>title</key>
