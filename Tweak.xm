@@ -566,12 +566,23 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 // Hide Status Bar in Control Center (When statusBarX is disabled)
 %hook CCUIOverlayStatusBarPresentationProvider
 - (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
-		if (statusBarX){
-			return %orig;
-		}else {
-			return;
-		}
+	if (statusBarX){
+		return %orig;
+	}
+	else {
+		return;
+	}
+}
+%end
 
+%hook CCUIModularControlCenterOverlayViewController
+- (void)setOverlayStatusBarHidden:(bool)arg1 {
+if (statusBarX){
+	return %orig;
+}
+else {
+	return;
+	}
 }
 %end
 
