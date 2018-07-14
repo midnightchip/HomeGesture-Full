@@ -29,6 +29,16 @@ SparkAppListTableViewController* s = [[SparkAppListTableViewController alloc] in
 [self.navigationController pushViewController:s animated:YES];
 self.navigationItem.hidesBackButton = FALSE;
 }
+-(void)selectBlackList{
+SparkAppListTableViewController* s = [[SparkAppListTableViewController alloc] initWithIdentifier:@"com.midnight.homegesture.plist" andKey:@"blackList"];
+[self.navigationController pushViewController:s animated:YES];
+self.navigationItem.hidesBackButton = FALSE;
+}
+/*-(void)selectStatus{
+SparkAppListTableViewController* s = [[SparkAppListTableViewController alloc] initWithIdentifier:@"com.midnight.homegesture.plist" andKey:@"statusBar"];
+[self.navigationController pushViewController:s animated:YES];
+self.navigationItem.hidesBackButton = FALSE;
+}*/
 //Make The Respring Pretty
 - (void)graduallyAdjustBrightnessToValue:(CGFloat)endValue{
     CGFloat startValue = [[UIScreen mainScreen] brightness];

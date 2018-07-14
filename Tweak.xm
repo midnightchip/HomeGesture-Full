@@ -1,10 +1,11 @@
 #import <SpringBoard/SpringBoard.h>
 #import <SpringBoard/SBApplication.h>
 #import <SparkAppList.h>
-
 #import "./prefs/libcolorpicker.h"
 
+// Definition for detecting iOS version (Required to hide CC Pocket)
 #define isGreaterThanOrEqualTo(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 //ScreenShot Remap
 /*#import <IOKit/hid/IOHIDEventSystem.h>
 #import <IOKit/hid/IOHIDEventSystemClient.h>
@@ -15,21 +16,11 @@
 -(void)takeScreenshot;
 @end*/
 
-@interface CCUIHeaderPocketView : UIView
-@end
-
 @interface NSUserDefaults (HomeGesture)
 - (id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
 - (void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
 @end
-//Enable iPX Status Bar
-@interface _UIStatusBar
-+ (void)setDefaultVisualProviderClass:(Class)classOb;
-+ (void)setForceSplit:(BOOL)arg1;
-@end
-@interface _UIStatusBarVisualProvider_iOS : NSObject
-+ (CGSize)intrinsicContentSizeForOrientation:(NSInteger)orientation;
-@end
+
 //ScreenShot Remap
 /*OBJC_EXTERN IOHIDEventSystemClientRef IOHIDEventSystemClientCreate(CFAllocatorRef allocator);
 
@@ -63,11 +54,10 @@ void ioEventHandler(void *target, void *refcon, IOHIDEventQueueRef queue, IOHIDE
 static IOHIDEventSystemClientRef ioHIDClient;
 static CFRunLoopRef ioHIDRunLoopScedule;*/
 
-
 static NSString *nsDomainString = @"/var/mobile/Library/Preferences/com.midnight.homegesture.plist";
 static NSString *nsNotificationString = @"com.midnight.homegesture.plist/post";
 
-
+// Define Variables required for preferences
 static BOOL hideCarrier;
 static BOOL enableBar;
 static BOOL enableBarCover;
@@ -82,7 +72,9 @@ static BOOL hideDots;
 static BOOL enableBlacklist;
 static BOOL enablePillColor;
 static BOOL enableKill;
-//Prefs
+static BOOL statusBarX;
+
+// Define Methods to be changed by toggles in preferences
 static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
 	NSNumber *noCarrier = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hidecarrier" inDomain:nsDomainString];
 	NSNumber *noBar = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hideBar" inDomain:nsDomainString];
@@ -98,7 +90,9 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	NSNumber *eBlacklist = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enableBlacklist" inDomain:nsDomainString];
 	NSNumber *pColor = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enablePillColor" inDomain:nsDomainString];
 	NSNumber *eKill = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enableKill" inDomain:nsDomainString];
+	NSNumber *statusX = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"statusBarX" inDomain:nsDomainString];
 
+// Define default state of preferences
 	hideCarrier = (noCarrier)? [noCarrier boolValue]:NO;
 	enableBar = (noBar)? [noBar boolValue]:NO;
 	enableBarCover = (noBarCover)? [noBarCover boolValue]:NO;
@@ -113,8 +107,9 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	enableBlacklist = (eBlacklist)? [eBlacklist boolValue]:NO;
 	enablePillColor = (pColor)? [pColor boolValue]:NO;
 	enableKill = (eKill)? [eKill boolValue]:YES;
-
+	statusBarX = (statusX)? [statusX boolValue]:NO;
 }
+
 /*static NSDictionary *prefs;
 static NSString *selectedApp1; //Applist stuff
 static NSMutableArray *test;
@@ -125,12 +120,10 @@ test = [prefs objectForKey:@"selected"];
 
 }*/
 
-
 long _dismissalSlidingMode = 0;
 bool originalButton;
 long _homeButtonType = 1;
 
-//static NSInteger switcherKillStyle = 1;
 // Enable home gestures
 %hook BSPlatform
 - (NSInteger)homeButtonType {
@@ -144,9 +137,8 @@ long _homeButtonType = 1;
 }
 %end
 
-// Remove carrier text
+// Hide Carrier Text in Status Bar
 %hook UIStatusBarServiceItemView
-//PreferencesValue(@"hidecarrier", NO);
 - (id)_serviceContentsImage {
 	if (hideCarrier){
 		return nil;
@@ -170,9 +162,10 @@ long _homeButtonType = 1;
 }
 %end
 
+// Hide HomeBar
 @interface MTLumaDodgePillView : UIView
 @end
-// Hide home bar
+
 static BOOL homeEnable = YES;
 static BOOL rotateDisable = YES;
 %hook MTLumaDodgePillView
@@ -185,13 +178,9 @@ static BOOL rotateDisable = YES;
 }
 /*-(void)setBackgroundColor:(UIColor*)arg1
 {
-
      %orig([UIColor redColor]);
 }*/
 %end
-
-
-
 
 // Workaround for TouchID respring bug
 %hook SBCoverSheetSlidingViewController
@@ -206,33 +195,6 @@ static BOOL rotateDisable = YES;
 	_dismissalSlidingMode = %orig;
 	return %orig;
 }
-%end
-
-// Workaround for status bar transition bug
-%hook CCUIOverlayStatusBarPresentationProvider
-- (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
-	return;
-}
-%end
-// Prevent status bar from flashing when invoking control center
-%hook CCUIModularControlCenterOverlayViewController
-- (void)setOverlayStatusBarHidden:(bool)arg1 {
-	return;
-}
-%end
-// Prevent status bar from displaying in fullscreen when invoking control center
-%hook CCUIStatusBarStyleSnapshot
-- (bool)isHidden {
-	return NO;
-}
-%end
-//Hide Control Center NavBar
-%hook CCUIHeaderPocketView
-- (BOOL)isHIdden {
-    return YES;
-}
-
-
 %end
 
 // Hide home bar in cover sheet
@@ -300,7 +262,8 @@ static BOOL rotateDisable = YES;
 	}
 }
 %end
-//AppSwitcher
+
+//AppSwitcher Swipe to Kill
 %hook SBAppSwitcherSettings
 - (NSInteger)effectiveKillAffordanceStyle {
 	if(enableKill){
@@ -331,10 +294,7 @@ static BOOL rotateDisable = YES;
 -(void)_addControlCenterGrabber {}
 %end
 
-//Hide Camera and Torch
-
-
-
+// Hide Torch Button on Coversheet
 %hook SBDashBoardQuickActionsViewController
 -(BOOL)hasFlashlight{
 	if(hideTorch){
@@ -343,6 +303,7 @@ static BOOL rotateDisable = YES;
 			return %orig;
 		}
 }
+// Hide Camera Button on Coversheet
 -(BOOL)hasCamera{
 	if(hideCamera){
 		return NO;
@@ -352,12 +313,16 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-
-
+// Disable Gestures Switch
 %hook SBHomeGestureSettings
 -(BOOL)isHomeGestureEnabled{
 	if(!disableGestures){
-		if(homeEnable && rotateDisable){
+		NSString *test;
+		SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
+		SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
+		test = [frontApp valueForKey:@"_bundleIdentifier"];
+		//[SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:test]
+		if(homeEnable && rotateDisable && ![SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"blackList" containBundleIdentifier:test]){
 			return YES;
 		}else{
 			return NO;
@@ -375,6 +340,7 @@ static NSString *test;
 -(void)applicationDidFinishLaunching:(id)application {
 	%orig;
 
+// Disable Gestures When Keyboard is enabled
 	if(stopKeyboard){
 		[[NSNotificationCenter defaultCenter] addObserver:self
                                          		selector:@selector(keyboardDidShow:)
@@ -386,9 +352,8 @@ static NSString *test;
                                              name:UIKeyboardDidHideNotification
                                            object:nil];
 			}
-		//if(stopRotate)
 
-
+// Disable Gestures if blacklist is enabled
 		if (enableBlacklist){
 			[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 			[[NSNotificationCenter defaultCenter]
@@ -397,11 +362,11 @@ static NSString *test;
    		object:[UIDevice currentDevice]];
 		}
 }
+
 %new
 -(void)keyboardDidShow:(NSNotification *)sender
 {
     homeEnable = NO;
-
 }
 
 %new
@@ -438,6 +403,7 @@ static NSString *test;
 }
 %end
 
+// Hide Lockscreen page dots
 @interface SBDashBoardPageControl : UIView
 @end
 
@@ -458,9 +424,7 @@ static NSString *test;
 }
 %end
 
-
-
-//Lock Screen HomeBar Color
+// Lock Screen HomeBar Color
 @interface MTStaticColorPillView : UIView
 @end
 
@@ -485,6 +449,10 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 
 }
 %end
+
+// Hide Control Center Top Nav Bar (Pocket)
+@interface CCUIHeaderPocketView : UIView
+@end
 
 %hook CCUIHeaderPocketView
 -(void)layoutSubviews{
@@ -553,6 +521,8 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
   }
 }
 %end
+
+// Change HomeBar Color on Homescreen
 /*%hook MTLumaDodgePillSettings
 -(void)setColorAddWhiteness:(double)arg1{
 	arg1 = 15;
@@ -561,16 +531,51 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 %end */
 
 
-//Keep this, fixes scrolling in CC
-/*%hook UIScrollView
-- (UIEdgeInsets)adjustedContentInset {
-	UIEdgeInsets orig = %orig;
-	//orig.top = 88;
-	orig.top = 0;
-	return orig;
+// iPhone X Status bar
+%hook UIStatusBar_Base
++ (BOOL)forceModern {
+	/*NSString *status;
+	SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
+	SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
+	status = [frontApp valueForKey:@"_bundleIdentifier"];*/
+	if(statusBarX){
+		return statusBarX;
+	}else{
+		return %orig;
+	}
 }
-%end*/
++ (Class)_statusBarImplementationClass {
+	if(statusBarX){
+		return statusBarX ? NSClassFromString(@"UIStatusBar_Modern") : NSClassFromString(@"UIStatusBar");
+	}else{
+		return %orig;
+	}
+}
+%end
 
+%hook _UIStatusBar
++ (BOOL)forceSplit {
+	if(statusBarX){
+		return statusBarX;
+	}else{
+		return %orig;
+	}
+}
+%end
+
+// Hide Status Bar in Control Center (When statusBarX is disabled)
+%hook CCUIOverlayStatusBarPresentationProvider
+- (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
+		if (statusBarX){
+			return %orig;
+		}else {
+			return;
+		}
+
+}
+%end
+
+// SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 %ctor{
   notificationCallback(NULL, NULL, NULL, NULL, NULL);
   CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
@@ -579,7 +584,6 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
     (CFStringRef)nsNotificationString,
     NULL,
     CFNotificationSuspensionBehaviorCoalesce);
-
 
 		/*ioHIDClient = IOHIDEventSystemClientCreate(kCFAllocatorDefault);
 		    ioHIDRunLoopScedule = CFRunLoopGetMain();

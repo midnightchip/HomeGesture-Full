@@ -2,7 +2,7 @@ Package: com.vitataf.homegesture
 Name: HomeGesture
 Pre-Depends: com.spark.libsparkapplist
 Depends: mobilesubstrate, ws.hbang.common (>= 1.11), org.thebigboss.libcolorpicker
-Version: 1.7.7
+Version: 1.7.8
 Architecture: iphoneos-arm
 Description: Enable iPhone X home gesture on other devices.
 Maintainer: MidnightChips/PINPAL

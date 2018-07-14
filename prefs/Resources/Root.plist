@@ -20,7 +20,7 @@
 			<key>label</key>
 			<string>ENABLE</string>
 			<key>footerText</key>
-			<string>Disable HomeGestures, but keep the UI and button layout.</string>
+			<string>Disable the gestures, but keep the UI and button layout.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -40,7 +40,7 @@
  			<key>cell</key>
  			<string>PSGroupCell</string>
  			<key>label</key>
- 			<string>EXTRAS</string>
+ 			<string>STATUS BAR</string>
 			<key>footerText</key>
 			<string>Disable Breadcrumbs to disable "◀Back to Search" on the status bar, for example. This setting effects all applications</string>
  		</dict>
@@ -54,9 +54,9 @@
 			<key>PostNotification</key>
 			<string>com.midnight.homegesture.plist/post</string>
 			<key>key</key>
-			<string>hidecarrier</string>
+			<string>statusBarX</string>
 			<key>label</key>
-			<string>Hide Status Bar Carrier</string>
+			<string>iPhone X Style Status Bar</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -68,9 +68,9 @@
 			<key>PostNotification</key>
 			<string>com.midnight.homegesture.plist/post</string>
 			<key>key</key>
-			<string>hideBar</string>
+			<string>hidecarrier</string>
 			<key>label</key>
-			<string>HomeBar</string>
+			<string>Hide Status Bar Carrier</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -170,20 +170,6 @@
 			<key>PostNotification</key>
 			<string>com.midnight.homegesture.plist/post</string>
 			<key>key</key>
-			<string>hideBarCover</string>
-			<key>label</key>
-			<string>HomeBar (LockScreen)</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
-			<key>PostNotification</key>
-			<string>com.midnight.homegesture.plist/post</string>
-			<key>key</key>
 			<string>hideTorch</string>
 			<key>label</key>
 			<string>Hide Torch Button</string>
@@ -220,9 +206,37 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string></string>
+			<string>HOMEBAR</string>
 			<key>footerText</key>
 			<string>Color the HomeBar to anything you want! Applies to lockscreen only.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>hideBar</string>
+			<key>label</key>
+			<string>HomeBar (Homescreen)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>hideBarCover</string>
+			<key>label</key>
+			<string>HomeBar (LockScreen)</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -250,9 +264,9 @@
  			<key>cell</key>
  			<string>PSGroupCell</string>
  			<key>label</key>
- 			<string>Miscellaneous</string>
+ 			<string>BLACKLIST</string>
  			<key>footerText</key>
- 	 		<string>Disables the HomeGestures when the keyboard is present.</string>
+ 	 		<string>Disables the gestures when the keyboard is present.</string>
  		</dict>
 		<dict>
 			<key>cell</key>
@@ -302,6 +316,14 @@
 			<key>label</key>
 			<string></string>
 		</dict>
+		<dict>
+        <key>cell</key>
+        <string>PSButtonCell</string>
+        <key>label</key>
+        <string>Select Apps to be Fully Disabled</string>
+        <key>action</key>
+        <string>selectBlackList</string>
+    </dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
