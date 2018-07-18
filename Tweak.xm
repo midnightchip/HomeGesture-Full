@@ -73,6 +73,7 @@ static BOOL enableBlacklist;
 static BOOL enablePillColor;
 static BOOL enableKill;
 static BOOL statusBarX;
+static BOOL siriHome;
 
 // Define Methods to be changed by toggles in preferences
 static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -91,6 +92,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	NSNumber *pColor = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enablePillColor" inDomain:nsDomainString];
 	NSNumber *eKill = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enableKill" inDomain:nsDomainString];
 	NSNumber *statusX = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"statusBarX" inDomain:nsDomainString];
+	NSNumber *siriOnHome = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"siriHome" inDomain:nsDomainString];
 
 // Define default state of preferences
 	hideCarrier = (noCarrier)? [noCarrier boolValue]:NO;
@@ -108,6 +110,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	enablePillColor = (pColor)? [pColor boolValue]:NO;
 	enableKill = (eKill)? [eKill boolValue]:YES;
 	statusBarX = (statusX)? [statusX boolValue]:NO;
+	siriHome = (siriOnHome)? [siriOnHome boolValue]:YES;
 }
 
 /*static NSDictionary *prefs;
@@ -221,12 +224,20 @@ static BOOL rotateDisable = YES;
 // Restore button to invoke Siri
 %hook SBLockHardwareButtonActions
 - (id)initWithHomeButtonType:(long long)arg1 proximitySensorManager:(id)arg2 {
-	return %orig(_homeButtonType, arg2);
+	if(siriHome){
+		return %orig(_homeButtonType, arg2);
+	]else{
+		%orig;
+	}
 }
 %end
 %hook SBHomeHardwareButtonActions
 - (id)initWitHomeButtonType:(long long)arg1 {
-	return %orig(_homeButtonType);
+	if(siriHome){
+		return %orig(_homeButtonType);
+	]else{
+		%orig;
+	}
 }
 %end
 

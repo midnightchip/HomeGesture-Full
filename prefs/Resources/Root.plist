@@ -87,6 +87,28 @@
 			<string>Breadcrumbs</string>
 		</dict>
 		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>BUTTONS</string>
+			<key>footerText</key>
+			<string>Disable "Press Home for Siri" to use the iPhone X style hold power button for Siri.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>siriHome</string>
+			<key>label</key>
+			<string>Press Home for Siri</string>
+		</dict>
+		<dict>
 		<key>cell</key>
 		<string>PSGroupCell</string>
 		<key>label</key>
