@@ -479,7 +479,7 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 }
 -(void)setBackgroundAlpha:(double)arg1{
   %orig;
-  if (arg1==0){
+  if (arg1==0) {
 		//For iOS 11.1.2 and higher
     if (isGreaterThanOrEqualTo(@"11.1.2")) {
       if ([self valueForKey:@"_statusBar"]) {
@@ -531,7 +531,25 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
     }
   }
 }
+/* kill cc empty space */
+
+//Sets bounds for header content (status bar)
+-(CGRect)contentBounds{
+
+	return CGRectMake (0,0,375,65);
+
+}
+
+
+//Reduces header frame height
+-(CGRect)frame{
+
+	return CGRectMake (0,0,375,65);
+
+}
+
 %end
+
 
 // Change HomeBar Color on Homescreen
 /*%hook MTLumaDodgePillSettings
@@ -595,35 +613,6 @@ else {
 	return;
 	}
 }
-%end
-
-//Kill cc empty space
-
-%hook CCUIHeaderPocketView
-
-  //Sets bounds for header content (status bar)
-  -(CGRect)contentBounds{
-
-    return CGRectMake (0,0,375,65);
-
-  }
-
-
-  //Reduces header frame height
-  -(CGRect)frame{
-
-    return CGRectMake (0,0,375,65);
-
-  }
-
-
-  //Removes blur
-  -(void)setBackgroundAlpha:(double)arg1{
-
-      arg1 = 0.0;
-
-  }
-
 %end
 
 %hook CCUIScrollView
