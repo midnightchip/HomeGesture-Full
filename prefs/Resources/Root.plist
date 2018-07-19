@@ -392,6 +392,14 @@
     	<key>user</key>
     	<string>simalary_ch</string>
 		</dict>
+		<dict>
+    	<key>cellClass</key>
+    	<string>HBTwitterCell</string>
+    	<key>label</key>
+    	<string>Smokin1337: CC gap</string>
+    	<key>user</key>
+    	<string>smokin1337</string>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>HomeGesture</string>
