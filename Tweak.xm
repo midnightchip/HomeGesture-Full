@@ -227,7 +227,7 @@ static BOOL rotateDisable = YES;
 	if(siriHome){
 		return %orig(_homeButtonType, arg2);
 	}else{
-		%orig;
+		return %orig;
 	}
 }
 %end
@@ -236,7 +236,7 @@ static BOOL rotateDisable = YES;
 	if(siriHome){
 		return %orig(_homeButtonType);
 	}else{
-		%orig;
+		return %orig;
 	}
 }
 %end
