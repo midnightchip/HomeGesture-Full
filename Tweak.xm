@@ -226,7 +226,7 @@ static BOOL rotateDisable = YES;
 - (id)initWithHomeButtonType:(long long)arg1 proximitySensorManager:(id)arg2 {
 	if(siriHome){
 		return %orig(_homeButtonType, arg2);
-	]else{
+	}else{
 		%orig;
 	}
 }
@@ -235,7 +235,7 @@ static BOOL rotateDisable = YES;
 - (id)initWitHomeButtonType:(long long)arg1 {
 	if(siriHome){
 		return %orig(_homeButtonType);
-	]else{
+	}else{
 		%orig;
 	}
 }
@@ -597,7 +597,49 @@ else {
 }
 %end
 
+//Kill cc empty space
+
+%hook CCUIHeaderPocketView
+
+  //Sets bounds for header content (status bar)
+  -(CGRect)contentBounds{
+
+    return CGRectMake (0,0,375,65);
+
+  }
+
+
+  //Reduces header frame height
+  -(CGRect)frame{
+
+    return CGRectMake (0,0,375,65);
+
+  }
+
+
+  //Removes blur
+  -(void)setBackgroundAlpha:(double)arg1{
+
+      arg1 = 0.0;
+
+  }
+
+%end
+
+%hook CCUIScrollView
+
+  //This moves the modules up
+  -(UIEdgeInsets)adjustedContentInset {
+
+    return UIEdgeInsetsMake(-70, 0.0, 35, 0.0);
+
+  }
+
+%end
+
+
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
+//You'll understand it, dw
 %ctor{
   notificationCallback(NULL, NULL, NULL, NULL, NULL);
   CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
