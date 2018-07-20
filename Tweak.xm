@@ -483,57 +483,7 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 -(void)setBackgroundAlpha:(double)arg1{
   %orig;
 if (removeGap) {
-  if (arg1==0) {
-		//For iOS 11.1.2 and higher
-    if (isGreaterThanOrEqualTo(@"11.1.2")) {
-      if ([self valueForKey:@"_statusBar"]) {
-        UIView *statusBar = (UIView *)[self valueForKey:@"_statusBar"];
-        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-              [statusBar setAlpha:1.0];
-          } completion:nil];
-					//For iOS 11.0 through 11.1.1
-      } else if ([self valueForKey:@"_headerChevronView"]) {
-        UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
-        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-              [chevron setAlpha:1.0];
-          } completion:nil];
-      } else {
-
-      }
-    } else {
-      if ([self valueForKey:@"_headerChevronView"]) {
-      UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
-      [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [chevron setAlpha:1.0];
-        } completion:nil];
-      }
-    }
-  } else {
-		//For iOS 11.1.2 and higher
-    if (isGreaterThanOrEqualTo(@"11.1.2")) {
-      if ([self valueForKey:@"_statusBar"]) {
-        UIView *statusBar = (UIView *)[self valueForKey:@"_statusBar"];
-        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-              [statusBar setAlpha:0.0];
-          } completion:nil];
-					//For iOS 11.0 through 11.1.1
-      } else if ([self valueForKey:@"_headerChevronView"]) {
-        UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
-        [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-              [chevron setAlpha:0.0];
-          } completion:nil];
-      } else {
-
-      }
-    } else {
-      if ([self valueForKey:@"_headerChevronView"]) {
-      UIView *chevron = (UIView *)[self valueForKey:@"_headerChevronView"];
-      [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [chevron setAlpha:0.0];
-        } completion:nil];
-      }
-    }
-  }
+   arg1 = 0.0;
 }
 }
 /* kill cc empty space */
@@ -630,20 +580,6 @@ else {
 }
 %end
 
-%hook CCUIScrollView
-
-  //This moves the modules up
-  -(UIEdgeInsets)adjustedContentInset {
-  if(removeGap){
-  return UIEdgeInsetsMake(-70, 0.0, 35, 0.0);
-  }else{
-  return %orig;
-  }
-
-  }
-
-%end
-
 %hook CCUIModuleCollectionView
 
   -(UIEdgeInsets)adjustedContentInset {
@@ -655,7 +591,6 @@ else {
 }
 
 %end
-
 
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 //You'll understand it, dw
