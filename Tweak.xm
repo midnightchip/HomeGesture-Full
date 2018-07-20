@@ -555,7 +555,7 @@ return %orig;
 if(removeGap){
 return CGRectMake (0,0,375,65);
 }else{
-return %orig(
+return %orig;
 }
 	
 
@@ -650,10 +650,7 @@ else {
   }else{
   return %orig;
   }
-
-	
-
-    }
+}
 
 %end
 
