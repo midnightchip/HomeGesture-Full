@@ -74,6 +74,7 @@ static BOOL enablePillColor;
 static BOOL enableKill;
 static BOOL statusBarX;
 static BOOL siriHome;
+static BOOL removeGap;
 
 // Define Methods to be changed by toggles in preferences
 static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -93,6 +94,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	NSNumber *eKill = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enableKill" inDomain:nsDomainString];
 	NSNumber *statusX = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"statusBarX" inDomain:nsDomainString];
 	NSNumber *siriOnHome = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"siriHome" inDomain:nsDomainString];
+	NSNumber *rGap = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"removeGap" inDomain:nsDomainString];
 
 // Define default state of preferences
 	hideCarrier = (noCarrier)? [noCarrier boolValue]:NO;
@@ -111,6 +113,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	enableKill = (eKill)? [eKill boolValue]:YES;
 	statusBarX = (statusX)? [statusX boolValue]:NO;
 	siriHome = (siriOnHome)? [siriOnHome boolValue]:YES;
+	removeGap = (rGap)? [rGap boolValue]:NO;
 }
 
 /*static NSDictionary *prefs;
@@ -535,16 +538,26 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 
 //Sets bounds for header content (status bar)
 -(CGRect)contentBounds{
+if(removeGap){
 
-	return CGRectMake (0,0,375,65);
+return CGRectMake (0,0,375,65);
+}else{
+return %orig;
+}
+
+	
 
 }
 
 
 //Reduces header frame height
 -(CGRect)frame{
-
-	return CGRectMake (0,0,375,65);
+if(removeGap){
+return CGRectMake (0,0,375,65);
+}else{
+return %orig(
+}
+	
 
 }
 
@@ -619,8 +632,11 @@ else {
 
   //This moves the modules up
   -(UIEdgeInsets)adjustedContentInset {
-
-    return UIEdgeInsetsMake(-70, 0.0, 35, 0.0);
+  if(removeGap){
+  return UIEdgeInsetsMake(-70, 0.0, 35, 0.0);
+  }else{
+  return %orig;
+  }
 
   }
 
@@ -629,8 +645,13 @@ else {
 %hook CCUIModuleCollectionView
 
   -(UIEdgeInsets)adjustedContentInset {
+  if(removeGap){
+  return UIEdgeInsetsMake(-66, 0.0, 33, 0.0);
+  }else{
+  return %orig;
+  }
 
-	return UIEdgeInsetsMake(-66, 0.0, 33, 0.0);
+	
 
     }
 

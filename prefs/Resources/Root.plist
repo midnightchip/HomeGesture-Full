@@ -32,6 +32,20 @@
 			<key>PostNotification</key>
 			<string>com.midnight.homegesture.plist/post</string>
 			<key>key</key>
+			<string>removeGap</string>
+			<key>label</key>
+			<string>Remove CC Gap</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
 			<string>disableGestures</string>
 			<key>label</key>
 			<string>Disable Gestures</string>
@@ -44,7 +58,7 @@
 			<key>footerText</key>
 			<string>Disable Breadcrumbs to disable "◀Back to Search" on the status bar, for example. This setting effects all applications</string>
  		</dict>
-		<dict>
+		<dictp>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
