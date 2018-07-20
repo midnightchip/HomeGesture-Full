@@ -482,6 +482,7 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 }
 -(void)setBackgroundAlpha:(double)arg1{
   %orig;
+if (removeGap) {
   if (arg1==0) {
 		//For iOS 11.1.2 and higher
     if (isGreaterThanOrEqualTo(@"11.1.2")) {
@@ -534,6 +535,7 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
     }
   }
 }
+}
 /* kill cc empty space */
 
 //Sets bounds for header content (status bar)
@@ -545,7 +547,7 @@ return CGRectMake (0,0,375,65);
 return %orig;
 }
 
-	
+
 
 }
 
@@ -557,7 +559,7 @@ return CGRectMake (0,0,375,65);
 }else{
 return %orig;
 }
-	
+
 
 }
 
