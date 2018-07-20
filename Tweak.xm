@@ -491,21 +491,35 @@ if (removeGap) {
 //Sets bounds for header content (status bar)
 -(CGRect)contentBounds{
 if(removeGap){
-	return CGRectMake (0,0,375,65);
+
+return CGRectMake (0,0,375,65);
+return CGRectMake (0,0,375,65);
 }else{
-	return %orig;
-	}
+return %orig;
+}
+
+
+
+}
+
+return %orig;
+}
 
 //Reduces header frame height
 -(CGRect)frame{
 if(removeGap){
-	return CGRectMake (0,0,375,65);
+return CGRectMake (0,0,375,65);
+return CGRectMake (0,0,375,65);
 }else{
-	return %orig;
-	}
+return %orig;
 }
 
+
+return %orig;
+}
+}
 %end
+
 
 // Change HomeBar Color on Homescreen
 /*%hook MTLumaDodgePillSettings
