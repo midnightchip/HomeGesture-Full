@@ -504,6 +504,7 @@ if(removeGap){
 	return %orig;
 	}
 }
+
 %end
 
 // Change HomeBar Color on Homescreen
