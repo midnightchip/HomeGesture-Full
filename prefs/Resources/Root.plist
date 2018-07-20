@@ -58,7 +58,7 @@
 			<key>footerText</key>
 			<string>Disable Breadcrumbs to disable "◀Back to Search" on the status bar, for example. This setting effects all applications</string>
  		</dict>
-		<dictp>
+		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
