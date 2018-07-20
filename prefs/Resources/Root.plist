@@ -32,20 +32,6 @@
 			<key>PostNotification</key>
 			<string>com.midnight.homegesture.plist/post</string>
 			<key>key</key>
-			<string>removeGap</string>
-			<key>label</key>
-			<string>Remove CC Gap</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
-			<key>PostNotification</key>
-			<string>com.midnight.homegesture.plist/post</string>
-			<key>key</key>
 			<string>disableGestures</string>
 			<key>label</key>
 			<string>Disable Gestures</string>
@@ -85,6 +71,20 @@
 			<string>hidecarrier</string>
 			<key>label</key>
 			<string>Hide Status Bar Carrier</string>
+		</dict>
+			<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>removeGap</string>
+			<key>label</key>
+			<string>Remove CC Gap</string>
 		</dict>
 		<dict>
 			<key>cell</key>
