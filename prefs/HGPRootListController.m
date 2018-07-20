@@ -160,7 +160,7 @@ self.navigationItem.hidesBackButton = FALSE;
 
 	return _specifiers;
 }
-
+/*
 - (void)ContactMePin {
 		NSURL *url = [NSURL URLWithString:@"https://twitter.com/TPinpal"];
 		[[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
@@ -173,5 +173,5 @@ self.navigationItem.hidesBackButton = FALSE;
 		NSURL *url = [NSURL URLWithString:@"https://www.reddit.com/user/VitaTaf/"];
 		[[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 }
-
+*/
 @end
