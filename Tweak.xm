@@ -626,6 +626,16 @@ else {
 
 %end
 
+%hook CCUIModuleCollectionView
+
+  -(UIEdgeInsets)adjustedContentInset {
+
+	return UIEdgeInsetsMake(-66, 0.0, 33, 0.0);
+
+    }
+
+%end
+
 
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 //You'll understand it, dw
