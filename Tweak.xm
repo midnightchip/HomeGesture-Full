@@ -349,12 +349,11 @@ static BOOL rotateDisable = YES;
 
 static NSString *test;
 
-
+// Disable Gestures When Keyboard is enabled
 %hook SpringBoard
 -(void)applicationDidFinishLaunching:(id)application {
 	%orig;
 
-// Disable Gestures When Keyboard is enabled
 	if(stopKeyboard){
 		[[NSNotificationCenter defaultCenter] addObserver:self
                                          		selector:@selector(keyboardDidShow:)
@@ -486,35 +485,26 @@ if (removeGap) {
    arg1 = 0.0;
 }
 }
-/* kill cc empty space */
 
+
+//Hide Control Center Empty Space
 //Sets bounds for header content (status bar)
 -(CGRect)contentBounds{
 if(removeGap){
-
-return CGRectMake (0,0,375,65);
+	return CGRectMake (0,0,375,65);
 }else{
-return %orig;
-}
-
-
-
-}
-
+	return %orig;
+	}
 
 //Reduces header frame height
 -(CGRect)frame{
 if(removeGap){
-return CGRectMake (0,0,375,65);
+	return CGRectMake (0,0,375,65);
 }else{
-return %orig;
+	return %orig;
+	}
 }
-
-
-}
-
 %end
-
 
 // Change HomeBar Color on Homescreen
 /*%hook MTLumaDodgePillSettings
@@ -523,7 +513,6 @@ return %orig;
 	%orig(arg1);
 }
 %end */
-
 
 // iPhone X Status bar
 %hook UIStatusBar_Base
@@ -569,31 +558,9 @@ return %orig;
 }
 %end
 
-%hook CCUIModularControlCenterOverlayViewController
-- (void)setOverlayStatusBarHidden:(bool)arg1 {
-if (statusBarX){
-	return %orig;
-}
-else {
-	return;
-	}
-}
-%end
-
-%hook CCUIModuleCollectionView
-
-  -(UIEdgeInsets)adjustedContentInset {
-  if(removeGap){
-  return UIEdgeInsetsMake(-66, 0.0, 33, 0.0);
-  }else{
-  return %orig;
-  }
-}
-
-%end
-
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 //You'll understand it, dw
+//Thanks :D
 %ctor{
   notificationCallback(NULL, NULL, NULL, NULL, NULL);
   CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
