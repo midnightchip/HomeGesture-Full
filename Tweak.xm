@@ -75,6 +75,7 @@ static BOOL enableKill;
 static BOOL statusBarX;
 static BOOL siriHome;
 static BOOL removeGap;
+static BOOL remapScreen;
 
 // Define Methods to be changed by toggles in preferences
 static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -95,6 +96,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	NSNumber *statusX = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"statusBarX" inDomain:nsDomainString];
 	NSNumber *siriOnHome = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"siriHome" inDomain:nsDomainString];
 	NSNumber *rGap = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"removeGap" inDomain:nsDomainString];
+	NSNumber *rScreen = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"remapScreen" inDomain:nsDomainString];
 
 // Define default state of preferences
 	hideCarrier = (noCarrier)? [noCarrier boolValue]:NO;
@@ -114,6 +116,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	statusBarX = (statusX)? [statusX boolValue]:NO;
 	siriHome = (siriOnHome)? [siriOnHome boolValue]:YES;
 	removeGap = (rGap)? [rGap boolValue]:NO;
+	remapScreen = (rScreen)? [rScreen boolValue]:NO;
 }
 
 /*static NSDictionary *prefs;
@@ -129,6 +132,7 @@ test = [prefs objectForKey:@"selected"];
 long _dismissalSlidingMode = 0;
 bool originalButton;
 long _homeButtonType = 1;
+int applicationDidFinishLaunching;
 
 // Enable home gestures
 %hook BSPlatform
@@ -351,7 +355,10 @@ static NSString *test;
 
 
 %hook SpringBoard
+
 -(void)applicationDidFinishLaunching:(id)application {
+	//Remap
+	applicationDidFinishLaunching = 2;
 	%orig;
 
 // Disable Gestures When Keyboard is enabled
@@ -416,6 +423,53 @@ static NSString *test;
 		}
 }
 %end
+
+//Remapp
+%hook SBPressGestureRecognizer
+- (void)setAllowedPressTypes:(NSArray *)arg1 {
+	NSArray * lockHome = @[@104, @101];
+	NSArray * lockVol = @[@104, @102, @103];
+	if(remapScreen){
+		if ([arg1 isEqual:lockVol] && applicationDidFinishLaunching == 2) {
+			%orig(lockHome);
+			applicationDidFinishLaunching--;
+			return;
+		}
+		%orig;
+	}else{
+		%orig;
+	}
+}
+%end
+%hook SBClickGestureRecognizer
+- (void)addShortcutWithPressTypes:(id)arg1 {
+	if(remapScreen){
+		if (applicationDidFinishLaunching == 1) {
+			applicationDidFinishLaunching--;
+			return;
+		}
+	}else{
+		%orig;
+	}
+}
+%end
+%hook SBHomeHardwareButton
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 buttonActions:(id)arg3 gestureRecognizerConfiguration:(id)arg4 {
+	if(remapScreen){
+		return %orig(arg1, _homeButtonType, arg3, arg4);
+	}else{
+		return %orig;
+	}
+}
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 {
+	if(remapScreen){
+		return %orig(arg1, _homeButtonType);
+	}else{
+		return %orig;
+	}
+}
+%end
+//End Remap
 
 // Hide Lockscreen page dots
 @interface SBDashBoardPageControl : UIView

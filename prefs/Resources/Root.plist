@@ -20,7 +20,7 @@
 			<key>label</key>
 			<string>ENABLE</string>
 			<key>footerText</key>
-			<string>Disable the gestures, but keep the UI and button layout.</string>
+			<string>Disable the gestures, but keep the UI and button layout. Currently Buggy</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -42,7 +42,7 @@
  			<key>label</key>
  			<string>STATUS BAR</string>
 			<key>footerText</key>
-			<string>Disable Breadcrumbs to disable "◀Back to Search" on the status bar, for example. This setting effects all applications</string>
+			<string>Disable Breadcrumbs to disable "◀Back to Search" on the status bar, for example. This setting affects all applications</string>
  		</dict>
 		<dict>
 			<key>cell</key>
@@ -107,6 +107,20 @@
 			<string>BUTTONS</string>
 			<key>footerText</key>
 			<string>Disable "Press Home for Siri" to use the iPhone X style hold power button for Siri.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>remapScreen</string>
+			<key>label</key>
+			<string>Normal ScreenShot</string>
 		</dict>
 		<dict>
 			<key>cell</key>
