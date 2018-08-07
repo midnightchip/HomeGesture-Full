@@ -76,6 +76,7 @@ static BOOL statusBarX;
 static BOOL siriHome;
 static BOOL removeGap;
 static BOOL remapScreen;
+static BOOL roundSwitcher;
 
 // Define Methods to be changed by toggles in preferences
 static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -97,6 +98,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	NSNumber *siriOnHome = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"siriHome" inDomain:nsDomainString];
 	NSNumber *rGap = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"removeGap" inDomain:nsDomainString];
 	NSNumber *rScreen = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"remapScreen" inDomain:nsDomainString];
+	NSNumber *rSwitcher = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"roundSwitcher" inDomain:nsDomainString];
 
 // Define default state of preferences
 	hideCarrier = (noCarrier)? [noCarrier boolValue]:NO;
@@ -117,6 +119,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	siriHome = (siriOnHome)? [siriOnHome boolValue]:YES;
 	removeGap = (rGap)? [rGap boolValue]:NO;
 	remapScreen = (rScreen)? [rScreen boolValue]:NO;
+	roundSwitcher = (rSwitcher)? [rSwitcher boolValue]:NO;
 }
 
 /*static NSDictionary *prefs;
@@ -624,9 +627,35 @@ return %orig;
 }
 %end
 
+%hook UITraitCollection
++ (id)traitCollectionWithDisplayCornerRadius:(CGFloat)arg1 {
+	if(roundSwitcher){
+		return %orig(19);
+	}else{
+		return %orig;
+	}
+}
+- (CGFloat)displayCornerRadius {
+	if(roundSwitcher){
+		return 19;
+	}else{
+		return %orig;
+	}
+}
+- (CGFloat)_displayCornerRadius {
+	if(roundSwitcher){
+		return 19;
+	}else{
+		return %orig;
+	}
+}
+%end
+
+
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 //You'll understand it, dw
 //Thanks :)
+//Lol
 %ctor{
   notificationCallback(NULL, NULL, NULL, NULL, NULL);
   CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),

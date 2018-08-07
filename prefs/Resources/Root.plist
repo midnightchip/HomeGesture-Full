@@ -159,6 +159,20 @@
 			<string>Swipe up to close</string>
 		</dict>
 		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+			<key>PostNotification</key>
+			<string>com.midnight.homegesture.plist/post</string>
+			<key>key</key>
+			<string>roundSwitcher</string>
+			<key>label</key>
+			<string>Round App Switcher</string>
+		</dict>
+		<dict>
 		 <key>cell</key>
 		 <string>PSGroupCell</string>
 		 <key>label</key>
@@ -378,6 +392,22 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
+			<string>Recommended Package</string>
+		</dict>
+		<dict>
+    	<key>cellClass</key>
+    	<string>HBPackageTableCell</string>
+    	<key>label</key>
+    	<string>ChromaHomeBarX</string>
+			<key>subtitleText</key>
+    	<string>Recommended Package</string>
+    	<key>packageIdentifier</key>
+    	<string>com.afnanahmad.chromahomebarx</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
 			<string>Created By:</string>
 		</dict>
 		<dict>
@@ -427,6 +457,14 @@
     	<string>Smokin1337: FUGap</string>
     	<key>user</key>
     	<string>smokin1337</string>
+		</dict>
+		<dict>
+    	<key>cellClass</key>
+    	<string>HBTwitterCell</string>
+    	<key>label</key>
+    	<string>Andy Wiik: Rounded AppSwitcher from LittleX</string>
+    	<key>user</key>
+    	<string>Andywiik</string>
 		</dict>
 	</array>
 	<key>title</key>
