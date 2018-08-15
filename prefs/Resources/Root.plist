@@ -72,20 +72,46 @@
 			<key>label</key>
 			<string>Hide Status Bar Carrier</string>
 		</dict>
-			<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
-			<key>PostNotification</key>
-			<string>com.midnight.homegesture.plist/post</string>
-			<key>key</key>
-			<string>removeGap</string>
-			<key>label</key>
-			<string>Remove CC Gap</string>
-		</dict>
+		<dict>
+    <key>cellClass</key>
+    <string>HBStepperTableCell</string>
+    <key>default</key>
+    <real>50</real>
+    <key>defaults</key>
+    <string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+		<key>PostNotification</key>
+		<string>com.midnight.homegesture.plist/post</string>
+    <key>key</key>
+    <string>vertical</string>
+    <key>label</key>
+    <string>%i Vertical Padding in CC</string>
+    <key>max</key>
+    <real>100</real>
+    <key>min</key>
+    <real>1</real>
+    <key>singularLabel</key>
+    <string>1 Vertical Padding in CC</string>
+	</dict>
+	<dict>
+	<key>cellClass</key>
+	<string>HBStepperTableCell</string>
+	<key>default</key>
+	<real>50</real>
+	<key>defaults</key>
+	<string>/var/mobile/Library/Preferences/com.midnight.homegesture.plist</string>
+	<key>PostNotification</key>
+	<string>com.midnight.homegesture.plist/post</string>
+	<key>key</key>
+	<string>verticalLand</string>
+	<key>label</key>
+	<string>%i LandScape Padding in CC</string>
+	<key>max</key>
+	<real>100</real>
+	<key>min</key>
+	<real>1</real>
+	<key>singularLabel</key>
+	<string>1 LandScape Padding in CC</string>
+  </dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -403,6 +429,16 @@
     	<string>Recommended Package</string>
     	<key>packageIdentifier</key>
     	<string>com.afnanahmad.chromahomebarx</string>
+		</dict>
+		<dict>
+    	<key>cellClass</key>
+    	<string>HBPackageTableCell</string>
+    	<key>label</key>
+    	<string>FloatyDock</string>
+			<key>subtitleText</key>
+    	<string>Recommended Package</string>
+    	<key>packageIdentifier</key>
+    	<string>com.synnyg.floatydock</string>
 		</dict>
 		<dict>
 			<key>cell</key>

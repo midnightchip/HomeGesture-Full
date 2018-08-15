@@ -1,7 +1,15 @@
 #import <SpringBoard/SpringBoard.h>
 #import <SpringBoard/SBApplication.h>
 #import <SparkAppList.h>
+#import <objc/runtime.h>
 #import "./prefs/libcolorpicker.h"
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define IS_IPHONE_X (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 // Definition for detecting iOS version (Required to hide CC Pocket)
 #define isGreaterThanOrEqualTo(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -77,6 +85,8 @@ static BOOL siriHome;
 static BOOL removeGap;
 static BOOL remapScreen;
 static BOOL roundSwitcher;
+static double vertical;
+static double verticalLandscape;
 
 // Define Methods to be changed by toggles in preferences
 static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -99,6 +109,9 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	NSNumber *rGap = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"removeGap" inDomain:nsDomainString];
 	NSNumber *rScreen = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"remapScreen" inDomain:nsDomainString];
 	NSNumber *rSwitcher = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"roundSwitcher" inDomain:nsDomainString];
+	NSNumber *vert = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"vertical" inDomain:nsDomainString];
+	NSNumber *vertLand = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"verticalLand" inDomain:nsDomainString];
+
 
 // Define default state of preferences
 	hideCarrier = (noCarrier)? [noCarrier boolValue]:NO;
@@ -120,6 +133,8 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 	removeGap = (rGap)? [rGap boolValue]:NO;
 	remapScreen = (rScreen)? [rScreen boolValue]:NO;
 	roundSwitcher = (rSwitcher)? [rSwitcher boolValue]:NO;
+	vertical = (vert)? [vert doubleValue]:50;
+	verticalLandscape = (vertLand)? [vertLand doubleValue]:50;
 }
 
 /*static NSDictionary *prefs;
@@ -537,39 +552,47 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
     lineView.hidden = YES;
   }
 }
--(void)setBackgroundAlpha:(double)arg1{
-  %orig;
-if (removeGap) {
-   arg1 = 0.0;
-}
-}
+
+//Start FUGap
 
 
-/* Hide Control Center Empty Space*/
-//Sets bounds for header content (status bar)
 -(CGRect)contentBounds{
-if(removeGap){
 
-return CGRectMake (0,0,375,65);
-}else{
-return %orig;
-}
+      if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
 
+        return CGRectMake (0,0,SCREEN_WIDTH,30);
 
+      }
 
-}
+      else{
 
+        return CGRectMake (0,0,SCREEN_WIDTH,65);
 
-//Reduces header frame height
--(CGRect)frame{
-if(removeGap){
-return CGRectMake (0,0,375,65);
-}else{
-return %orig;
-}
+      }
 
+  }
 
-}
+  //Make frame match our inset
+  -(CGRect)frame {
+
+      return CGRectMake (0,0,SCREEN_WIDTH,vertical);
+
+  }
+
+  //Hide header blur
+  -(void)setBackgroundAlpha:(double)arg1{
+
+      arg1 = 0.0;
+      %orig;
+
+  }
+
+  //Nedded to make buttons work
+  -(BOOL)isUserInteractionEnabled {
+
+      return NO;
+
+  }
 
 %end
 
@@ -651,6 +674,84 @@ return %orig;
 }
 %end
 
+
+//FUGap
+@interface CCUIStatusLabelViewController : UIViewController
+-(void)setEdgeInsets:(UIEdgeInsets)arg1 ;
+@end
+
+@interface CCUIScrollView : UIScrollView
+@end
+
+%hook SBUIChevronView
+
+   //Hide chevron
+   -(id)initWithFrame:(CGRect)arg1 {
+
+	return nil;
+
+   }
+
+%end
+
+%hook CCUIStatusLabelViewController
+
+  //Move status labels under notch on iPhone X
+  -(void)setEdgeInsets:(UIEdgeInsets)arg1 {
+
+   if (IS_IPHONE_X) {
+
+     arg1 = UIEdgeInsetsMake(30,0,0,0);
+
+   }
+
+   else{
+
+      %orig;
+
+   }
+
+  }
+
+  //kills status labels for dnd, wifi off etc.
+  -(void)enqueueStatusUpdate:(id)arg1 forIdentifier:(id)arg2 {
+
+      nil;
+
+  }
+
+%end
+
+%hook CCUIStatusBar
+
+  //Hide CC statusbar on iPhone X
+  -(id)initWithFrame:(CGRect)frame{
+
+	return nil;
+
+  }
+
+%end
+%hook CCUIScrollView
+-(void)setContentInset:(UIEdgeInsets)arg1 {
+
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
+
+       arg1 = UIEdgeInsetsMake(verticalLandscape,0,0,0);
+       %orig;
+
+    }
+
+    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
+
+     arg1 = UIEdgeInsetsMake(vertical,0,0,0);
+     %orig;
+
+    }
+
+  }
+
+%end
 
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 //You'll understand it, dw
