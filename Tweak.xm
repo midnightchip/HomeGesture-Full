@@ -14,53 +14,13 @@
 // Definition for detecting iOS version (Required to hide CC Pocket)
 #define isGreaterThanOrEqualTo(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-//ScreenShot Remap
-/*#import <IOKit/hid/IOHIDEventSystem.h>
-#import <IOKit/hid/IOHIDEventSystemClient.h>
 
-//ScreenShot Remap
-@interface UIApplication (HomeGesture)
-+(id)sharedApplication;
--(void)takeScreenshot;
-@end*/
 
 @interface NSUserDefaults (HomeGesture)
 - (id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
 - (void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
 @end
 
-//ScreenShot Remap
-/*OBJC_EXTERN IOHIDEventSystemClientRef IOHIDEventSystemClientCreate(CFAllocatorRef allocator);
-
-//ScreenShot Remap
-#define kIOHIDEventUsageHome 64
-#define kIOHIDEventUsagePower 48
-
-void ioEventHandler(void *target, void *refcon, IOHIDEventQueueRef queue, IOHIDEventRef event) {
-    static BOOL homePressed = NO;
-    static BOOL powerPressed = NO;
-
-    if (IOHIDEventGetType(event) == kIOHIDEventTypeKeyboard) {
-        int keyDown = IOHIDEventGetIntegerValue(event, kIOHIDEventFieldKeyboardDown);
-        int button = IOHIDEventGetIntegerValue(event, kIOHIDEventFieldKeyboardUsage);
-        switch (button) {
-            case kIOHIDEventUsageHome:
-               homePressed = keyDown;
-                break;
-            case kIOHIDEventUsagePower:
-                powerPressed = keyDown;
-                break;
-            default:
-                break;
-        }
-        if (homePressed && powerPressed) {
-                [[UIApplication sharedApplication] takeScreenshot];
-        }
-    }
-}
-
-static IOHIDEventSystemClientRef ioHIDClient;
-static CFRunLoopRef ioHIDRunLoopScedule;*/
 
 static NSString *nsDomainString = @"/var/mobile/Library/Preferences/com.midnight.homegesture.plist";
 static NSString *nsNotificationString = @"com.midnight.homegesture.plist/post";
@@ -301,7 +261,7 @@ static BOOL rotateDisable = YES;
 
 //AppSwitcher Swipe to Kill
 %hook SBAppSwitcherSettings
-- (NSInteger)effectiveKillAffordanceStyle {
+- (long long)effectiveKillAffordanceStyle {
 	if(enableKill){
 		return 2;
 	}else{
@@ -752,6 +712,27 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
   }
 
 %end
+
+// Workaround for crash when launching app and invoking control center simultaneously
+%hook SBSceneHandle
+- (id)scene {
+	@try {
+		return %orig;
+	}
+	@catch (NSException *e) {
+		return nil;
+	}
+}
+%end
+
+// Enable simutaneous scrolling and dismissing
+%hook SBFluidSwitcherViewController
+- (double)_killGestureHysteresis {
+	double orig = %orig;
+	return orig == 30 ? 10 : orig;
+}
+%end
+
 
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 //You'll understand it, dw
