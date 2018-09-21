@@ -1,7 +1,7 @@
-#import "NINEHeaderCell.h"
+#import "homeBanner.h"
 #import <Preferences/PSSpecifier.h>
 
- NSString *const PATH_TO_IMAGE = @"/Library/PreferenceBundles/nineprefs.bundle/back.jpg";
+ NSString *const PATH_TO_IMAGE = @"/Library/PreferenceBundles/HomeGesture.bundle/banner.png";
 
 @implementation homeBanner
 
@@ -25,6 +25,6 @@
     UIImage *img = [UIImage imageNamed:PATH_TO_IMAGE];
     CGFloat constant = (width / img.size.width);
     return (CGFloat)img.size.height * constant;
-    
+
 }
 @end
