@@ -30,7 +30,8 @@
 			<string>#5c5555</string>
 			<key>packageID</key>
 			<string>HomeGesture</string>
-			
+			<key>repo</key>
+			<string>https://repo.dynastic.co</string>
 		</dict>
 	</dict>
 </plist>
