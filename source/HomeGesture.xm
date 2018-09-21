@@ -674,7 +674,7 @@ static BOOL remapScreen = YES;
 %end
 
 // Enable simutaneous scrolling and dismissing TODO add if statement for swiping up to kill
-/*%hook SBFluidSwitcherViewController
+%hook SBFluidSwitcherViewController
 - (double)_killGestureHysteresis {
   if([prefs boolForKey:@"enableKill"]){
     double orig = %orig;
@@ -683,7 +683,7 @@ static BOOL remapScreen = YES;
     return %orig;
   }
 }
-%end*/
+%end
 
 
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
