@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Hide Torch Button</string>
+				<key>key</key>
+				<string>hideTorch</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Hide Camera Button</string>
+				<key>key</key>
+				<string>hideCamera</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Hide Page Dots</string>
+				<key>key</key>
+				<string>dots</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Disable "Swipe Up to Unlock"</string>
+				<key>key</key>
+				<string>unlockHint</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Disable Control Center Hint</string>
+				<key>key</key>
+				<string>notificationHint</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+		</array>
+		<key>title</key>
+		<string>Lock Screen Settings</string>
+	</dict>
+</plist>

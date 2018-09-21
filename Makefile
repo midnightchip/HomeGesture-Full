@@ -1,18 +1,25 @@
-GO_EASY_ON_ME = 1
+ARCHS = armv7 armv7s arm64
+TARGET = iphone:clang:11.2:10.0
 
-THEOS_DEVICE_IP = 127.0.0.1
-THEOS_DEVICE_PORT = 2222
+DEBUG = 0
+FINALPACKAGE = 0
+GO_EASY_ON_ME = 0
+
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = HomeGesture
-HomeGesture_FILES = Tweak.xm
-HomeGesture_LIBRARIES = sparkapplist colorpicker
-HomeGesture_FRAMEWORKS = IOKit
-HomeGesture_CFLAGS = -fobjc-arc
+$(TWEAK_NAME)_FILES = $(wildcard source/*.m source/*.xm)
+$(TWEAK_NAME)_FRAMEWORKS =
+$(TWEAK_NAME)_LIBRARIES = sparkapplist
+$(TWEAK_NAME)_PRIVATE_FRAMEWORKS =
+$(TWEAK_NAME)_CFLAGS += -fobjc-arc -I$(THEOS_PROJECT_DIR)/source
+$(TWEAK_NAME)_LDFLAGS += -lCSColorPicker -lCSPreferencesProvider
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
-after-install::
-	install.exec "killall -9 SpringBoard"
-SUBPROJECTS += prefs
+SUBPROJECTS += preferences
+
 include $(THEOS_MAKE_PATH)/aggregate.mk
+
+after-install::
+	install.exec "killall -9 backboardd"

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>items</key>
+		<array>
+
+			 <dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>HomeBar (HomeScreen)</string>
+				<key>key</key>
+				<string>hideBar</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>HomeBar (LockScreen)</string>
+				<key>key</key>
+				<string>hideBarCover</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Custom Homebar Color (Lock Screen)</string>
+				<key>key</key>
+				<string>enablePillColor</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>CSColorDisplayCell</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>key</key>
+				<string>customColor</string>
+				<key>label</key>
+				<string>Select HomeBar Color</string>
+				<key>fallback</key>
+				<string>FF0000</string>
+				<key>alpha</key>
+				<true/>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+		</array>
+		<key>title</key>
+		<string>Home Bar Settings</string>
+	</dict>
+</plist>

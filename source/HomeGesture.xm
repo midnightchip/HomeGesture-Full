@@ -1,8 +1,32 @@
+#include <HomeGesture.h>
+#include <CSColorPicker/CSColorPicker.h>
+/*
+// getting values
+UIColor *myColor = [prefs colorForKey:@"kMyColorKey"];
+NSString *mystring = [prefs stringForKey:@"kMyColorKey"];
+BOOL myBOOL = [prefs boolForKey:@"kMyColorKey"];
+int myInt = [prefs intForKey:@"kMyColorKey"];
+float myFloat = [prefs floatForKey:@"kMyColorKey"];
+double myDouble = [prefs doubleForKey:@"kMyColorKey"];
+
+// setting values
+id myValue = @"My Custom Value";
+[prefs setObject:myValue forKey:@"kMyCustomValue"];
+
+// removing values
+[prefs removeObjectForKey: @"kMyCustomValue"];
+
+// saving prefs
+[prefs save];
+
+// save and send notification that prefs have been changed
+[prefs saveAndPostNotification];
+*/
+
 #import <SpringBoard/SpringBoard.h>
 #import <SpringBoard/SBApplication.h>
 #import <SparkAppList.h>
 #import <objc/runtime.h>
-#import "./prefs/libcolorpicker.h"
 
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
@@ -14,88 +38,9 @@
 // Definition for detecting iOS version (Required to hide CC Pocket)
 #define isGreaterThanOrEqualTo(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
+/*static NSString *nsDomainString = @"/var/mobile/Library/Preferences/com.midnight.homegesture.plist";
+static NSString *nsNotificationString = @"com.midnight.homegesture.plist/post";*/
 
-
-@interface NSUserDefaults (HomeGesture)
-- (id)objectForKey:(NSString *)key inDomain:(NSString *)domain;
-- (void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
-@end
-
-
-static NSString *nsDomainString = @"/var/mobile/Library/Preferences/com.midnight.homegesture.plist";
-static NSString *nsNotificationString = @"com.midnight.homegesture.plist/post";
-
-// Define Variables required for preferences
-static BOOL hideCarrier;
-static BOOL enableBar;
-static BOOL enableBarCover;
-static BOOL unlockHint;
-static BOOL notificationHint;
-static BOOL allowBread;
-static BOOL hideTorch;
-static BOOL hideCamera;
-static BOOL stopKeyboard;
-static BOOL disableGestures;
-static BOOL hideDots;
-static BOOL enableBlacklist;
-static BOOL enablePillColor;
-static BOOL enableKill;
-static BOOL statusBarX;
-static BOOL siriHome;
-static BOOL removeGap;
-static BOOL remapScreen;
-static BOOL roundSwitcher;
-static double vertical;
-static double verticalLandscape;
-
-// Define Methods to be changed by toggles in preferences
-static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
-	NSNumber *noCarrier = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hidecarrier" inDomain:nsDomainString];
-	NSNumber *noBar = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hideBar" inDomain:nsDomainString];
-	NSNumber *noBarCover = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hideBarCover" inDomain:nsDomainString];
-	NSNumber *uHint = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"unlockHint" inDomain:nsDomainString];
-	NSNumber *nHint = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"notificationHint" inDomain:nsDomainString];
-	NSNumber *bread = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enableBread" inDomain:nsDomainString];
-	NSNumber *hTorch = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hideTorch" inDomain:nsDomainString];
-	NSNumber *hCamera = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hideCamera" inDomain:nsDomainString];
-	NSNumber *stKeyboard = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"stopKeyboard" inDomain:nsDomainString];
-	NSNumber *noGest = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"disableGestures" inDomain:nsDomainString];
-	NSNumber *hDots = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"hideDots" inDomain:nsDomainString];
-	NSNumber *eBlacklist = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enableBlacklist" inDomain:nsDomainString];
-	NSNumber *pColor = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enablePillColor" inDomain:nsDomainString];
-	NSNumber *eKill = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enableKill" inDomain:nsDomainString];
-	NSNumber *statusX = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"statusBarX" inDomain:nsDomainString];
-	NSNumber *siriOnHome = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"siriHome" inDomain:nsDomainString];
-	NSNumber *rGap = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"removeGap" inDomain:nsDomainString];
-	NSNumber *rScreen = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"remapScreen" inDomain:nsDomainString];
-	NSNumber *rSwitcher = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"roundSwitcher" inDomain:nsDomainString];
-	NSNumber *vert = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"vertical" inDomain:nsDomainString];
-	NSNumber *vertLand = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"verticalLand" inDomain:nsDomainString];
-
-
-// Define default state of preferences
-	hideCarrier = (noCarrier)? [noCarrier boolValue]:NO;
-	enableBar = (noBar)? [noBar boolValue]:NO;
-	enableBarCover = (noBarCover)? [noBarCover boolValue]:NO;
-	unlockHint = (uHint)? [uHint boolValue]:NO;
-	notificationHint = (nHint)? [nHint boolValue]:NO;
-	allowBread = (bread)? [bread boolValue]:NO;
-	hideTorch = (hTorch)? [hTorch boolValue]:NO;
-	hideCamera = (hCamera)? [hCamera boolValue]:NO;
-	stopKeyboard = (stKeyboard)? [stKeyboard boolValue]:NO;
-	disableGestures = (noGest)? [noGest boolValue]:NO;
-	hideDots = (hDots)? [hDots boolValue]:NO;
-	enableBlacklist = (eBlacklist)? [eBlacklist boolValue]:NO;
-	enablePillColor = (pColor)? [pColor boolValue]:NO;
-	enableKill = (eKill)? [eKill boolValue]:YES;
-	statusBarX = (statusX)? [statusX boolValue]:NO;
-	siriHome = (siriOnHome)? [siriOnHome boolValue]:YES;
-	removeGap = (rGap)? [rGap boolValue]:NO;
-	remapScreen = (rScreen)? [rScreen boolValue]:NO;
-	roundSwitcher = (rSwitcher)? [rSwitcher boolValue]:NO;
-	vertical = (vert)? [vert doubleValue]:50;
-	verticalLandscape = (vertLand)? [vertLand doubleValue]:50;
-}
 
 /*static NSDictionary *prefs;
 static NSString *selectedApp1; //Applist stuff
@@ -128,21 +73,21 @@ int applicationDidFinishLaunching;
 // Hide Carrier Text in Status Bar
 %hook UIStatusBarServiceItemView
 - (id)_serviceContentsImage {
-	if (hideCarrier){
+	if ([prefs boolForKey: @"hidecarrier"]){
 		return nil;
 		}else{
 			return %orig;
 		}
 	}
 - (CGFloat)extraRightPadding {
-	if (hideCarrier){
+	if ([prefs boolForKey: @"hidecarrier"]){
 		return 0.0f;
 		}else{
 			return %orig;
 		}
 	}
 - (CGFloat)standardPadding {
-	if (hideCarrier){
+	if ([prefs boolForKey: @"hidecarrier"]){
 		return 2.0f;
 		}else{
 			return %orig;
@@ -158,7 +103,7 @@ static BOOL homeEnable = YES;
 static BOOL rotateDisable = YES;
 %hook MTLumaDodgePillView
 - (id)initWithFrame:(struct CGRect)arg1 {
-	if (enableBar){
+	if ([prefs boolForKey:@"hideBar"]){
 		return %orig;
 		}else{
 			return NULL;
@@ -190,7 +135,7 @@ static BOOL rotateDisable = YES;
 @end
 %hook SBDashboardHomeAffordanceView
 - (void)_createStaticHomeAffordance {
-	if (enableBarCover){
+	if ([prefs boolForKey:@"hideBarCover"]){
 		return %orig;
 		}else{
 			return;
@@ -209,7 +154,7 @@ static BOOL rotateDisable = YES;
 // Restore button to invoke Siri
 %hook SBLockHardwareButtonActions
 - (id)initWithHomeButtonType:(long long)arg1 proximitySensorManager:(id)arg2 {
-	if(siriHome){
+	if([prefs boolForKey:@"siriHome"]){
 		return %orig(_homeButtonType, arg2);
 	}else{
 		return %orig;
@@ -218,7 +163,7 @@ static BOOL rotateDisable = YES;
 %end
 %hook SBHomeHardwareButtonActions
 - (id)initWitHomeButtonType:(long long)arg1 {
-	if(siriHome){
+	if([prefs boolForKey:@"siriHome"]){
 		return %orig(_homeButtonType);
 	}else{
 		return %orig;
@@ -229,7 +174,7 @@ static BOOL rotateDisable = YES;
 // Hide notification hints
 %hook NCNotificationListSectionRevealHintView
 - (void)_updateHintTitle {
-	if(notificationHint){
+	if(![prefs boolForKey:@"notificationHint"]){
 		%orig;
 	}else{
 		return;
@@ -240,7 +185,7 @@ static BOOL rotateDisable = YES;
 // Hide unlock hints
 %hook SBDashBoardTeachableMomentsContainerViewController
 - (void)_updateTextLabel {
-	if(unlockHint){
+	if(![prefs boolForKey:@"unlockHint"]){
 		%orig;
 	}else{
 		return;
@@ -251,7 +196,7 @@ static BOOL rotateDisable = YES;
 // Disable breadcrumb
 %hook SBWorkspaceDefaults
 - (bool)isBreadcrumbDisabled {
-	if (allowBread){
+	if (![prefs boolForKey:@"enableBread"]){
 		return NO;
 	}else{
 		return YES;
@@ -262,7 +207,7 @@ static BOOL rotateDisable = YES;
 //AppSwitcher Swipe to Kill
 %hook SBAppSwitcherSettings
 - (long long)effectiveKillAffordanceStyle {
-	if(enableKill){
+	if([prefs boolForKey:@"enableKill"]){
 		return 2;
 	}else{
 		return %orig;
@@ -270,14 +215,14 @@ static BOOL rotateDisable = YES;
 
 }
 - (NSInteger)killAffordanceStyle {
-	if(enableKill){
+	if([prefs boolForKey:@"enableKill"]){
 		return 2;
 	}else{
 		return %orig;
 	}
 }
 - (void)setKillAffordanceStyle:(NSInteger)style {
-	if(enableKill){
+	if([prefs boolForKey:@"enableKill"]){
 		%orig(2);
 	}else{
 		%orig;
@@ -293,7 +238,7 @@ static BOOL rotateDisable = YES;
 // Hide Torch Button on Coversheet
 %hook SBDashBoardQuickActionsViewController
 -(BOOL)hasFlashlight{
-	if(hideTorch){
+	if([prefs boolForKey:@"hideTorch"]){
 		return NO;
 		}else{
 			return %orig;
@@ -301,7 +246,7 @@ static BOOL rotateDisable = YES;
 }
 // Hide Camera Button on Coversheet
 -(BOOL)hasCamera{
-	if(hideCamera){
+	if([prefs boolForKey:@"hideCamera"]){
 		return NO;
 	}else{
 		return %orig;
@@ -312,7 +257,7 @@ static BOOL rotateDisable = YES;
 // Disable Gestures Switch
 %hook SBHomeGestureSettings
 -(BOOL)isHomeGestureEnabled{
-	if(!disableGestures){
+	if(![prefs boolForKey:@"disableGestures"]){
 		NSString *test;
 		SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
 		SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
@@ -340,7 +285,7 @@ static NSString *test;
 	%orig;
 
 // Disable Gestures When Keyboard is enabled
-	if(stopKeyboard){
+	if([prefs boolForKey:@"stopKeyboard"]){
 		[[NSNotificationCenter defaultCenter] addObserver:self
                                          		selector:@selector(keyboardDidShow:)
                                              		name:UIKeyboardDidShowNotification
@@ -353,7 +298,7 @@ static NSString *test;
 			}
 
 // Disable Gestures if blacklist is enabled
-		if (enableBlacklist){
+		if ([prefs boolForKey:@"enableBlacklist"]){
 			[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 			[[NSNotificationCenter defaultCenter]
    		addObserver:self selector:@selector(yourMethod:)
@@ -402,7 +347,10 @@ static NSString *test;
 }
 %end
 
+
 //Remapp
+
+static BOOL remapScreen = YES;
 %hook SBPressGestureRecognizer
 - (void)setAllowedPressTypes:(NSArray *)arg1 {
 	NSArray * lockHome = @[@104, @101];
@@ -436,14 +384,14 @@ static NSString *test;
 	if(remapScreen){
 		return %orig(arg1, _homeButtonType, arg3, arg4);
 	}else{
-		return %orig;
+		return %orig(arg1, _homeButtonType + 1, arg3, arg4);
 	}
 }
 - (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 {
 	if(remapScreen){
 		return %orig(arg1, _homeButtonType);
 	}else{
-		return %orig;
+		return %orig(arg1, _homeButtonType+1);
 	}
 }
 %end
@@ -455,14 +403,14 @@ static NSString *test;
 
 %hook SBDashBoardPageControl
 -(id)_pageIndicatorColor{
-	if (hideDots){
+	if ([prefs boolForKey:@"dots"]){
 		return [UIColor clearColor];
 	}else{
 		return %orig;
 	}
 }
 -(id)_currentPageIndicatorColor{
-	if (hideDots){
+	if ([prefs boolForKey:@"dots"]){
 		return [UIColor clearColor];
 	}else{
 		return %orig;
@@ -474,20 +422,20 @@ static NSString *test;
 @interface MTStaticColorPillView : UIView
 @end
 
-static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.midnight.homegesture.plist"];
+
 
 %hook MTStaticColorPillView
 -(UIColor *)pillColor {
-	if(enablePillColor){
-		return LCPParseColorString([coloursettings objectForKey:@"customColour"], @"#FF0000");
+	if([prefs boolForKey:@"enablePillColor"]){
+		return [prefs colorForKey:@"customColor"];
 	}else {
 		return %orig;
 	}
 }
 
 -(void)setPillColor:(UIColor *)pillColor {
-	if(enablePillColor){
-		pillColor = LCPParseColorString([coloursettings objectForKey:@"customColour"], @"#FF0000");
+	if([prefs boolForKey:@"enablePillColor"]){
+		pillColor = [prefs colorForKey:@"customColor"];
 		%orig(pillColor);
 	}else {
 		%orig;
@@ -535,7 +483,7 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
   //Make frame match our inset
   -(CGRect)frame {
 
-      return CGRectMake (0,0,SCREEN_WIDTH,vertical);
+      return CGRectMake (0,0,SCREEN_WIDTH,[prefs floatForKey:@"vertical"]);
 
   }
 
@@ -573,15 +521,15 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 	SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
 	SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
 	status = [frontApp valueForKey:@"_bundleIdentifier"];*/
-	if(statusBarX){
-		return statusBarX;
+	if([prefs boolForKey:@"statusBarX"]){
+		return [prefs boolForKey:@"statusBarX"];
 	}else{
 		return %orig;
 	}
 }
 + (Class)_statusBarImplementationClass {
-	if(statusBarX){
-		return statusBarX ? NSClassFromString(@"UIStatusBar_Modern") : NSClassFromString(@"UIStatusBar");
+	if([prefs boolForKey:@"statusBarX"]){
+		return [prefs boolForKey:@"statusBarX"] ? NSClassFromString(@"UIStatusBar_Modern") : NSClassFromString(@"UIStatusBar");
 	}else{
 		return %orig;
 	}
@@ -590,8 +538,8 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 
 %hook _UIStatusBar
 + (BOOL)forceSplit {
-	if(statusBarX){
-		return statusBarX;
+	if([prefs boolForKey:@"statusBarX"]){
+		return [prefs boolForKey:@"statusBarX"];
 	}else{
 		return %orig;
 	}
@@ -601,7 +549,7 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 // Hide Status Bar in Control Center (When statusBarX is disabled)
 %hook CCUIOverlayStatusBarPresentationProvider
 - (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
-	if (statusBarX){
+	if ([prefs boolForKey:@"statusBarX"]){
 		return %orig;
 	}
 	else {
@@ -612,21 +560,21 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 
 %hook UITraitCollection
 + (id)traitCollectionWithDisplayCornerRadius:(CGFloat)arg1 {
-	if(roundSwitcher){
+	if([prefs boolForKey:@"roundSwitcher"]){
 		return %orig(19);
 	}else{
 		return %orig;
 	}
 }
 - (CGFloat)displayCornerRadius {
-	if(roundSwitcher){
+	if([prefs boolForKey:@"roundSwitcher"]){
 		return 19;
 	}else{
 		return %orig;
 	}
 }
 - (CGFloat)_displayCornerRadius {
-	if(roundSwitcher){
+	if([prefs boolForKey:@"roundSwitcher"]){
 		return 19;
 	}else{
 		return %orig;
@@ -697,14 +645,14 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
 
-       arg1 = UIEdgeInsetsMake(verticalLandscape,0,0,0);
+       arg1 = UIEdgeInsetsMake([prefs floatForKey:@"verticalLandscape"],0,0,0);
        %orig;
 
     }
 
     else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
 
-     arg1 = UIEdgeInsetsMake(vertical,0,0,0);
+     arg1 = UIEdgeInsetsMake([prefs floatForKey:@"vertical"],0,0,0);
      %orig;
 
     }
@@ -725,35 +673,20 @@ static NSMutableDictionary *coloursettings = [[NSMutableDictionary alloc] initWi
 }
 %end
 
-// Enable simutaneous scrolling and dismissing
-%hook SBFluidSwitcherViewController
+// Enable simutaneous scrolling and dismissing TODO add if statement for swiping up to kill
+/*%hook SBFluidSwitcherViewController
 - (double)_killGestureHysteresis {
-	double orig = %orig;
-	return orig == 30 ? 10 : orig;
+  if([prefs boolForKey:@"enableKill"]){
+    double orig = %orig;
+    return orig == 30 ? 10 : orig;
+  }else{
+    return %orig;
+  }
 }
-%end
+%end*/
 
 
 // SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
 //You'll understand it, dw
 //Thanks :)
 //Lol
-%ctor{
-  notificationCallback(NULL, NULL, NULL, NULL, NULL);
-  CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
-    NULL,
-    notificationCallback,
-    (CFStringRef)nsNotificationString,
-    NULL,
-    CFNotificationSuspensionBehaviorCoalesce);
-
-		/*ioHIDClient = IOHIDEventSystemClientCreate(kCFAllocatorDefault);
-		    ioHIDRunLoopScedule = CFRunLoopGetMain();
-		    IOHIDEventSystemClientScheduleWithRunLoop(ioHIDClient, ioHIDRunLoopScedule, kCFRunLoopDefaultMode);
-		    IOHIDEventSystemClientRegisterEventCallback(ioHIDClient, ioEventHandler, NULL, NULL);*/
-	}
-
-	/*%dtor {
-    IOHIDEventSystemClientUnregisterEventCallback(ioHIDClient);
-    IOHIDEventSystemClientUnscheduleWithRunLoop(ioHIDClient, ioHIDRunLoopScedule, kCFRunLoopDefaultMode);
-}*/

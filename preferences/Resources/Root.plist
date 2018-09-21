@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>items</key>
+		<array>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>statusBar</string>
+				<key>label</key>
+				<string>Status Bar and CC Settings</string>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>buttonMapping</string>
+				<key>label</key>
+				<string>Set Button Mapping</string>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>appSwitcher</string>
+				<key>label</key>
+				<string>App Switcher Settings</string>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>lockScreen</string>
+				<key>label</key>
+				<string>Lock Screen Settings</string>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>homeBar</string>
+				<key>label</key>
+				<string>Home Bar Settings</string>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>blackList</string>
+				<key>label</key>
+				<string>BlackList Settings</string>
+			</dict>
+
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>Support</string>
+				<key>label</key>
+				<string>Support, Donations &amp; Contact</string>
+				<key>key</key>
+				<string>support</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>detail</key>
+				<string>CSPBackupListViewController</string>
+				<key>isController</key>
+				<true/>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle/defaults.plist</string>
+				<key>label</key>
+				<string>Backup &amp; Restore</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>detail</key>
+				<string>CSPChangeLogController</string>
+				<key>isController</key>
+				<true/>
+				<key>label</key>
+				<string>ChangeLog</string>
+				<key>changes</key>
+				<array>
+					<dict>
+						<key>0.0.1</key>
+						<array>
+							<string>initial release</string>
+						</array>
+					</dict>
+				</array>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSStaticTextCell</string>
+				<key>cellClass</key>
+				<string>CSPVersionCell</string>
+				<key>bundleID</key>
+				<string>com.vitataf.homegesture</string>
+				<key>label</key>
+				<string>Version:</string>
+			</dict>
+
+		</array>
+		<key>title</key>
+		<string>HomeGesture</string>
+	</dict>
+</plist>

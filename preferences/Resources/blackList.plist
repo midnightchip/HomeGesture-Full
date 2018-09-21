@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Disable Gestures With Keyboard</string>
+				<key>sublabel</key>
+				<string>Disables the gestures when keyboard is present.</string>
+				<key>key</key>
+				<string>stopKeyboard</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>Enable App Blacklist</string>
+				<key>key</key>
+				<string>enableBlacklist</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+        <key>cell</key>
+        <string>PSButtonCell</string>
+        <key>label</key>
+        <string>Select Blacklisted Apps</string>
+				<key>sublabel</key>
+				<string>Disables HomeGestures while in landscape mode</string>
+        <key>action</key>
+        <string>selectExcludeApps</string>
+    </dict>
+		<dict>
+        <key>cell</key>
+        <string>PSButtonCell</string>
+        <key>label</key>
+        <string>Select Apps to be Fully Disabled</string>
+        <key>action</key>
+        <string>selectBlackList</string>
+				<key>sublabel</key>
+				<string>Disables HomeGestures Completly in app</string>
+    </dict>
+
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+		</array>
+		<key>title</key>
+		<string>BlackList Settings</string>
+	</dict>
+</plist>
