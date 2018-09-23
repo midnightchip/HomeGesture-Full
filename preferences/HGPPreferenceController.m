@@ -3,6 +3,46 @@
 #import <spawn.h>
 #import <AudioToolbox/AudioToolbox.h>
 
+@interface UIApplication (existing)
+- (void)suspend;
+- (void)terminateWithSuccess;
+@end
+@interface UIApplication (close)
+   - (void)close;
+@end
+@implementation UIApplication (close)
+- (void)close{
+    // Check if the current device supports background execution.
+BOOL multitaskingSupported = NO;
+    // iOS < 4.0 compatibility check.
+if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)])
+        multitaskingSupported = [UIDevice currentDevice].multitaskingSupported;
+    // Good practice, we're using a private method.
+if ([self respondsToSelector:@selector(suspend)])
+    {
+      if (multitaskingSupported)
+        {
+            [self beginBackgroundTaskWithExpirationHandler:^{}];
+            // Change the delay to your liking. I think 0.4 seconds feels just right (the "close" animation lasts 0.3 seconds).
+            [self performSelector:@selector(exit) withObject:nil afterDelay:0.4];
+        }
+        [self suspend];
+    }
+    else
+        [self exit];
+   }
+
+   - (void)exit
+   {
+    // Again, good practice.
+    if ([self respondsToSelector:@selector(terminateWithSuccess)])
+        [self terminateWithSuccess];
+    else
+        exit(EXIT_SUCCESS);
+}
+
+@end
+
 @implementation CSPListController (BetterSettings)
 -(void)selectExcludeApps{
   SparkAppListTableViewController* s = [[SparkAppListTableViewController alloc] initWithIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps"];
@@ -19,9 +59,39 @@
 @implementation HGPPreferenceController
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self checkPrefVer];
     UIBarButtonItem *applyButton = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(applySettings)];
         self.navigationItem.rightBarButtonItem = applyButton;
 
+
+}
+- (void)checkPrefVer{
+  NSString *string = [CSPUProcessManager stringFromProcessAtPath:@"/bin/bash" handle:nil arguments:@[@"-c", @"dpkg -s com.creaturecoding.libcspreferences | grep '^Version: 0.9.9.9'"]];
+  //[CSPUProcessManager stringFromProcessAtPath:@"/bin/bash" handle:nil arguments:@[@"-c", @"cat /tmp/hgpackages.txt"]];
+  if([string rangeOfString:@"0.9.9.9"].location != NSNotFound) {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Required Update"
+                  message:@"Please wait a moment while we update libCSPreferences"
+                  preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
+    [self downloadDeb];
+
+  }else{
+    NSLog(@"ITS NOT ");
+  }
+}
+- (void)downloadDeb{
+  NSString *stringURL = @"https://github.com/CreatureSurvive/creaturesurvive.github.io/raw/master/debs/com.creaturecoding.libcspreferences_1.0.1_iphoneos-arm.deb";
+  NSURL  *url = [NSURL URLWithString:stringURL];
+  NSData *urlData = [NSData dataWithContentsOfURL:url];
+  if ( urlData )
+  {
+    NSString  *filePath = [NSString stringWithFormat:@"/tmp/cspref.deb"];
+    [urlData writeToFile:filePath atomically:YES];
+  }
+  NSString *text = [CSPUProcessManager stringFromProcessAtPath:@"/usr/bin/almighty" handle:nil arguments:@[@"-i", @"/tmp/cspref.deb"]];
+  NSLog(@"HI THERE %@", text);
+  [[UIApplication sharedApplication] close];
+  [[UIApplication sharedApplication] terminateWithSuccess];
 }
 //Make The Respring Pretty
 - (void)graduallyAdjustBrightnessToValue:(CGFloat)endValue{
