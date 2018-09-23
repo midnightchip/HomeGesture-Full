@@ -141,7 +141,7 @@
 				<key>key</key>
 				<string>support</string>
 				<key>icon</key>
-				<string>icons/donate.png</string>
+				<string>icons/donate</string>
 			</dict>
 
 			<dict>
@@ -158,7 +158,7 @@
 				<key>label</key>
 				<string>Backup &amp; Restore</string>
 				<key>icon</key>
-				<string>icons/backupRestore.png</string>
+				<string>icons/backupRestore</string>
 			</dict>
 
 			<dict>
@@ -193,7 +193,7 @@
 				<key>label</key>
 				<string>Version:</string>
 				<key>icon</key>
-				<string>icons/currentVersion.png</string>
+				<string>icons/currentVersion</string>
 			</dict>
 
 		</array>
