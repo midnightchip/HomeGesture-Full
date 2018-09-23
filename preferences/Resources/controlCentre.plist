@@ -7,10 +7,6 @@
 		 <dict>
 			 <key>cell</key>
 			 <string>PSGroupCell</string>
-			 <key>footerText</key>
-			 <string>Top Padding</string>
-			 <key>footerAlignment</key>
-			 <integer>0</integer>
 		 </dict>
 
 		 <dict>
@@ -74,10 +70,6 @@
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>Top Padding (Landscape Mode)</string>
-				<key>footerAlignment</key>
-				<integer>0</integer>
 			</dict>
 
 			<dict>
