@@ -24,7 +24,7 @@
 				<key>label</key>
 				<string>Status Bar</string>
 				<key>icon</key>
-				<string>statusBar.png</string>
+				<string>icons/statusBar</string>
 			</dict>
 
 			<dict>
@@ -37,7 +37,7 @@
 				<key>label</key>
 				<string>Control Centre</string>
 				<key>icon</key>
-				<string>controlCentre.png</string>
+				<string>icons/controlCentre</string>
 			</dict>
 
 			<dict>
@@ -50,7 +50,7 @@
 				<key>label</key>
 				<string>Hardware Buttons</string>
 				<key>icon</key>
-				<string>buttons.png</string>
+				<string>icons/buttons.png</string>
 			</dict>
 
 			<dict>
