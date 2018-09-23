@@ -3,7 +3,7 @@
 
  NSString *const PATH_TO_IMAGE = @"/Library/PreferenceBundles/HomeGesture.bundle/cc.png";
 
-@implementation homeBanner
+@implementation ccbanner
 
 - (id)initWithSpecifier:(PSSpecifier *)specifier {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell" specifier:specifier];
