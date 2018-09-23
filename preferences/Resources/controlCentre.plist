@@ -7,12 +7,29 @@
 		 <dict>
 			 <key>cell</key>
 			 <string>PSGroupCell</string>
-			 <key>headerCellClass</key>
-			 <string>ccbanner</string>
 			 <key>footerText</key>
 			 <string>Top Padding</string>
 			 <key>footerAlignment</key>
 			 <integer>0</integer>
+		 </dict>
+
+		 <dict>
+			 <key>cell</key>
+			 <string>PSTableCell</string>
+			 <key>cellClass</key>
+			 <string>CSPImageCell</string>
+			 <key>height</key>
+			 <string>200</string>
+			 <key>static</key>
+			 <false/>
+			 <key>key</key>
+			 <string>selectPhotos</string>
+			 <key>storePath</key>
+			 <string>/Library/PreferenceBundles/HomeGesture.bundle/banners/cc_vert.png</string>
+			 <key>defaults</key>
+			 <string>com.vitataf.homegesture</string>
+			 <key>defaultsPath</key>
+			 <string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 		 </dict>
 
 			<dict>
@@ -53,13 +70,13 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>365</string>
+				<string>200</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
 				<string>selectPhotos</string>
 				<key>storePath</key>
-				<string>/Library/PreferenceBundles/HomeGesture.bundle/cc@2x.png</string>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle/banners/cc_vert.png</string>
 				<key>defaults</key>
 				<string>com.vitataf.homegesture</string>
 				<key>defaultsPath</key>
