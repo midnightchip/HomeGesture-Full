@@ -110,9 +110,9 @@
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>Disable BreadCrumbs</string>
-				<key>key</key>
 				<key>sublabel</key>
 				<string>Hide back to app button from Status Bar</string>
+				<key>key</key>
 				<string>enableBread</string>
 				<key>PostNotification</key>
 				<string>com.vitataf.homegesture.prefschanged</string>
