@@ -94,7 +94,7 @@
 				<key>key</key>
 				<string>selectPhotos</string>
 				<key>storePath</key>
-				<string>/Library/PreferenceBundles/HomeGesture.bundle/banners/breadcrumbs.png</string>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle/banners/breadcrumb.png</string>
 				<key>defaults</key>
 				<string>com.vitataf.homegesture</string>
 				<key>defaultsPath</key>
