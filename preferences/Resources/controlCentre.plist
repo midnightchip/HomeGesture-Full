@@ -16,6 +16,8 @@
 			<dict>
 				<key>cell</key>
 				<string>PSSliderCell</string>
+				<key>label</key>
+				<string>Vertical Padding in CC</string>
 				<key>isContinuous</key>
 				<true/>
 				<key>key</key>
@@ -48,6 +50,8 @@
 			<dict>
 				<key>cell</key>
 				<string>PSSliderCell</string>
+				<key>label</key>
+				<string>Horizontal Padding in CC</string>
 				<key>isContinuous</key>
 				<true/>
 				<key>key</key>

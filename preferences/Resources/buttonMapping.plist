@@ -9,7 +9,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Screen Shot with Home and Power Button</string>
+				<string>Original Screenshot</string>
+				<key>sublabel</key>
+				<string>Disable Volume Up + Lock Button to Screenshot</string>
 				<key>key</key>
 				<string>remapScreen</string>
 				<key>PostNotification</key>
@@ -24,9 +26,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Activate Siri by pressing HomeButton</string>
+				<string>Press Home for Siri</string>
 				<key>sublabel</key>
-				<string>Enable "Swipe up to close" to close app cards in switcher</string>
+				<string>Activate Siri by holding the Home Button</string>
 				<key>key</key>
 				<string>siriHome</string>
 				<key>PostNotification</key>
@@ -49,6 +51,6 @@
 
 		</array>
 		<key>title</key>
-		<string>Set Button Mapping</string>
+		<string>Hardware Buttons</string>
 	</dict>
 </plist>

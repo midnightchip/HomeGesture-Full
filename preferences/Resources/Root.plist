@@ -88,7 +88,7 @@
 				<key>pushToPlist</key>
 				<string>blackList</string>
 				<key>label</key>
-				<string>BlackList Settings</string>
+				<string>Blacklist Applications</string>
 			</dict>
 
 

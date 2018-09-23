@@ -54,7 +54,7 @@
         <key>action</key>
         <string>selectBlackList</string>
 				<key>sublabel</key>
-				<string>Disables HomeGestures Completly in app</string>
+				<string>Disables HomeGestures completly in app</string>
     </dict>
 
 

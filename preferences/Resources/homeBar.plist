@@ -9,7 +9,7 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>HomeBar (HomeScreen)</string>
+				<string>Home Bar (HomeScreen)</string>
 				<key>key</key>
 				<string>hideBar</string>
 				<key>PostNotification</key>
@@ -24,7 +24,7 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>HomeBar (LockScreen)</string>
+				<string>Home Bar (LockScreen)</string>
 				<key>key</key>
 				<string>hideBarCover</string>
 				<key>PostNotification</key>
@@ -37,9 +37,20 @@
 
 			<dict>
 				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+			<dict>
+				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Custom Homebar Color (Lock Screen)</string>
+				<string>Custom Homebar Color</string>
+				<key>sublabel</key>
+				<string>Only applies to the Lock Screen</string>
 				<key>key</key>
 				<string>enablePillColor</string>
 				<key>PostNotification</key>
@@ -69,16 +80,6 @@
 				<true/>
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
-			</dict>
-
-
-			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
-				<key>footerAlignment</key>
-				<integer>1</integer>
 			</dict>
 
 		</array>
