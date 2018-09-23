@@ -24,7 +24,7 @@
 				<key>label</key>
 				<string>Status Bar</string>
 				<key>icon</key>
-				<string>icon.png</string>
+				<string>statusBar.png</string>
 			</dict>
 
 			<dict>
@@ -36,6 +36,8 @@
 				<string>controlCentre</string>
 				<key>label</key>
 				<string>Control Centre</string>
+				<key>icon</key>
+				<string>controlCentre.png</string>
 			</dict>
 
 			<dict>
@@ -47,6 +49,8 @@
 				<string>buttonMapping</string>
 				<key>label</key>
 				<string>Hardware Buttons</string>
+				<key>icon</key>
+				<string>buttons.png</string>
 			</dict>
 
 			<dict>
@@ -58,6 +62,8 @@
 				<string>appSwitcher</string>
 				<key>label</key>
 				<string>App Switcher</string>
+				<key>icon</key>
+				<string>appSwitcher.png</string>
 			</dict>
 
 			<dict>
@@ -69,6 +75,8 @@
 				<string>lockScreen</string>
 				<key>label</key>
 				<string>Lock Screen</string>
+				<key>icon</key>
+				<string>lockScreen.png</string>
 			</dict>
 
 			<dict>
@@ -80,6 +88,8 @@
 				<string>homeBar</string>
 				<key>label</key>
 				<string>Home Bar</string>
+				<key>icon</key>
+				<string>homeBar.png</string>
 			</dict>
 
 			<dict>
@@ -91,6 +101,8 @@
 				<string>blackList</string>
 				<key>label</key>
 				<string>Blacklist Applications</string>
+				<key>icon</key>
+				<string>blacklist.png</string>
 			</dict>
 
 
@@ -114,6 +126,8 @@
 				<string>Support, Donations &amp; Contact</string>
 				<key>key</key>
 				<string>support</string>
+				<key>icon</key>
+				<string>donate.png</string>
 			</dict>
 
 			<dict>

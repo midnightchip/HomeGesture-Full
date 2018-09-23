@@ -7,14 +7,12 @@
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
-				<key>headerText</key>
-				<string>Set Vertical Padding in CC</string>
 			</dict>
 
 			<dict>
 				<key>cell</key>
 				<string>PSSliderCell</string>
-				<key>headerText</key>
+				<key>label</key>
 				<string>Vertical Padding in CC</string>
 				<key>isContinuous</key>
 				<true/>
@@ -30,8 +28,6 @@
 				<string/>
 				<key>showValue</key>
 				<false/>
-				<key>description</key>
-				<string>Vertical Padding in CC</string>
 				<key>PostNotification</key>
 				<string>com.vitataf.homegesture.prefschanged</string>
 				<key>defaults</key>
@@ -48,7 +44,7 @@
 			<dict>
 				<key>cell</key>
 				<string>PSSliderCell</string>
-				<key>headerText</key>
+				<key>label</key>
 				<string>Horizontal Padding in CC</string>
 				<key>isContinuous</key>
 				<true/>
@@ -64,8 +60,6 @@
 				<string/>
 				<key>showValue</key>
 				<false/>
-				<key>description</key>
-				<string>Landscape Padding in CC</string>
 				<key>PostNotification</key>
 				<string>com.vitataf.homegesture.prefschanged</string>
 				<key>defaults</key>
