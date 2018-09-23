@@ -7,20 +7,11 @@
 
 			<dict>
 				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>FOLLOWING SETTINGS FOR NORMAL STATUS BAR ONLY:</string>
-				<key>footerAlignment</key>
-				<integer>0</integer>
-			</dict>
-
-			<dict>
-				<key>cell</key>
 				<string>PSTableCell</string>
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>95</string>
+				<string>70</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -63,7 +54,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>95</string>
+				<string>75</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -97,7 +88,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>95</string>
+				<string>75</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>

@@ -11,7 +11,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>85</string>
+				<string>65</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -57,10 +57,6 @@
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
-				<key>footerAlignment</key>
-				<integer>1</integer>
 			</dict>
 
 			<dict>
@@ -69,7 +65,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>85</string>
+				<string>65</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -87,6 +83,8 @@
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>Hide Page Dots</string>
+				<key>sublabel</key>
+				<string>Hide page dots from the LockScreen</string>
 				<key>key</key>
 				<string>dots</string>
 				<key>PostNotification</key>
@@ -103,7 +101,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>85</string>
+				<string>65</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -135,11 +133,20 @@
 
 			<dict>
 				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+			<dict>
+				<key>cell</key>
 				<string>PSTableCell</string>
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>85</string>
+				<string>75</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -158,7 +165,7 @@
 				<key>label</key>
 				<string>Hide Control Center Hint</string>
 				<key>sublabel</key>
-				<string>Hide small bar on top right of the LockScreen</string>
+				<string>Hide small top right bar from the LockScreen</string>
 				<key>key</key>
 				<string>notificationHint</string>
 				<key>PostNotification</key>
