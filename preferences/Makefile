@@ -4,7 +4,7 @@ TARGET = iphone:clang:11.2:10.0
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = HomeGesture
-$(BUNDLE_NAME)_FILES = HGPPreferenceController.m homeBanner.m
+$(BUNDLE_NAME)_FILES = HGPPreferenceController.m
 $(BUNDLE_NAME)_INSTALL_PATH = /Library/PreferenceBundles
 $(BUNDLE_NAME)_FRAMEWORKS = UIKit AudioToolbox
 $(BUNDLE_NAME)_PRIVATE_FRAMEWORKS = Preferences
