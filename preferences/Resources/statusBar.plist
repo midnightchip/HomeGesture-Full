@@ -29,6 +29,8 @@
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>iPhone X Style Status Bar</string>
+				<key>sublabel</key>
+				<string>Add additional space to simulate a notch</string>
 				<key>key</key>
 				<string>statusBarX</string>
 				<key>PostNotification</key>
@@ -72,6 +74,8 @@
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>Hide Status Bar Carrier</string>
+				<key>sublabel</key>
+				<string>Hide carrier from the Status Bar</string>
 				<key>key</key>
 				<string>hidecarrier</string>
 				<key>PostNotification</key>
@@ -107,6 +111,8 @@
 				<key>label</key>
 				<string>Disable BreadCrumbs</string>
 				<key>key</key>
+				<key>sublabel</key>
+				<string>Hide back to app button from Status Bar</string>
 				<string>enableBread</string>
 				<key>PostNotification</key>
 				<string>com.vitataf.homegesture.prefschanged</string>
