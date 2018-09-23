@@ -11,7 +11,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>100</string>
+				<string>110</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -54,7 +54,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>50</string>
+				<string>110</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -88,7 +88,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>50</string>
+				<string>110</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
