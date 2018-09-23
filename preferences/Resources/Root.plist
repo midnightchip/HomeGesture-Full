@@ -155,9 +155,9 @@
 				<true/>
 				<key>label</key>
 				<string>ChangeLog</string>
-				<key>changes</key>
 				<key>icon</key>
 				<string>changes.png</string>
+				<key>changes</key>
 				<array>
 					<dict>
 						<key>0.0.1</key>
