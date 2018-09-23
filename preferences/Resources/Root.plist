@@ -11,7 +11,7 @@
 				<key>cellClass</key>
 				<string>CSPImageCell</string>
 				<key>height</key>
-				<string>100</string>
+				<string>130</string>
 				<key>static</key>
 				<false/>
 				<key>key</key>
@@ -22,6 +22,11 @@
 				<string>com.vitataf.homegesture</string>
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
 			</dict>
 
 			<dict>
