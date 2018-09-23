@@ -11,7 +11,7 @@
 				 <key>headerCellClass</key>
 				 <string>homeBanner</string>
 				 <key>footerText</key>
-				 <string>Any changes require a respring.</string>
+				 <string>Some Changes May Require a Respring</string>
 			</dict>
 
 			<dict>
@@ -23,6 +23,8 @@
 				<string>statusBar</string>
 				<key>label</key>
 				<string>Status Bar</string>
+				<key>icon</key>
+				<string>icon.png</string>
 			</dict>
 
 			<dict>
