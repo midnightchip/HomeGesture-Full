@@ -32,11 +32,24 @@
 			 <string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 		 </dict>
 
+		 <dict>
+			 <key>action</key>
+			 <string>pushToView:</string>
+			 <key>cell</key>
+			 <string>PSLinkCell</string>
+			 <key>pushToPlist</key>
+			 <string></string>
+			 <key>label</key>
+			 <string>Top Padding</string>
+			 <key>sublabel</key>
+			 <string>Change top padding on Control Centre</string>
+			 <key>icon</key>
+			 <string>icons/statusBar</string>
+		 </dict>
+
 			<dict>
 				<key>cell</key>
 				<string>PSSliderCell</string>
-				<key>label</key>
-				<string>Vertical Padding in CC</string>
 				<key>isContinuous</key>
 				<true/>
 				<key>key</key>
