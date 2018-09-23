@@ -53,83 +53,6 @@
 				<key>cell</key>
 				<string>PSGroupCell</string>
 				<key>footerText</key>
-				<string>Set Vertical Padding in CC</string>
-				<key>footerAlignment</key>
-				<integer>1</integer>
-			</dict>
-
-			<dict>
-				<key>cell</key>
-				<string>PSSliderCell</string>
-				<key>isContinuous</key>
-				<true/>
-				<key>key</key>
-				<string>vertical</string>
-				<key>leftImage</key>
-				<string/>
-				<key>max</key>
-				<real>100</real>
-				<key>min</key>
-				<real>0</real>
-				<key>rightImage</key>
-				<string/>
-				<key>showValue</key>
-				<false/>
-				<key>description</key>
-				<string>Vertical Padding in CC</string>
-				<key>PostNotification</key>
-				<string>com.vitataf.homegesture.prefschanged</string>
-				<key>defaults</key>
-				<string>com.vitataf.homegesture</string>
-				<key>defaultsPath</key>
-				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
-			</dict>
-
-			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-			</dict>
-
-			<dict>
-				<key>cell</key>
-				<string>PSSliderCell</string>
-				<key>isContinuous</key>
-				<true/>
-				<key>key</key>
-				<string>verticalLandscape</string>
-				<key>leftImage</key>
-				<string/>
-				<key>max</key>
-				<real>100</real>
-				<key>min</key>
-				<real>0</real>
-				<key>rightImage</key>
-				<string/>
-				<key>showValue</key>
-				<false/>
-				<key>description</key>
-				<string>Landscape Padding in CC</string>
-				<key>PostNotification</key>
-				<string>com.vitataf.homegesture.prefschanged</string>
-				<key>defaults</key>
-				<string>com.vitataf.homegesture</string>
-				<key>defaultsPath</key>
-				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
-			</dict>
-
-			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>Set LandScape Padding in CC</string>
-				<key>footerAlignment</key>
-				<integer>1</integer>
-			</dict>
-
-			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>footerText</key>
 				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
 				<key>footerAlignment</key>
 				<integer>1</integer>
@@ -137,6 +60,6 @@
 
 		</array>
 		<key>title</key>
-		<string>Status Bar and CC Settings</string>
+		<string>Status Bar</string>
 	</dict>
 </plist>
