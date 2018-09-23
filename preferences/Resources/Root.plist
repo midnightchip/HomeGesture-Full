@@ -5,13 +5,23 @@
 		<key>items</key>
 		<array>
 
-			 <dict>
-				 <key>cell</key>
-				 <string>PSGroupCell</string>
-				 <key>headerCellClass</key>
-				 <string>homeBanner</string>
-				 <key>footerText</key>
-				 <string>Some Changes May Require a Respring</string>
+			<dict>
+				<key>cell</key>
+				<string>PSTableCell</string>
+				<key>cellClass</key>
+				<string>CSPImageCell</string>
+				<key>height</key>
+				<string>100</string>
+				<key>static</key>
+				<false/>
+				<key>key</key>
+				<string>selectPhotos</string>
+				<key>storePath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle/banner.png</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 			</dict>
 
 			<dict>
