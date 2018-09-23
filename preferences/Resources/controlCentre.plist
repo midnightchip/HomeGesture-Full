@@ -59,7 +59,7 @@
 				<key>key</key>
 				<string>selectPhotos</string>
 				<key>storePath</key>
-				<string>/Library/PreferenceBundles/HomeGesture.bundle/cc.png</string>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle/cc@2x.png</string>
 				<key>defaults</key>
 				<string>com.vitataf.homegesture</string>
 				<key>defaultsPath</key>
