@@ -1,4 +1,4 @@
-#import "homeBanner.h"
+#import "ccbanner.h"
 #import <Preferences/PSSpecifier.h>
 
  NSString *const PATH_TO_IMAGE = @"/Library/PreferenceBundles/HomeGesture.bundle/cc.png";
