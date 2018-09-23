@@ -9,7 +9,7 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell" specifier:specifier];
     if (self) {
         CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-        UIImage *img = [UIImage imageNamed:PATH_TO_IMAGE];
+        UIImage *img = [UIImage imageNamed:PATH_TO_CC];
         CGFloat constant = (width / img.size.width);
         UIImageView *iv = [[UIImageView alloc] initWithFrame: CGRectMake(0,0, width, img.size.height * constant)];
         [iv setContentMode: UIViewContentModeScaleAspectFit];
@@ -22,7 +22,7 @@
 
 - (CGFloat)preferredHeightForWidth:(CGFloat)arg1 {
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
-    UIImage *img = [UIImage imageNamed:PATH_TO_IMAGE];
+    UIImage *img = [UIImage imageNamed:PATH_TO_CC];
     CGFloat constant = (width / img.size.width);
     return (CGFloat)img.size.height * constant;
 
