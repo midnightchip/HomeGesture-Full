@@ -142,6 +142,8 @@
 				<string>/Library/PreferenceBundles/HomeGesture.bundle/defaults.plist</string>
 				<key>label</key>
 				<string>Backup &amp; Restore</string>
+				<key>icon</key>
+				<string>backupRestore.png</string>
 			</dict>
 
 			<dict>
@@ -154,6 +156,8 @@
 				<key>label</key>
 				<string>ChangeLog</string>
 				<key>changes</key>
+				<key>icon</key>
+				<string>changes.png</string>
 				<array>
 					<dict>
 						<key>0.0.1</key>
@@ -173,6 +177,8 @@
 				<string>com.vitataf.homegesture</string>
 				<key>label</key>
 				<string>Version:</string>
+				<key>icon</key>
+				<string>currentVersion.png</string>
 			</dict>
 
 		</array>
