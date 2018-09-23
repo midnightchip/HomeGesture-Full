@@ -33,10 +33,8 @@
 		 </dict>
 
 		 <dict>
-			 <key>action</key>
-			 <string>pushToView:</string>
 			 <key>cell</key>
-			 <string>PSLinkCell</string>
+			 <string>PSStaticTextCell</string>
 			 <key>pushToPlist</key>
 			 <string></string>
 			 <key>label</key>
@@ -44,7 +42,7 @@
 			 <key>sublabel</key>
 			 <string>Change top padding on Control Centre</string>
 			 <key>icon</key>
-			 <string>icons/statusBar</string>
+			 <string>icons/vertical</string>
 		 </dict>
 
 			<dict>
@@ -72,6 +70,7 @@
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 			</dict>
 
+
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
@@ -98,6 +97,19 @@
 				<string>com.vitataf.homegesture</string>
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSStaticTextCell</string>
+				<key>pushToPlist</key>
+				<string></string>
+				<key>label</key>
+				<string>Top Padding (Landscape)</string>
+				<key>sublabel</key>
+				<string>Change top padding on Landscape CC</string>
+				<key>icon</key>
+				<string>icons/horizontal</string>
 			</dict>
 
 			<dict>
