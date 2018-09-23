@@ -23,6 +23,15 @@
 
 			<dict>
 				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+			<dict>
+				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>Enable App Blacklist</string>
@@ -37,35 +46,25 @@
 			</dict>
 
 			<dict>
-        <key>cell</key>
-        <string>PSButtonCell</string>
-        <key>label</key>
-        <string>Select Blacklisted Apps</string>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>Select Blacklisted Apps</string>
 				<key>sublabel</key>
 				<string>Disables HomeGestures while in landscape mode</string>
-        <key>action</key>
-        <string>selectExcludeApps</string>
-    </dict>
+				<key>action</key>
+				<string>selectExcludeApps</string>
+		</dict>
 		<dict>
-        <key>cell</key>
-        <string>PSButtonCell</string>
-        <key>label</key>
-        <string>Select Apps to be Fully Disabled</string>
-        <key>action</key>
-        <string>selectBlackList</string>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>Select Apps to be Fully Disabled</string>
+				<key>action</key>
+				<string>selectBlackList</string>
 				<key>sublabel</key>
 				<string>Disables HomeGestures completly in app</string>
-    </dict>
-
-
-			<dict>
-				<key>cell</key>
-				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
-				<key>footerAlignment</key>
-				<integer>1</integer>
-			</dict>
+		</dict>
 
 		</array>
 		<key>title</key>

@@ -4,12 +4,14 @@
 	<dict>
 		<key>items</key>
 		<array>
-			
+
 			<dict>
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>Swipe Up to Close</string>
+				<key>sublabel</key>
+				<string>Swipe up app cards to close them</string>
 				<key>key</key>
 				<string>enableKill</string>
 				<key>PostNotification</key>
@@ -18,13 +20,15 @@
 				<string>com.vitataf.homegesture</string>
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
-			</dict> 
+			</dict>
 
 			<dict>
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Round App Switcher and iPhone X Dock</string>
+				<string>Round Card Corners</string>
+				<key>sublabel</key>
+				<string>Bug: Also enables iPhone X Dock</string>
 				<key>key</key>
 				<string>roundSwitcher</string>
 				<key>PostNotification</key>
