@@ -1,4 +1,4 @@
-extern NSString *const PATH_TO_IMAGE;
+extern NSString *const PATH_TO_CC;
 
 #import <Preferences/PSTableCell.h>
 
