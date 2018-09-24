@@ -32,8 +32,6 @@ id myValue = @"My Custom Value";
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
-#define IS_IPHONE_X (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
-#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 // Definition for detecting iOS version (Required to hide CC Pocket)
 #define isGreaterThanOrEqualTo(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -109,10 +107,6 @@ static BOOL rotateDisable = YES;
 			return NULL;
 		}
 }
-/*-(void)setBackgroundColor:(UIColor*)arg1
-{
-     %orig([UIColor redColor]);
-}*/
 %end
 
 // Workaround for TouchID respring bug
@@ -204,7 +198,7 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-//AppSwitcher Swipe to Kill
+// App Switcher Swipe to Kill
 %hook SBAppSwitcherSettings
 - (long long)effectiveKillAffordanceStyle {
 	if([prefs boolForKey:@"enableKill"]){
@@ -422,8 +416,6 @@ static BOOL remapScreen = YES;
 @interface MTStaticColorPillView : UIView
 @end
 
-
-
 %hook MTStaticColorPillView
 -(UIColor *)pillColor {
 	if([prefs boolForKey:@"enablePillColor"]){
@@ -462,65 +454,53 @@ static BOOL remapScreen = YES;
 }
 
 //Start FUGap
+@interface CCUIStatusLabelViewController : UIViewController
+-(void)setEdgeInsets:(UIEdgeInsets)arg1 ;
+@end
 
+@interface CCUIScrollView : UIScrollView
+@end
 
 -(CGRect)contentBounds{
-
       if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
-
         return CGRectMake (0,0,SCREEN_WIDTH,30);
-
       }
-
       else{
-
         return CGRectMake (0,0,SCREEN_WIDTH,65);
-
       }
-
   }
-
   //Make frame match our inset
   -(CGRect)frame {
-
       return CGRectMake (0,0,SCREEN_WIDTH,[prefs floatForKey:@"vertical"]);
-
   }
-
   //Hide header blur
   -(void)setBackgroundAlpha:(double)arg1{
-
       arg1 = 0.0;
       %orig;
-
   }
-
   //Nedded to make buttons work
   -(BOOL)isUserInteractionEnabled {
-
       return NO;
-
   }
-
 %end
 
+%hook SBUIChevronView
+   //Hide chevron
+   -(id)initWithFrame:(CGRect)arg1 {
+	return nil;
+   }
+%end
 
-// Change HomeBar Color on Homescreen
-/*%hook MTLumaDodgePillSettings
--(void)setColorAddWhiteness:(double)arg1{
-	arg1 = 15;
-	%orig(arg1);
-}
-%end */
-
+%hook CCUIStatusLabelViewController
+  //Kills status labels for dnd, wifi off etc.
+  -(void)enqueueStatusUpdate:(id)arg1 forIdentifier:(id)arg2 {
+      nil;
+  }
+%end
 
 // iPhone X Status bar
 %hook UIStatusBar_Base
 + (BOOL)forceModern {
-	/*NSString *status;
-	SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
-	SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
-	status = [frontApp valueForKey:@"_bundleIdentifier"];*/
 	if([prefs boolForKey:@"statusBarX"]){
 		return [prefs boolForKey:@"statusBarX"];
 	}else{
@@ -558,6 +538,7 @@ static BOOL remapScreen = YES;
 }
 %end
 
+//Round App Switcher (Bug: Enables Dock)
 %hook UITraitCollection
 + (id)traitCollectionWithDisplayCornerRadius:(CGFloat)arg1 {
 	if([prefs boolForKey:@"roundSwitcher"]){
@@ -582,83 +563,17 @@ static BOOL remapScreen = YES;
 }
 %end
 
-
-//FUGap
-@interface CCUIStatusLabelViewController : UIViewController
--(void)setEdgeInsets:(UIEdgeInsets)arg1 ;
-@end
-
-@interface CCUIScrollView : UIScrollView
-@end
-
-%hook SBUIChevronView
-
-   //Hide chevron
-   -(id)initWithFrame:(CGRect)arg1 {
-
-	return nil;
-
-   }
-
-%end
-
-%hook CCUIStatusLabelViewController
-
-  //Move status labels under notch on iPhone X
-  -(void)setEdgeInsets:(UIEdgeInsets)arg1 {
-
-   if (IS_IPHONE_X) {
-
-     arg1 = UIEdgeInsetsMake(30,0,0,0);
-
-   }
-
-   else{
-
-      %orig;
-
-   }
-
-  }
-
-  //kills status labels for dnd, wifi off etc.
-  -(void)enqueueStatusUpdate:(id)arg1 forIdentifier:(id)arg2 {
-
-      nil;
-
-  }
-
-%end
-
-%hook CCUIStatusBar
-
-  //Hide CC statusbar on iPhone X
-  -(id)initWithFrame:(CGRect)frame{
-
-	return nil;
-
-  }
-
-%end
 %hook CCUIScrollView
 -(void)setContentInset:(UIEdgeInsets)arg1 {
-
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
-
        arg1 = UIEdgeInsetsMake([prefs floatForKey:@"verticalLandscape"],0,0,0);
        %orig;
-
     }
-
     else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
-
      arg1 = UIEdgeInsetsMake([prefs floatForKey:@"vertical"],0,0,0);
      %orig;
-
     }
-
   }
-
 %end
 
 // Workaround for crash when launching app and invoking control center simultaneously
@@ -684,9 +599,3 @@ static BOOL remapScreen = YES;
   }
 }
 %end
-
-
-// SOME REALLY COMPLEX STUFF TO DO WITH BUTTONS REMAP? I THINK - MY IQ LEVEL IS NOT HIGH ENOUGH FOR THIS
-//You'll understand it, dw
-//Thanks :)
-//Lol
