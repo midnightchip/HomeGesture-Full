@@ -342,8 +342,7 @@ static NSString *test;
 %end
 
 
-//Remapp
-
+// Screenshot Remap
 static BOOL remapScreen = YES;
 %hook SBPressGestureRecognizer
 - (void)setAllowedPressTypes:(NSArray *)arg1 {
@@ -489,13 +488,6 @@ static BOOL remapScreen = YES;
    -(id)initWithFrame:(CGRect)arg1 {
 	return nil;
    }
-%end
-
-%hook CCUIStatusLabelViewController
-  //Kills status labels for dnd, wifi off etc.
-  -(void)enqueueStatusUpdate:(id)arg1 forIdentifier:(id)arg2 {
-      nil;
-  }
 %end
 
 // iPhone X Status bar
