@@ -4,14 +4,14 @@
 	<dict>
 		<key>items</key>
 		<array>
-			<!--- Just realised disabling this doesnt work rn
+
 			 <dict>
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>Original Screenshot</string>
 				<key>sublabel</key>
-				<string>Disable Volume Up + Lock Button to Screenshot</string>
+				<string>Use Home/Lock instead of Volume Up/Lock</string>
 				<key>key</key>
 				<string>remapScreen</string>
 				<key>PostNotification</key>
@@ -20,7 +20,7 @@
 				<string>com.vitataf.homegesture</string>
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
-			</dict> -->
+			</dict>
 
 			<dict>
 				<key>cell</key>

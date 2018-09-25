@@ -33,23 +33,6 @@ id myValue = @"My Custom Value";
 #define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
 
-// Definition for detecting iOS version (Required to hide CC Pocket)
-#define isGreaterThanOrEqualTo(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-
-/*static NSString *nsDomainString = @"/var/mobile/Library/Preferences/com.midnight.homegesture.plist";
-static NSString *nsNotificationString = @"com.midnight.homegesture.plist/post";*/
-
-
-/*static NSDictionary *prefs;
-static NSString *selectedApp1; //Applist stuff
-static NSMutableArray *test;
-static void loadPrefs() {
-NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.midnight.homegestureapplist.plist"];
-selectedApp1 = [prefs objectForKey:@"selected"]; //Setting up variables
-test = [prefs objectForKey:@"selected"];
-
-}*/
-
 long _dismissalSlidingMode = 0;
 bool originalButton;
 long _homeButtonType = 1;
@@ -238,6 +221,7 @@ static BOOL rotateDisable = YES;
 			return %orig;
 		}
 }
+
 // Hide Camera Button on Coversheet
 -(BOOL)hasCamera{
 	if([prefs boolForKey:@"hideCamera"]){
@@ -252,12 +236,11 @@ static BOOL rotateDisable = YES;
 %hook SBHomeGestureSettings
 -(BOOL)isHomeGestureEnabled{
 	if(![prefs boolForKey:@"disableGestures"]){
-		NSString *test;
+		NSString *currentApp;
 		SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
 		SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
-		test = [frontApp valueForKey:@"_bundleIdentifier"];
-		//[SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:test]
-		if(homeEnable && rotateDisable && ![SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"blackList" containBundleIdentifier:test]){
+		currentApp = [frontApp valueForKey:@"_bundleIdentifier"];
+		if(homeEnable && rotateDisable && ![SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"blackList" containBundleIdentifier:currentApp]){
 			return YES;
 		}else{
 			return NO;
@@ -268,13 +251,11 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-static NSString *test;
-
+// Disable Gestures (SpringBoard applicationDidFinishLaunching also used in Screenshot Remap!)
+static NSString *currentApp;
 
 %hook SpringBoard
-
 -(void)applicationDidFinishLaunching:(id)application {
-	//Remap
 	applicationDidFinishLaunching = 2;
 	%orig;
 
@@ -322,16 +303,16 @@ static NSString *test;
 		if(currentDevice.orientation == UIDeviceOrientationLandscapeLeft) {
 			SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
 			SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
-			test = [frontApp valueForKey:@"_bundleIdentifier"];
-			if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:test]){
+			currentApp = [frontApp valueForKey:@"_bundleIdentifier"];
+			if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:currentApp]){
 			rotateDisable = NO;
 			}
 		}
 		if(currentDevice.orientation == UIDeviceOrientationLandscapeRight) {
 			SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
 			SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
-			test = [frontApp valueForKey:@"_bundleIdentifier"];
-			if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:test]){
+			currentApp = [frontApp valueForKey:@"_bundleIdentifier"];
+			if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:currentApp]){
 			rotateDisable = NO;
 			}
 		}
@@ -341,56 +322,7 @@ static NSString *test;
 }
 %end
 
-
-// Screenshot Remap
-static BOOL remapScreen = YES;
-%hook SBPressGestureRecognizer
-- (void)setAllowedPressTypes:(NSArray *)arg1 {
-	NSArray * lockHome = @[@104, @101];
-	NSArray * lockVol = @[@104, @102, @103];
-	if(remapScreen){
-		if ([arg1 isEqual:lockVol] && applicationDidFinishLaunching == 2) {
-			%orig(lockHome);
-			applicationDidFinishLaunching--;
-			return;
-		}
-		%orig;
-	}else{
-		%orig;
-	}
-}
-%end
-%hook SBClickGestureRecognizer
-- (void)addShortcutWithPressTypes:(id)arg1 {
-	if(remapScreen){
-		if (applicationDidFinishLaunching == 1) {
-			applicationDidFinishLaunching--;
-			return;
-		}
-	}else{
-		%orig;
-	}
-}
-%end
-%hook SBHomeHardwareButton
-- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 buttonActions:(id)arg3 gestureRecognizerConfiguration:(id)arg4 {
-	if(remapScreen){
-		return %orig(arg1, _homeButtonType, arg3, arg4);
-	}else{
-		return %orig(arg1, _homeButtonType + 1, arg3, arg4);
-	}
-}
-- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 {
-	if(remapScreen){
-		return %orig(arg1, _homeButtonType);
-	}else{
-		return %orig(arg1, _homeButtonType+1);
-	}
-}
-%end
-//End Remap
-
-// Hide Lockscreen page dots
+// Hide Lockscreen Page Dots
 @interface SBDashBoardPageControl : UIView
 @end
 
@@ -411,7 +343,7 @@ static BOOL remapScreen = YES;
 }
 %end
 
-// Lock Screen HomeBar Color
+// Lock Screen Home Bar Color
 @interface MTStaticColorPillView : UIView
 @end
 
@@ -589,5 +521,42 @@ static BOOL remapScreen = YES;
   }else{
     return %orig;
   }
+}
+%end
+
+// Screenshot Remap
+%hook SBPressGestureRecognizer
+- (void)setAllowedPressTypes:(NSArray *)arg1 {
+	NSArray * lockHome = @[@104, @101];
+	NSArray * lockVol = @[@104, @102, @103];
+	if ([arg1 isEqual:lockVol] && applicationDidFinishLaunching == 2 && [prefs boolForKey:@"remapScreen"]) {
+		%orig(lockHome);
+		applicationDidFinishLaunching--;
+		return;
+	}
+	%orig;
+}
+%end
+%hook SBClickGestureRecognizer
+- (void)addShortcutWithPressTypes:(id)arg1 {
+	if (applicationDidFinishLaunching == 1 && [prefs boolForKey:@"remapScreen"]) {
+		applicationDidFinishLaunching--;
+		return;
+	}
+	%orig;
+}
+%end
+%hook SBHomeHardwareButton
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 buttonActions:(id)arg3 gestureRecognizerConfiguration:(id)arg4 {
+	if ([prefs boolForKey:@"remapScreen"]) {
+		return %orig(arg1, _homeButtonType, arg3, arg4);
+	}
+	return %orig;
+}
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 {
+	if ([prefs boolForKey:@"remapScreen"]) {
+		return %orig(arg1, _homeButtonType);
+	}
+	return %orig;
 }
 %end
