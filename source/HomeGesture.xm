@@ -1,27 +1,5 @@
 #include <HomeGesture.h>
 #include <CSColorPicker/CSColorPicker.h>
-/*
-// getting values
-UIColor *myColor = [prefs colorForKey:@"kMyColorKey"];
-NSString *mystring = [prefs stringForKey:@"kMyColorKey"];
-BOOL myBOOL = [prefs boolForKey:@"kMyColorKey"];
-int myInt = [prefs intForKey:@"kMyColorKey"];
-float myFloat = [prefs floatForKey:@"kMyColorKey"];
-double myDouble = [prefs doubleForKey:@"kMyColorKey"];
-
-// setting values
-id myValue = @"My Custom Value";
-[prefs setObject:myValue forKey:@"kMyCustomValue"];
-
-// removing values
-[prefs removeObjectForKey: @"kMyCustomValue"];
-
-// saving prefs
-[prefs save];
-
-// save and send notification that prefs have been changed
-[prefs saveAndPostNotification];
-*/
 
 #import <SpringBoard/SpringBoard.h>
 #import <SpringBoard/SBApplication.h>
@@ -38,7 +16,7 @@ bool originalButton;
 long _homeButtonType = 1;
 int applicationDidFinishLaunching;
 
-// Enable home gestures
+// Enable Home Gestures
 %hook BSPlatform
 - (NSInteger)homeButtonType {
 	_homeButtonType = %orig;
@@ -110,6 +88,7 @@ static BOOL rotateDisable = YES;
 // Hide home bar in cover sheet
 @interface SBDashboardHomeAffordanceView : UIView
 @end
+
 %hook SBDashboardHomeAffordanceView
 - (void)_createStaticHomeAffordance {
 	if ([prefs boolForKey:@"hideBarCover"]){
@@ -120,7 +99,7 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-// Restore footer indicators
+// Restore Footer Indicators
 %hook SBDashBoardViewController
 - (void)viewDidLoad {
 	originalButton = YES;
@@ -128,7 +107,7 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-// Restore button to invoke Siri
+// Press Home Button for Siri
 %hook SBLockHardwareButtonActions
 - (id)initWithHomeButtonType:(long long)arg1 proximitySensorManager:(id)arg2 {
 	if([prefs boolForKey:@"siriHome"]){
@@ -148,7 +127,7 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-// Hide notification hints
+// Hide Notification Hints
 %hook NCNotificationListSectionRevealHintView
 - (void)_updateHintTitle {
 	if(![prefs boolForKey:@"notificationHint"]){
@@ -159,7 +138,7 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-// Hide unlock hints
+// Hide "Swipe up to unlock" on Coversheet
 %hook SBDashBoardTeachableMomentsContainerViewController
 - (void)_updateTextLabel {
 	if(![prefs boolForKey:@"unlockHint"]){
@@ -170,7 +149,7 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-// Disable breadcrumb
+// Disable Breadcrumb
 %hook SBWorkspaceDefaults
 - (bool)isBreadcrumbDisabled {
 	if (![prefs boolForKey:@"enableBread"]){
@@ -181,7 +160,7 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-// App Switcher Swipe to Kill
+// Swipe to Kill in App Switcher
 %hook SBAppSwitcherSettings
 - (long long)effectiveKillAffordanceStyle {
 	if([prefs boolForKey:@"enableKill"]){
@@ -189,7 +168,6 @@ static BOOL rotateDisable = YES;
 	}else{
 		return %orig;
 	}
-
 }
 - (NSInteger)killAffordanceStyle {
 	if([prefs boolForKey:@"enableKill"]){
@@ -207,12 +185,24 @@ static BOOL rotateDisable = YES;
 }
 %end
 
-// Hide Control Center indicator
+// Enable Simutaneous Scrolling and Dismissing
+%hook SBFluidSwitcherViewController
+- (double)_killGestureHysteresis {
+  if([prefs boolForKey:@"enableKill"]){
+    double orig = %orig;
+    return orig == 30 ? 10 : orig;
+  }else{
+    return %orig;
+  }
+}
+%end
+
+// Hide Control Center Indicator on Coversheet
 %hook SBDashBoardTeachableMomentsContainerView
 -(void)_addControlCenterGrabber {}
 %end
 
-// Hide Torch Button on Coversheet
+// Hide Torch Button on CoverSheet
 %hook SBDashBoardQuickActionsViewController
 -(BOOL)hasFlashlight{
 	if([prefs boolForKey:@"hideTorch"]){
@@ -259,7 +249,7 @@ static NSString *currentApp;
 	applicationDidFinishLaunching = 2;
 	%orig;
 
-// Disable Gestures When Keyboard is enabled
+// Disable Gestures When Keyboard is Visible
 	if([prefs boolForKey:@"stopKeyboard"]){
 		[[NSNotificationCenter defaultCenter] addObserver:self
                                          		selector:@selector(keyboardDidShow:)
@@ -272,7 +262,7 @@ static NSString *currentApp;
                                            object:nil];
 			}
 
-// Disable Gestures if blacklist is enabled
+// Disable Gestures in Blacklisted Apps
 		if ([prefs boolForKey:@"enableBlacklist"]){
 			[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 			[[NSNotificationCenter defaultCenter]
@@ -322,7 +312,7 @@ static NSString *currentApp;
 }
 %end
 
-// Hide Lockscreen Page Dots
+// Hide Coversheet Page Dots
 @interface SBDashBoardPageControl : UIView
 @end
 
@@ -343,7 +333,7 @@ static NSString *currentApp;
 }
 %end
 
-// Lock Screen Home Bar Color
+// Coversheet Home Bar Color
 @interface MTStaticColorPillView : UIView
 @end
 
@@ -400,26 +390,19 @@ static NSString *currentApp;
         return CGRectMake (0,0,SCREEN_WIDTH,65);
       }
   }
-  //Make frame match our inset
+  //Make Frame Match our Inset
   -(CGRect)frame {
       return CGRectMake (0,0,SCREEN_WIDTH,[prefs floatForKey:@"vertical"]);
   }
-  //Hide header blur
+  //Hide Header Blur
   -(void)setBackgroundAlpha:(double)arg1{
       arg1 = 0.0;
       %orig;
   }
-  //Nedded to make buttons work
+  //Nedded to Make Buttons Work
   -(BOOL)isUserInteractionEnabled {
       return NO;
   }
-%end
-
-%hook SBUIChevronView
-   //Hide chevron
-   -(id)initWithFrame:(CGRect)arg1 {
-	return nil;
-   }
 %end
 
 // iPhone X Status bar
@@ -509,18 +492,6 @@ static NSString *currentApp;
 	@catch (NSException *e) {
 		return nil;
 	}
-}
-%end
-
-// Enable simutaneous scrolling and dismissing TODO add if statement for swiping up to kill
-%hook SBFluidSwitcherViewController
-- (double)_killGestureHysteresis {
-  if([prefs boolForKey:@"enableKill"]){
-    double orig = %orig;
-    return orig == 30 ? 10 : orig;
-  }else{
-    return %orig;
-  }
 }
 %end
 
