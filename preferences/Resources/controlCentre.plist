@@ -17,7 +17,7 @@
 			 <key>height</key>
 			 <string>180</string>
 			 <key>static</key>
-			 <false/>
+			 <true/>
 			 <key>key</key>
 			 <string>selectPhotos</string>
 			 <key>storePath</key>
@@ -80,7 +80,7 @@
 				<key>height</key>
 				<string>185</string>
 				<key>static</key>
-				<false/>
+				<true/>
 				<key>key</key>
 				<string>selectPhotos</string>
 				<key>storePath</key>
