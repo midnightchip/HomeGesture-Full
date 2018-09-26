@@ -433,10 +433,10 @@ static NSString *currentApp;
 }
 %end
 
-// Hide Status Bar in Control Center (When statusBarX is disabled)
+//Hide Status Bar in Control Center
 %hook CCUIOverlayStatusBarPresentationProvider
 - (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
-	if ([prefs boolForKey:@"statusBarX"]){
+	if ([prefs boolForKey:@"statusBarCC"]){
 		return %orig;
 	}
 	else {

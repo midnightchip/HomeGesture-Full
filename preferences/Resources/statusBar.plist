@@ -44,10 +44,6 @@
 			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
-				<key>footerText</key>
-				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
-				<key>footerAlignment</key>
-				<integer>1</integer>
 			</dict>
 
 			<dict>
@@ -121,6 +117,51 @@
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSTableCell</string>
+				<key>cellClass</key>
+				<string>CSPImageCell</string>
+				<key>height</key>
+				<string>80</string>
+				<key>static</key>
+				<true/>
+				<key>key</key>
+				<string>selectPhotos</string>
+				<key>storePath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle/banners/cc_status.png</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerText</key>
+				<string>MidnightChips, VitaTaf, PINPAL © 2018</string>
+				<key>footerAlignment</key>
+				<integer>1</integer>
+			</dict>
+
+			<dict>
+			 <key>cell</key>
+			 <string>PSSwitchCell</string>
+			 <key>label</key>
+			 <string>Show in CC</string>
+			 <key>sublabel</key>
+			 <string>Show the status bar in Control Centre</string>
+			 <key>key</key>
+			 <string>statusBarCC</string>
+			 <key>PostNotification</key>
+			 <string>com.vitataf.homegesture.prefschanged</string>
+			 <key>defaults</key>
+			 <string>com.vitataf.homegesture</string>
+			 <key>defaultsPath</key>
+			 <string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+		 </dict>
 
 		</array>
 		<key>title</key>
