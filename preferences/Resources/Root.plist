@@ -107,7 +107,7 @@
 				<key>icon</key>
 				<string>icons/lockScreen</string>
 			</dict>
-			
+
 			<dict>
 				<key>action</key>
 				<string>pushToView:</string>
@@ -138,7 +138,7 @@
 				<key>pushToPlist</key>
 				<string>Support</string>
 				<key>label</key>
-				<string>Support, Donations &amp; Contact</string>
+				<string>Support</string>
 				<key>key</key>
 				<string>support</string>
 				<key>icon</key>
@@ -170,15 +170,97 @@
 				<key>isController</key>
 				<true/>
 				<key>label</key>
-				<string>ChangeLog</string>
+				<string>Change Log</string>
 				<key>icon</key>
 				<string>icons/changes.png</string>
 				<key>changes</key>
 				<array>
 					<dict>
-						<key>0.0.1</key>
+						<key>2.0</key>
 						<array>
-							<string>initial release</string>
+							<string>Redesigned Preferences</string>
+							<string>Added this Change Log</string>
+							<string>Fixed iPhone X Status Bar</string>
+							<string>Added Stats Bar in CC Toggle</string>
+							<string>Added Quick Setup</string>
+							<string>Reduced Memory Use - Performance Improvements</string>
+							<string>Fixed CC Pocket Padding</string>
+							<string>Improved Stability of Swipe to Close in App Switcher</string>
+							<string>Migrated to libCSPrefs</string>
+							<string>Repaired Screenshot Remap</string>
+						</array>
+						<key>1.8.2</key>
+						<array>
+							<string>Fixed CC Padding Issues</string>
+						</array>
+						<key>1.8.1></key>
+						<array>
+							<string>Added Round App Switcher Cards</string>
+						</array>
+						<key>1.8.0</key>
+						<array>
+							<string>Added Option to use Original Screenshot Gestures</string>
+						</array>
+						<key>1.7.9</key>
+						<array>
+							<string>Added FUGap - Thanks @smokin1337</string>
+						</array>
+						<key>1.7.8</key>
+						<array>
+							<string>Added iPhone X Status Bar</string>
+							<string>Added iPX Status Bar in CC</string>
+							<string>Added option to disable gestures in selected apps</string>
+							<string>Added option to disable gestures with Keyboard</string>
+						</array>
+						<key>1.7.7</key>
+						<array>
+							<string>Removed CC Pocket - Thanks @Simalary</string>
+						</array>
+						<key>1.7.6</key>
+						<array>
+							<string>Added Option for Swipe o Close Apps</string>
+						</array>
+						<key>1.7.5</key>
+						<array>
+							<string>Minor Bug Fixes</string>
+						</array>
+						<key>1.7.4</key>
+						<array>
+							<string>Added Option to Color Home Bar</string>
+						</array>
+						<key>1.7.3</key>
+						<array>
+							<string>Fixed Lock Page Dots not Disapearing Correctly</string>
+						</array>
+						<key>1.7.2</key>
+						<array>
+							<string>Minor Bug Fixes</string>
+						</array>
+						<key>1.7.1</key>
+						<array>
+							<string>Minor Bug Fixes</string>
+						</array>
+						<key>1.4</key>
+						<array>
+							<string>Added Preferences to Tweak</string>
+						</array>
+						<key>1.3</key>
+						<array>
+							<string>iOS 11.2+ Support</string>
+							<string>Hide CC Indicator</string>
+						</array>
+						<key>1.2</key>
+						<array>
+							<string>Added Swipe to Close in App Switcher</string>
+						</array>
+						<key>1.1</key>
+						<array>
+							<string>Restored footer indicators in Cover Sheet</string>
+							<string>Restored abilty to activate Siri using Home Button</string>
+						</array>
+						<key>1.0</key>
+						<array>
+							<string>Initial Release! A big thanks to VitaTaf!</string>
 						</array>
 					</dict>
 				</array>
