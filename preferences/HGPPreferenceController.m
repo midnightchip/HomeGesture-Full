@@ -140,8 +140,25 @@ if ([self respondsToSelector:@selector(suspend)])
                      }];
 }
 
+-(void)applySettings {
 
-- (void)applySettings {
+UIAlertController* respringAlert = [UIAlertController alertControllerWithTitle:@"Respring Warning"
+                           message:@"This will respring to apply"
+                           preferredStyle:UIAlertControllerStyleAlert];
+UIAlertAction* respringAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive
+                               handler:^(UIAlertAction * action) {
+                                 [self startRespring];
+                               }];
+
+UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction * action) {}];
+
+              [respringAlert addAction:respringAction];
+              [respringAlert addAction:cancelAction];
+              [self presentViewController:respringAlert animated:YES completion:nil];
+}
+
+- (void)startRespring {
     //make a visual effect view to fade in for the blur
     [self.view endEditing:YES]; //save changes to text fields and dismiss keyboard
 
@@ -165,6 +182,7 @@ if ([self respondsToSelector:@selector(suspend)])
                      completion:^(BOOL finished){
                          if (finished) {
                              NSLog(@"Squiddy says hello");
+                             NSLog(@"Midnight replys with 'where am I?'");
                              //call the animation here for the screen fade and respring
                              [self graduallyAdjustBrightnessToValue:0.0f];
                          }
