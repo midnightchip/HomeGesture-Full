@@ -143,7 +143,7 @@ if ([self respondsToSelector:@selector(suspend)])
 -(void)applySettings {
 
 UIAlertController* respringAlert = [UIAlertController alertControllerWithTitle:@"Respring Warning"
-                           message:@"A resrping is required to apply settings!"
+                           message:@"Applying settings will respring your device"
                            preferredStyle:UIAlertControllerStyleAlert];
 UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive
                              handler:^(UIAlertAction * action) {}];
