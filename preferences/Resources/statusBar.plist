@@ -150,7 +150,7 @@
 			 <key>cell</key>
 			 <string>PSSwitchCell</string>
 			 <key>label</key>
-			 <string>Show in CC</string>
+			 <string>Status Bar in CC</string>
 			 <key>sublabel</key>
 			 <string>Show the status bar in Control Centre</string>
 			 <key>key</key>
