@@ -35,12 +35,26 @@
 				<key>cell</key>
 				<string>PSLinkCell</string>
 				<key>pushToPlist</key>
-				<string>statusBar</string>
+				<string>appSwitcher</string>
 				<key>label</key>
-				<string>Status Bar</string>
+				<string>App Switcher</string>
 				<key>icon</key>
-				<string>icons/statusBar</string>
+				<string>icons/appSwitcher</string>
 			</dict>
+
+			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>blackList</string>
+				<key>label</key>
+				<string>Blacklisting</string>
+				<key>icon</key>
+				<string>icons/blacklist</string>
+			</dict>
+
 
 			<dict>
 				<key>action</key>
@@ -74,11 +88,11 @@
 				<key>cell</key>
 				<string>PSLinkCell</string>
 				<key>pushToPlist</key>
-				<string>appSwitcher</string>
+				<string>homeBar</string>
 				<key>label</key>
-				<string>App Switcher</string>
+				<string>Home Bar</string>
 				<key>icon</key>
-				<string>icons/appSwitcher</string>
+				<string>icons/homeBar</string>
 			</dict>
 
 			<dict>
@@ -93,31 +107,18 @@
 				<key>icon</key>
 				<string>icons/lockScreen</string>
 			</dict>
-
+			
 			<dict>
 				<key>action</key>
 				<string>pushToView:</string>
 				<key>cell</key>
 				<string>PSLinkCell</string>
 				<key>pushToPlist</key>
-				<string>homeBar</string>
+				<string>statusBar</string>
 				<key>label</key>
-				<string>Home Bar</string>
+				<string>Status Bar</string>
 				<key>icon</key>
-				<string>icons/homeBar</string>
-			</dict>
-
-			<dict>
-				<key>action</key>
-				<string>pushToView:</string>
-				<key>cell</key>
-				<string>PSLinkCell</string>
-				<key>pushToPlist</key>
-				<string>blackList</string>
-				<key>label</key>
-				<string>Blacklisting</string>
-				<key>icon</key>
-				<string>icons/blacklist</string>
+				<string>icons/statusBar</string>
 			</dict>
 
 			<dict>
