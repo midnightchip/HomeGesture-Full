@@ -78,7 +78,7 @@
 			 <key>label</key>
 			 <string>Top Padding</string>
 			 <key>sublabel</key>
-			 <string>Change top padding on Control Centre</string>
+			 <string>Change top padding in Control Centre</string>
 			 <key>icon</key>
 			 <string>icons/vertical</string>
 		 </dict>
@@ -140,7 +140,7 @@
 				<key>label</key>
 				<string>Top Padding (Landscape)</string>
 				<key>sublabel</key>
-				<string>Change top padding on Landscape CC</string>
+				<string>Change top padding in Landscape CC</string>
 				<key>icon</key>
 				<string>icons/horizontal</string>
 			</dict>
