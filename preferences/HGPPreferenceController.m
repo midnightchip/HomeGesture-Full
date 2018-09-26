@@ -145,13 +145,12 @@ if ([self respondsToSelector:@selector(suspend)])
 UIAlertController* respringAlert = [UIAlertController alertControllerWithTitle:@"Respring Warning"
                            message:@"This will respring to apply"
                            preferredStyle:UIAlertControllerStyleAlert];
-UIAlertAction* respringAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive
+UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive
+                             handler:^(UIAlertAction * action) {}];
+UIAlertAction* respringAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
                                  [self startRespring];
                                }];
-
-UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction * action) {}];
 
               [respringAlert addAction:respringAction];
               [respringAlert addAction:cancelAction];
