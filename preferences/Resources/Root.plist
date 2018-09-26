@@ -179,15 +179,16 @@
 						<key>2.0</key>
 						<array>
 							<string>Redesigned Preferences</string>
-							<string>Added this Change Log</string>
 							<string>Fixed iPhone X Status Bar</string>
-							<string>Added Stats Bar in CC Toggle</string>
+							<string>Added Status Bar in CC Toggle</string>
 							<string>Added Quick Setup</string>
 							<string>Reduced Memory Use - Performance Improvements</string>
 							<string>Fixed CC Pocket Padding</string>
 							<string>Improved Stability of Swipe to Close in App Switcher</string>
-							<string>Migrated to libCSPrefs</string>
 							<string>Repaired Screenshot Remap</string>
+							<string>Migrated to libCSPrefs and libCSColorPicker</string>
+							<string>Added Backup/Restore to Preferences</string>
+							<string>Added This Change Log to Preferneces</string>
 						</array>
 						<key>1.8.2</key>
 						<array>
@@ -266,6 +267,7 @@
 				</array>
 			</dict>
 
+<!-- Waiting for CreatureSurvive to add Icon support to Version Cell
 			<dict>
 				<key>cell</key>
 				<string>PSStaticTextCell</string>
@@ -278,6 +280,7 @@
 				<key>icon</key>
 				<string>icons/currentVersion</string>
 			</dict>
+-->
 
 		</array>
 		<key>title</key>
