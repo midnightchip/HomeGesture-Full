@@ -115,7 +115,7 @@
 				<key>pushToPlist</key>
 				<string>blackList</string>
 				<key>label</key>
-				<string>Blacklist Applications</string>
+				<string>Blacklisting</string>
 				<key>icon</key>
 				<string>icons/blacklist</string>
 			</dict>
