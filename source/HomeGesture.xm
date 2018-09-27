@@ -16,6 +16,123 @@ bool originalButton;
 long _homeButtonType = 1;
 int applicationDidFinishLaunching;
 
+
+
+//First run
+@interface SBDashBoardViewController : UIViewController
+@property (retain, nonatomic) UIView *welcomeView;
+@property (retain, nonatomic) UIView *swipeExplainView;
+@property (retain, nonatomic) UIView *thirdView;
+@property (retain, nonatomic) UIButton *but;
+@property (retain, nonatomic) UIView *swipeUpView;
+@end
+
+@interface SBDashBoardViewController (HomeGesture)
+-(void)buttonAction;
+@end
+%group easySetup
+%hook SBIdleTimerDefaults
+
+-(double)minimumLockscreenIdleTime {
+    // This is iOS 11 onwards
+    return 1000;
+}
+
+%end
+
+%hook SBDashBoardViewController
+%property (retain, nonatomic) UIView *welcomeView;
+%property (retain, nonatomic) UIButton *but;
+%property (retain, nonatomic) UIView *swipeExplainView;
+%property (retain, nonatomic) UIView *swipeUpView;
+
+static NSMutableDictionary *pref = @{}.mutableCopy;
+
+-(void)viewDidLoad {
+  %orig;
+  // Creating the weatherView which will hold all the other stuff we add (centralization)
+  if(!self.welcomeView){
+    self.welcomeView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.welcomeView setBackgroundColor: [UIColor whiteColor]]; //just realised we dont need to color this
+    [self.welcomeView setUserInteractionEnabled:TRUE ];
+    [self.view addSubview:self.welcomeView];
+
+    self.swipeUpView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.swipeUpView setBackgroundColor: [UIColor redColor]]; //just realised we dont need to color this
+    [self.swipeUpView setUserInteractionEnabled:TRUE ];
+  }
+  if(!self.but){
+    UIButton *but=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    but.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+    [but setTitle:@"Start" forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(secondView) forControlEvents:UIControlEventTouchUpInside];
+    but.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.2 );
+    [self.welcomeView addSubview:but];
+  }
+}
+%new
+-(void)secondView{
+  //set up view
+  self.swipeExplainView = [[UIView alloc] initWithFrame:self.view.bounds];
+  [self.swipeExplainView setBackgroundColor: [UIColor greenColor]];
+  [self.swipeExplainView setUserInteractionEnabled:TRUE ];
+
+  UIButton *yesButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+  yesButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+  [yesButton setTitle:@"Yes" forState:UIControlStateNormal];
+  [yesButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
+  yesButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.3 );
+  [self.swipeExplainView addSubview:yesButton];
+
+  UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+  noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+  [noButton setTitle:@"No" forState:UIControlStateNormal];
+  [noButton addTarget:self action:@selector(firstNo) forControlEvents:UIControlEventTouchUpInside];
+  noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.1 );
+  [self.swipeExplainView addSubview:noButton];
+
+  //animate changing views
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+  self.welcomeView.hidden = TRUE;
+  [self.view addSubview:self.swipeExplainView];
+  [UIView commitAnimations];
+}
+%new
+-(void)firstYes{
+    [pref setObject:[NSNumber numberWithBool:1] forKey:@"someKey"];
+
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+    [self.view addSubview:self.swipeUpView];
+    [UIView commitAnimations];
+  [self thirdView];
+}
+
+%new
+-(void)firstNo{
+  [pref setObject:[NSNumber numberWithBool:0] forKey:@"someKey"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.swipeUpView];
+  [UIView commitAnimations];
+[self thirdView];
+}
+%new
+-(void) thirdView{
+
+}
+%end
+%end
+//end first run
+
+
 // Enable Home Gestures
 %hook BSPlatform
 - (NSInteger)homeButtonType {
@@ -549,3 +666,11 @@ static NSString *currentApp;
 	return %orig;
 }
 %end
+
+%ctor {
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
+		%init(easySetup);
+	}
+	%init(_ungrouped);
+}
