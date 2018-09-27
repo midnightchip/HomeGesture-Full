@@ -183,7 +183,24 @@ static BOOL rotateDisable = YES;
 		%orig;
 	}
 }
+
+//Grid Swicher
+/*
+-(NSInteger)switcherStyle {
+			return 2;
+		}
+		*/
+
 %end
+
+//Grid Switcher
+/*
+%hook SBGridSwitcherPersonality
+	-(BOOL)shouldShowControlCenter {
+		return NO;
+	}
+%end
+*/
 
 // Enable Simutaneous Scrolling and Dismissing
 %hook SBFluidSwitcherViewController
@@ -199,7 +216,13 @@ static BOOL rotateDisable = YES;
 
 // Hide Control Center Indicator on Coversheet
 %hook SBDashBoardTeachableMomentsContainerView
--(void)_addControlCenterGrabber {}
+-(void)_addControlCenterGrabber {
+	if ([prefs boolForKey:@"notificationHint"]){
+
+	}else{
+		return %orig;
+	}
+}
 %end
 
 // Hide Torch Button on CoverSheet
@@ -405,6 +428,19 @@ static NSString *currentApp;
   }
 %end
 
+%hook CCUIScrollView
+-(void)setContentInset:(UIEdgeInsets)arg1 {
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
+       arg1 = UIEdgeInsetsMake([prefs floatForKey:@"verticalLandscape"],0,0,0);
+       %orig;
+    }
+    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
+     arg1 = UIEdgeInsetsMake([prefs floatForKey:@"vertical"],0,0,0);
+     %orig;
+    }
+  }
+%end
+
 // iPhone X Status bar
 %hook UIStatusBar_Base
 + (BOOL)forceModern {
@@ -468,19 +504,6 @@ static NSString *currentApp;
 		return %orig;
 	}
 }
-%end
-
-%hook CCUIScrollView
--(void)setContentInset:(UIEdgeInsets)arg1 {
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
-       arg1 = UIEdgeInsetsMake([prefs floatForKey:@"verticalLandscape"],0,0,0);
-       %orig;
-    }
-    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
-     arg1 = UIEdgeInsetsMake([prefs floatForKey:@"vertical"],0,0,0);
-     %orig;
-    }
-  }
 %end
 
 // Workaround for crash when launching app and invoking control center simultaneously
