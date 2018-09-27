@@ -16,6 +16,25 @@
 
 			<dict>
 				<key>cell</key>
+				<string>PSTableCell</string>
+				<key>cellClass</key>
+				<string>CSPImageCell</string>
+				<key>height</key>
+				<string>130</string>
+				<key>static</key>
+				<true/>
+				<key>key</key>
+				<string>selectPhotos</string>
+				<key>storePath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle/banners/round_screenshot.png</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>Round Screenshot Preview</string>
