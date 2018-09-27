@@ -481,25 +481,20 @@ static NSString *currentApp;
 }
 %end
 
-//Round App Switcher (Bug: Enables Dock)
+//Round Screenshot Preview
 %hook UITraitCollection
 + (id)traitCollectionWithDisplayCornerRadius:(CGFloat)arg1 {
-	if([prefs boolForKey:@"roundSwitcher"]){
+	if([prefs boolForKey:@"roundScreenshot"]){
 		return %orig(19);
 	}else{
 		return %orig;
 	}
 }
+
+//Round App Switcher (Bug: Enables Rounded Dock)
 - (CGFloat)displayCornerRadius {
 	if([prefs boolForKey:@"roundSwitcher"]){
-		return 19;
-	}else{
-		return %orig;
-	}
-}
-- (CGFloat)_displayCornerRadius {
-	if([prefs boolForKey:@"roundSwitcher"]){
-		return 19;
+		return [prefs floatForKey:@"switcherRoundness"];
 	}else{
 		return %orig;
 	}

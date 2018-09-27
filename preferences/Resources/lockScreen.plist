@@ -120,7 +120,7 @@
 				<key>label</key>
 				<string>Hide "Swipe Up to Unlock"</string>
 				<key>sublabel</key>
-				<string>Hide the text from the LockScreen.</string>
+				<string>Hide the text from the LockScreen</string>
 				<key>key</key>
 				<string>unlockHint</string>
 				<key>PostNotification</key>
@@ -165,7 +165,7 @@
 				<key>label</key>
 				<string>Hide Control Center Hint</string>
 				<key>sublabel</key>
-				<string>Hide small top right bar from the LockScreen</string>
+				<string>Hide small top right bar on LockScreen</string>
 				<key>key</key>
 				<string>notificationHint</string>
 				<key>PostNotification</key>

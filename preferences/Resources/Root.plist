@@ -122,6 +122,19 @@
 			</dict>
 
 			<dict>
+				<key>action</key>
+				<string>pushToView:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>pushToPlist</key>
+				<string>miscellaneous</string>
+				<key>label</key>
+				<string>Miscellaneous</string>
+				<key>icon</key>
+				<string>icons/miscellaneous</string>
+			</dict>
+
+			<dict>
 				<key>cell</key>
 				<string>PSGroupCell</string>
 				<key>footerText</key>
@@ -186,6 +199,7 @@
 							<string>Fixed CC Pocket Padding</string>
 							<string>Improved Stability of Swipe to Close in App Switcher</string>
 							<string>Repaired Screenshot Remap</string>
+							<string>Fixed CC Hint Toggle</string>
 							<string>Migrated to libCSPrefs and libCSColorPicker</string>
 							<string>Added Backup/Restore to Preferences</string>
 							<string>Added This Change Log to Preferneces</string>
