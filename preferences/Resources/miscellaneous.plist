@@ -39,7 +39,7 @@
 				<key>label</key>
 				<string>Round Screenshot Preview</string>
 				<key>sublabel</key>
-				<string>Does not affect the screnshot iself</string>
+				<string>Does not affect the screnshot itself</string>
 				<key>key</key>
 				<string>roundScreenshot</string>
 				<key>PostNotification</key>
