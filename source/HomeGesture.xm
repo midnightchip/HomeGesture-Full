@@ -17,8 +17,7 @@ long _homeButtonType = 1;
 int applicationDidFinishLaunching;
 
 
-
-//First run
+//Quick Setup
 @interface SBDashBoardViewController : UIViewController
 @property (retain, nonatomic) UIView *welcomeView;
 @property (retain, nonatomic) UIView *swipeExplainView;
@@ -58,37 +57,55 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [self.view addSubview:self.welcomeView];
 
     self.swipeUpView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.swipeUpView setBackgroundColor: [UIColor redColor]]; //just realised we dont need to color this
+    [self.swipeUpView setBackgroundColor: [UIColor whiteColor]]; //just realised we dont need to color this
     [self.swipeUpView setUserInteractionEnabled:TRUE ];
   }
   if(!self.but){
     UIButton *but=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     but.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
-    [but setTitle:@"Start" forState:UIControlStateNormal];
+    [but setTitle:@"setup" forState:UIControlStateNormal];
+    but.titleLabel.font = [UIFont systemFontOfSize:30];
     [but addTarget:self action:@selector(secondView) forControlEvents:UIControlEventTouchUpInside];
     but.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.2 );
     [self.welcomeView addSubview:but];
+
   }
 }
 %new
 -(void)secondView{
   //set up view
   self.swipeExplainView = [[UIView alloc] initWithFrame:self.view.bounds];
-  [self.swipeExplainView setBackgroundColor: [UIColor greenColor]];
+  [self.swipeExplainView setBackgroundColor: [UIColor whiteColor]];
   [self.swipeExplainView setUserInteractionEnabled:TRUE ];
 
+  //Bold Title at the Top
+  UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, self.welcomeView.frame.size.width, 100)];
+  bigTitle.text = @"Big Title";
+  bigTitle.textAlignment = NSTextAlignmentCenter;
+  bigTitle.font = [UIFont boldSystemFontOfSize:40];
+  [self.swipeExplainView addSubview:bigTitle];
+
+  //Description below Bold Title
+  UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/4, 75, self.welcomeView.frame.size.width*0.75, 100)];
+  description.text = @"This is a description of what this feature does";
+  description.textAlignment = NSTextAlignmentCenter;
+  description.font = [UIFont systemFontOfSize:20];
+  [self.swipeExplainView addSubview:description];
+
   UIButton *yesButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+  yesButton.titleLabel.font = [UIFont systemFontOfSize:30];
   yesButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
   [yesButton setTitle:@"Yes" forState:UIControlStateNormal];
   [yesButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
-  yesButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.3 );
+  yesButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.15 );
   [self.swipeExplainView addSubview:yesButton];
 
   UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+  noButton.titleLabel.font = [UIFont systemFontOfSize:20];
   noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
   [noButton setTitle:@"No" forState:UIControlStateNormal];
   [noButton addTarget:self action:@selector(firstNo) forControlEvents:UIControlEventTouchUpInside];
-  noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.1 );
+  noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
   [self.swipeExplainView addSubview:noButton];
 
   //animate changing views
