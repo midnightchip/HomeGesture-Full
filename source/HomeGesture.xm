@@ -5,6 +5,7 @@
 #import <SpringBoard/SBApplication.h>
 #import <SparkAppList.h>
 #import <objc/runtime.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
@@ -24,6 +25,7 @@ int applicationDidFinishLaunching;
 @property (retain, nonatomic) UIView *thirdView;
 @property (retain, nonatomic) UIButton *but;
 @property (retain, nonatomic) UIView *swipeUpView;
+@property (retain, nonatomic) UIView *videoView;
 @end
 
 @interface SBDashBoardViewController (HomeGesture)
@@ -44,6 +46,7 @@ int applicationDidFinishLaunching;
 %property (retain, nonatomic) UIButton *but;
 %property (retain, nonatomic) UIView *swipeExplainView;
 %property (retain, nonatomic) UIView *swipeUpView;
+%property (retain, nonatomic) UIView *videoView;
 
 static NSMutableDictionary *pref = @{}.mutableCopy;
 
@@ -52,13 +55,18 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   // Creating the welcomeView which will hold all the other stuff we add (centralization)
   if(!self.welcomeView){
     self.welcomeView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.welcomeView setBackgroundColor: [UIColor whiteColor]]; //just realised we dont need to color this
+    [self.welcomeView setBackgroundColor: [UIColor whiteColor]];
     [self.welcomeView setUserInteractionEnabled:TRUE ];
     [self.view addSubview:self.welcomeView];
 
     self.swipeUpView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.swipeUpView setBackgroundColor: [UIColor whiteColor]]; //just realised we dont need to color this
+    [self.swipeUpView setBackgroundColor: [UIColor whiteColor]];
     [self.swipeUpView setUserInteractionEnabled:TRUE ];
+
+    self.videoView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.videoView setBackgroundColor: [UIColor whiteColor]];
+    [self.videoView setUserInteractionEnabled:TRUE ];
+
   }
   if(!self.but){
     UIButton *but=[UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -173,7 +181,29 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 }
 %new
 -(void) thirdView{
+    CGFloat width = self.swipeUpView.frame.size.width;
+    CGFloat height = self.swipeUpView.frame.size.height / 3.0;
+    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/appSwitcher.mp4";
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:moviePath]];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
+    playerLayer.player = player;
+    playerLayer.frame = CGRectMake(.0, height, width, height);
+    playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+    playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    //playerLayer.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.15 );
+    player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(playerItemDidReachEnd:)
+                                               name:AVPlayerItemDidPlayToEndTimeNotification
+                                             object:[player currentItem]];
+    [self.swipeUpView.layer addSublayer:playerLayer];
+    [player play];
+}
+%new 
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero];
 }
 %end
 %end
