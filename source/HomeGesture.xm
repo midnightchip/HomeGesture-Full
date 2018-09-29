@@ -187,16 +187,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 }
 %new
 -(void) thirdView{
-    CGFloat width = self.swipeUpView.frame.size.width;
-    CGFloat height = self.swipeUpView.frame.size.height / 3.0;
-    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/appSwitcher.mp4";
+  //Set up view
+  self.swipeExplainView = [[UIView alloc] initWithFrame:self.view.bounds];
+  [self.swipeExplainView setBackgroundColor: [UIColor whiteColor]];
+  [self.swipeExplainView setUserInteractionEnabled:TRUE ];
+
+  //Bold Title at the top
+  UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+  bigTitle.text = @"Get Home Fast";
+  bigTitle.textAlignment = NSTextAlignmentCenter;
+  bigTitle.font = [UIFont boldSystemFontOfSize:35];
+  [self.swipeExplainView addSubview:bigTitle];
+
+  //Description below Bold Title
+  UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+  description.text = @"Swipe up to go Home.";
+  description.textAlignment = NSTextAlignmentCenter;
+  description.lineBreakMode = NSLineBreakByWordWrapping;
+  description.numberOfLines = 0;
+  description.font = [UIFont systemFontOfSize:20];
+  [self.swipeExplainView addSubview:description];
+
+  //Center Video
+    CGFloat width = (self.welcomeView.frame.size.height*0.59)/1.777777777;
+    CGFloat height = self.welcomeView.frame.size.height*0.59;
+    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/swipeToGoHome.mp4";
     AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:moviePath]];
     AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
     playerLayer.player = player;
-    playerLayer.frame = CGRectMake(.0, height, width, height);
+    playerLayer.frame = CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, width, height);
     playerLayer.backgroundColor = [UIColor blackColor].CGColor;
     playerLayer.videoGravity = AVLayerVideoGravityResize;
-    //playerLayer.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.15 );
     player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -205,6 +226,20 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
                                              object:[player currentItem]];
     [self.swipeUpView.layer addSublayer:playerLayer];
     [player play];
+
+    //Enable Button
+    UIButton *enableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [enableButton setTitle:@"Next" forState:UIControlStateNormal];
+    [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+    enableButton.layer.cornerRadius = 7.5;
+    enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.titleLabel.textColor = [UIColor whiteColor];
+    enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [enableButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
+    [self.swipeExplainView addSubview:enableButton];
+
 }
 %new
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
@@ -213,7 +248,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 }
 %end
 %end
-//end first run
+//End Quick Setup
 
 
 // Enable Home Gestures
