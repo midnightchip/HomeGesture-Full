@@ -49,7 +49,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
 -(void)viewDidLoad {
   %orig;
-  // Creating the weatherView which will hold all the other stuff we add (centralization)
+  // Creating the welcomeView which will hold all the other stuff we add (centralization)
   if(!self.welcomeView){
     self.welcomeView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.welcomeView setBackgroundColor: [UIColor whiteColor]]; //just realised we dont need to color this
@@ -62,12 +62,35 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   }
   if(!self.but){
     UIButton *but=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    but.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
-    [but setTitle:@"setup" forState:UIControlStateNormal];
+    but.frame= CGRectMake(0, self.welcomeView.frame.size.height, self.welcomeView.frame.size.height/3, 100);
+    [but setTitle:@"Begin Setup" forState:UIControlStateNormal];
+    but.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     but.titleLabel.font = [UIFont systemFontOfSize:30];
     [but addTarget:self action:@selector(secondView) forControlEvents:UIControlEventTouchUpInside];
     but.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.2 );
     [self.welcomeView addSubview:but];
+
+    //HomeGesture Logo
+    UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-(self.welcomeView.frame.size.height*0.15)/2, 140, self.welcomeView.frame.size.height*0.15, self.welcomeView.frame.size.height*0.15)];
+    logo.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/homeGesture.png"];
+    [self.welcomeView addSubview:logo];
+
+    //Bold Title at the Top
+    UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, self.welcomeView.frame.size.height/3, self.welcomeView.frame.size.width, 100)];
+    bigTitle.text = @"Welcome";
+
+    bigTitle.textAlignment = NSTextAlignmentCenter;
+    bigTitle.font = [UIFont boldSystemFontOfSize:40];
+    [self.welcomeView addSubview:bigTitle];
+
+    //Description below Bold Title
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, self.welcomeView.frame.size.height/3+60, self.welcomeView.frame.size.width, 100)];
+    description.text = @"Thanks for installing HomeGesture\nLet's get setup fast...";
+    description.textAlignment = NSTextAlignmentCenter;
+    description.lineBreakMode = NSLineBreakByWordWrapping;
+    description.numberOfLines = 0;
+    description.font = [UIFont systemFontOfSize:20];
+    [self.welcomeView addSubview:description];
 
   }
 }
@@ -79,18 +102,25 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   [self.swipeExplainView setUserInteractionEnabled:TRUE ];
 
   //Bold Title at the Top
-  UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, self.welcomeView.frame.size.width, 100)];
+  UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, self.welcomeView.frame.size.height/45, self.welcomeView.frame.size.width, 100)];
   bigTitle.text = @"Big Title";
   bigTitle.textAlignment = NSTextAlignmentCenter;
   bigTitle.font = [UIFont boldSystemFontOfSize:40];
   [self.swipeExplainView addSubview:bigTitle];
 
   //Description below Bold Title
-  UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/4, 75, self.welcomeView.frame.size.width*0.75, 100)];
+  UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, self.welcomeView.frame.size.height/45+50, self.welcomeView.frame.size.width, 100)];
   description.text = @"This is a description of what this feature does";
   description.textAlignment = NSTextAlignmentCenter;
+  description.lineBreakMode = NSLineBreakByWordWrapping;
+  description.numberOfLines = 0;
   description.font = [UIFont systemFontOfSize:20];
   [self.swipeExplainView addSubview:description];
+
+  //Center Image
+  UIImageView *centerImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.62)/1.777777777)/2, 140, (self.welcomeView.frame.size.height*0.62)/1.777777777, self.welcomeView.frame.size.height*0.62)];
+  centerImage.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/siri.png"];
+  [self.swipeExplainView addSubview:centerImage];
 
   UIButton *yesButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
   yesButton.titleLabel.font = [UIFont systemFontOfSize:30];
