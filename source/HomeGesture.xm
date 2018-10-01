@@ -25,10 +25,23 @@ int applicationDidFinishLaunching;
 @property (retain, nonatomic) UIButton *but;
 @property (retain, nonatomic) UIView *swipeUpView;
 @property (retain, nonatomic) UIView *videoView;
+@property (retain, nonatomic) UIView *doingAlot;
+@property (retain, nonatomic) UIView *controlCenterView;
+@property (retain, nonatomic) UIView *statusBarView;
+@property (retain, nonatomic) UIView *killStyleView;
+@property (retain, nonatomic) UIView *oneHandSSView;
+@property (retain, nonatomic) UIView *classicSiriView;
+@property (retain, nonatomic) UIView *homeBarView;
+@property (retain, nonatomic) UIView *exitView;
 @end
 
 @interface SBDashBoardViewController (HomeGesture)
 -(void)buttonAction;
+-(void)closeWithEase;
+-(void)oneHandSS;
+-(void)classicSiri;
+-(void)homeBar;
+-(void)exitSetup;
 @end
 
 //Fancy Button
@@ -65,6 +78,14 @@ int applicationDidFinishLaunching;
 %property (retain, nonatomic) UIView *swipeExplainView;
 %property (retain, nonatomic) UIView *swipeUpView;
 %property (retain, nonatomic) UIView *videoView;
+%property (retain, nonatomic) UIView *doingAlot;
+%property (retain, nonatomic) UIView *controlCenterView;
+%property (retain, nonatomic) UIView *statusBarView;
+%property (retain, nonatomic) UIView *killStyleView;
+%property (retain, nonatomic) UIView *oneHandSSView;
+%property (retain, nonatomic) UIView *classicSiriView;
+%property (retain, nonatomic) UIView *homeBarView;
+%property (retain, nonatomic) UIView *exitView;
 
 static NSMutableDictionary *pref = @{}.mutableCopy;
 
@@ -269,10 +290,582 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
       enableButton.titleLabel.textColor = [UIColor whiteColor];
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
-      [enableButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
+      [enableButton addTarget:self action:@selector(toDoingAlot) forControlEvents:UIControlEventTouchUpInside];
       [self.swipeExplainView addSubview:enableButton];
 
 }
+%new
+-(void) toDoingAlot{
+    //Set up view
+    self.doingAlot = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.doingAlot setBackgroundColor: [UIColor whiteColor]];
+    [self.doingAlot setUserInteractionEnabled:TRUE ];
+
+    //Bold Title at the top
+    UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+      bigTitle.text = @"Doing a lot?";
+      bigTitle.textAlignment = NSTextAlignmentCenter;
+      bigTitle.font = [UIFont boldSystemFontOfSize:35];
+      [self.doingAlot addSubview:bigTitle];
+
+    //Description below Bold Title
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+      description.text = @"Swipe up and hold to enter multitasking.";
+      description.textAlignment = NSTextAlignmentCenter;
+      description.lineBreakMode = NSLineBreakByWordWrapping;
+      description.numberOfLines = 0;
+      description.font = [UIFont systemFontOfSize:20];
+      [self.doingAlot addSubview:description];
+
+    //Center Video
+    CGFloat width = (self.welcomeView.frame.size.height*0.59)/1.777777777;
+    CGFloat height = self.welcomeView.frame.size.height*0.59;
+    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/appSwitcher.mp4";
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:moviePath]];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
+    playerLayer.player = player;
+    playerLayer.frame = CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, width, height);
+    playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+    playerLayer.videoGravity = AVLayerVideoGravityResize;
+    player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(playerItemDidReachEnd:)
+                                               name:AVPlayerItemDidPlayToEndTimeNotification
+                                             object:[player currentItem]];
+    [self.doingAlot.layer addSublayer:playerLayer];
+    [player play];
+
+    //Animate changing views
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+    self.welcomeView.hidden = TRUE;
+    [self.view addSubview:self.doingAlot];
+    [UIView commitAnimations];
+
+    //Next Button
+    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+      [enableButton setTitle:@"Next" forState:UIControlStateNormal];
+      [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      enableButton.layer.cornerRadius = 7.5;
+      enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+      enableButton.titleLabel.textColor = [UIColor whiteColor];
+      enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [enableButton addTarget:self action:@selector(controlOnDemand) forControlEvents:UIControlEventTouchUpInside];
+      [self.doingAlot addSubview:enableButton];
+
+}
+%new
+-(void) controlOnDemand{
+    //Set up view
+    self.controlCenterView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.controlCenterView setBackgroundColor: [UIColor whiteColor]];
+    [self.controlCenterView setUserInteractionEnabled:TRUE ];
+
+    //Bold Title at the top
+    UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+      bigTitle.text = @"Control On Demand";
+      bigTitle.textAlignment = NSTextAlignmentCenter;
+      bigTitle.font = [UIFont boldSystemFontOfSize:35];
+      [self.controlCenterView addSubview:bigTitle];
+
+    //Description below Bold Title
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+      description.text = @"Swipe down from the top right for the Control Center.";
+      description.textAlignment = NSTextAlignmentCenter;
+      description.lineBreakMode = NSLineBreakByWordWrapping;
+      description.numberOfLines = 0;
+      description.font = [UIFont systemFontOfSize:20];
+      [self.controlCenterView addSubview:description];
+
+    //Center Video
+    CGFloat width = (self.welcomeView.frame.size.height*0.59)/1.777777777;
+    CGFloat height = self.welcomeView.frame.size.height*0.59;
+    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/controlCentre.mp4";
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:moviePath]];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
+    playerLayer.player = player;
+    playerLayer.frame = CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, width, height);
+    playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+    playerLayer.videoGravity = AVLayerVideoGravityResize;
+    player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(playerItemDidReachEnd:)
+                                               name:AVPlayerItemDidPlayToEndTimeNotification
+                                             object:[player currentItem]];
+    [self.controlCenterView.layer addSublayer:playerLayer];
+    [player play];
+
+    //Animate changing views
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+    self.welcomeView.hidden = TRUE;
+    [self.view addSubview:self.controlCenterView];
+    [UIView commitAnimations];
+
+    //Next Button
+    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+      [enableButton setTitle:@"Next" forState:UIControlStateNormal];
+      [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      enableButton.layer.cornerRadius = 7.5;
+      enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+      enableButton.titleLabel.textColor = [UIColor whiteColor];
+      enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [enableButton addTarget:self action:@selector(statusInStyle) forControlEvents:UIControlEventTouchUpInside];
+      [self.controlCenterView addSubview:enableButton];
+
+}
+%new
+-(void) statusInStyle{
+    //Set up view
+    self.statusBarView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.statusBarView setBackgroundColor: [UIColor whiteColor]];
+    [self.statusBarView setUserInteractionEnabled:TRUE ];
+
+    //Bold Title at the top
+    UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+      bigTitle.text = @"Status in Style?";
+      bigTitle.textAlignment = NSTextAlignmentCenter;
+      bigTitle.font = [UIFont boldSystemFontOfSize:35];
+      [self.statusBarView addSubview:bigTitle];
+
+    //Description below Bold Title
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+      description.text = @"Style your status bar like the iPhone X?";
+      description.textAlignment = NSTextAlignmentCenter;
+      description.lineBreakMode = NSLineBreakByWordWrapping;
+      description.numberOfLines = 0;
+      description.font = [UIFont systemFontOfSize:20];
+      [self.statusBarView addSubview:description];
+
+    //Center Video
+    CGFloat width = (self.welcomeView.frame.size.height*0.59)/1.777777777;
+    CGFloat height = self.welcomeView.frame.size.height*0.59;
+    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/statusBar.mp4";
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:moviePath]];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
+    playerLayer.player = player;
+    playerLayer.frame = CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, width, height);
+    playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+    playerLayer.videoGravity = AVLayerVideoGravityResize;
+    player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(playerItemDidReachEnd:)
+                                               name:AVPlayerItemDidPlayToEndTimeNotification
+                                             object:[player currentItem]];
+    [self.statusBarView.layer addSublayer:playerLayer];
+    [player play];
+
+    //Animate changing views
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+    self.welcomeView.hidden = TRUE;
+    [self.view addSubview:self.statusBarView];
+    [UIView commitAnimations];
+
+    //Next Button
+    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+      [enableButton setTitle:@"Enable X Status Bar" forState:UIControlStateNormal];
+      [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      enableButton.layer.cornerRadius = 7.5;
+      enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+      enableButton.titleLabel.textColor = [UIColor whiteColor];
+      enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [enableButton addTarget:self action:@selector(statusYes) forControlEvents:UIControlEventTouchUpInside];
+      [self.statusBarView addSubview:enableButton];
+
+    UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+        noButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+        [noButton setTitle:@"Not Now" forState:UIControlStateNormal];
+        [noButton addTarget:self action:@selector(statusNo) forControlEvents:UIControlEventTouchUpInside];
+        noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
+        [self.statusBarView addSubview:noButton];
+
+
+}
+%new
+-(void)statusYes{
+  [pref setObject:[NSNumber numberWithBool:1] forKey:@"statusBarX"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.killStyleView];
+  [UIView commitAnimations];
+[self closeWithEase];
+}
+%new
+-(void)statusNo{
+  [pref setObject:[NSNumber numberWithBool:0] forKey:@"statusBarX"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.killStyleView];
+  [UIView commitAnimations];
+[self closeWithEase];
+}
+%new
+-(void) closeWithEase{
+    //Set up view
+    self.killStyleView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.killStyleView setBackgroundColor: [UIColor whiteColor]];
+    [self.killStyleView setUserInteractionEnabled:TRUE ];
+
+    //Bold Title at the top
+    UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+      bigTitle.text = @"Close with Ease";
+      bigTitle.textAlignment = NSTextAlignmentCenter;
+      bigTitle.font = [UIFont boldSystemFontOfSize:35];
+      [self.killStyleView addSubview:bigTitle];
+
+    //Description below Bold Title
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+      description.text = @"Swipe up to close your applications?";
+      description.textAlignment = NSTextAlignmentCenter;
+      description.lineBreakMode = NSLineBreakByWordWrapping;
+      description.numberOfLines = 0;
+      description.font = [UIFont systemFontOfSize:20];
+      [self.killStyleView addSubview:description];
+
+    //Center Video
+    CGFloat width = (self.welcomeView.frame.size.height*0.59)/1.777777777;
+    CGFloat height = self.welcomeView.frame.size.height*0.59;
+    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/swipeToClose.mp4";
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:moviePath]];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
+    playerLayer.player = player;
+    playerLayer.frame = CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, width, height);
+    playerLayer.backgroundColor = [UIColor blackColor].CGColor;
+    playerLayer.videoGravity = AVLayerVideoGravityResize;
+    player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(playerItemDidReachEnd:)
+                                               name:AVPlayerItemDidPlayToEndTimeNotification
+                                             object:[player currentItem]];
+    [self.killStyleView.layer addSublayer:playerLayer];
+    [player play];
+
+    //Animate changing views
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+    self.welcomeView.hidden = TRUE;
+    [self.view addSubview:self.killStyleView];
+    [UIView commitAnimations];
+
+    //Next Button
+    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+      [enableButton setTitle:@"Enable Swipe to Close" forState:UIControlStateNormal];
+      [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      enableButton.layer.cornerRadius = 7.5;
+      enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+      enableButton.titleLabel.textColor = [UIColor whiteColor];
+      enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [enableButton addTarget:self action:@selector(closeYes) forControlEvents:UIControlEventTouchUpInside];
+      [self.killStyleView addSubview:enableButton];
+
+    UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+        noButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+        [noButton setTitle:@"Not Now" forState:UIControlStateNormal];
+        [noButton addTarget:self action:@selector(closeNo) forControlEvents:UIControlEventTouchUpInside];
+        noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
+        [self.killStyleView addSubview:noButton];
+
+
+}
+%new
+-(void)closeYes{
+  [pref setObject:[NSNumber numberWithBool:1] forKey:@"enableKill"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.oneHandSSView];
+  [UIView commitAnimations];
+[self oneHandSS];
+}
+%new
+-(void)closeNo{
+  [pref setObject:[NSNumber numberWithBool:0] forKey:@"enableKill"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.oneHandSSView];
+  [UIView commitAnimations];
+[self oneHandSS];
+}
+%new
+-(void) oneHandSS{
+  //Set up view
+  self.oneHandSSView = [[UIView alloc] initWithFrame:self.view.bounds];
+  [self.oneHandSSView setBackgroundColor: [UIColor whiteColor]];
+  [self.oneHandSSView setUserInteractionEnabled:TRUE ];
+
+  //Bold Title at the top
+  UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+  bigTitle.text = @"One Hand Screenshot";
+  bigTitle.textAlignment = NSTextAlignmentCenter;
+  bigTitle.font = [UIFont boldSystemFontOfSize:35];
+  [self.oneHandSSView addSubview:bigTitle];
+
+  //Description below Bold Title
+  UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+    description.text = @"Take screenshots with Volume Up + Lock?";
+    description.textAlignment = NSTextAlignmentCenter;
+    description.lineBreakMode = NSLineBreakByWordWrapping;
+    description.numberOfLines = 0;
+    description.font = [UIFont systemFontOfSize:20];
+    [self.oneHandSSView addSubview:description];
+
+  //Center Image
+  UIImageView *centerImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, (self.welcomeView.frame.size.height*0.59)/1.777777777, self.welcomeView.frame.size.height*0.59)];
+    centerImage.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/screenshot.png"];
+    [self.oneHandSSView addSubview:centerImage];
+
+  //Disable Button
+  UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    noButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+    [noButton setTitle:@"Not Now" forState:UIControlStateNormal];
+    [noButton addTarget:self action:@selector(oneHandNo) forControlEvents:UIControlEventTouchUpInside];
+    noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
+    [self.oneHandSSView addSubview:noButton];
+
+  //Animate changing views
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+  self.welcomeView.hidden = TRUE;
+  [self.view addSubview:self.oneHandSSView];
+  [UIView commitAnimations];
+
+  //Enable Button
+  fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [enableButton setTitle:@"Enable Feature" forState:UIControlStateNormal];
+    [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+    enableButton.layer.cornerRadius = 7.5;
+    enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.titleLabel.textColor = [UIColor whiteColor];
+    enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [enableButton addTarget:self action:@selector(oneHandYes) forControlEvents:UIControlEventTouchUpInside];
+    [self.oneHandSSView addSubview:enableButton];
+}
+%new
+-(void)oneHandYes{
+  [pref setObject:[NSNumber numberWithBool:0] forKey:@"remapScreen"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.classicSiriView];
+  [UIView commitAnimations];
+[self classicSiri];
+}
+%new
+-(void)oneHandNo{
+  [pref setObject:[NSNumber numberWithBool:1] forKey:@"remapScreen"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.classicSiriView];
+  [UIView commitAnimations];
+[self classicSiri];
+}
+%new
+-(void) classicSiri{
+  //Set up view
+  self.classicSiriView = [[UIView alloc] initWithFrame:self.view.bounds];
+  [self.classicSiriView setBackgroundColor: [UIColor whiteColor]];
+  [self.classicSiriView setUserInteractionEnabled:TRUE ];
+
+  //Bold Title at the top
+  UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+  bigTitle.text = @"Classic Siri?";
+  bigTitle.textAlignment = NSTextAlignmentCenter;
+  bigTitle.font = [UIFont boldSystemFontOfSize:35];
+  [self.classicSiriView addSubview:bigTitle];
+
+  //Description below Bold Title
+  UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+    description.text = @"Don't like the power button? Hold Home to access Siri!";
+    description.textAlignment = NSTextAlignmentCenter;
+    description.lineBreakMode = NSLineBreakByWordWrapping;
+    description.numberOfLines = 0;
+    description.font = [UIFont systemFontOfSize:20];
+    [self.classicSiriView addSubview:description];
+
+  //Center Image
+  UIImageView *centerImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, (self.welcomeView.frame.size.height*0.59)/1.777777777, self.welcomeView.frame.size.height*0.59)];
+    centerImage.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/siri.png"];
+    [self.classicSiriView addSubview:centerImage];
+
+  //Disable Button
+  UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    noButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+    [noButton setTitle:@"Hold Home for Siri" forState:UIControlStateNormal];
+    [noButton addTarget:self action:@selector(siriNo) forControlEvents:UIControlEventTouchUpInside];
+    noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
+    [self.classicSiriView addSubview:noButton];
+
+  //Animate changing views
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+  self.welcomeView.hidden = TRUE;
+  [self.view addSubview:self.classicSiriView];
+  [UIView commitAnimations];
+
+  //Enable Button
+  fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [enableButton setTitle:@"Hold Home for Siri" forState:UIControlStateNormal];
+    [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+    enableButton.layer.cornerRadius = 7.5;
+    enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.titleLabel.textColor = [UIColor whiteColor];
+    enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [enableButton addTarget:self action:@selector(siriYes) forControlEvents:UIControlEventTouchUpInside];
+    [self.classicSiriView addSubview:enableButton];
+}
+%new
+-(void)classicSiriYes{
+  [pref setObject:[NSNumber numberWithBool:1] forKey:@"siriHome"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.homeBarView];
+  [UIView commitAnimations];
+[self homeBar];
+}
+%new
+-(void)classicSiriNo{
+  [pref setObject:[NSNumber numberWithBool:0] forKey:@"siriHome"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.homeBarView];
+  [UIView commitAnimations];
+[self homeBar];
+}
+%new
+-(void)homeBar{
+  //Set up view
+  self.homeBarView = [[UIView alloc] initWithFrame:self.view.bounds];
+  [self.homeBarView setBackgroundColor: [UIColor whiteColor]];
+  [self.homeBarView setUserInteractionEnabled:TRUE ];
+
+  //Bold Title at the top
+  UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
+  bigTitle.text = @"Forgot Everything?";
+  bigTitle.textAlignment = NSTextAlignmentCenter;
+  bigTitle.font = [UIFont boldSystemFontOfSize:35];
+  [self.homeBarView addSubview:bigTitle];
+
+  //Description below Bold Title
+  UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
+    description.text = @"Enable the Home Bar indicator?";
+    description.textAlignment = NSTextAlignmentCenter;
+    description.lineBreakMode = NSLineBreakByWordWrapping;
+    description.numberOfLines = 0;
+    description.font = [UIFont systemFontOfSize:20];
+    [self.homeBarView addSubview:description];
+
+  //Center Image
+  UIImageView *centerImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, (self.welcomeView.frame.size.height*0.59)/1.777777777, self.welcomeView.frame.size.height*0.59)];
+    centerImage.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/homeBar.png"];
+    [self.homeBarView addSubview:centerImage];
+
+  //Disable Button
+  UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    noButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+    [noButton setTitle:@"Not Now" forState:UIControlStateNormal];
+    [noButton addTarget:self action:@selector(homeBarNo) forControlEvents:UIControlEventTouchUpInside];
+    noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
+    [self.homeBarView addSubview:noButton];
+
+  //Animate changing views
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+  self.welcomeView.hidden = TRUE;
+  [self.view addSubview:self.homeBarView];
+  [UIView commitAnimations];
+
+  //Enable Button
+  fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [enableButton setTitle:@"Enable Home Bar" forState:UIControlStateNormal];
+    [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+    enableButton.layer.cornerRadius = 7.5;
+    enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.titleLabel.textColor = [UIColor whiteColor];
+    enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [enableButton addTarget:self action:@selector(homeBarYes) forControlEvents:UIControlEventTouchUpInside];
+    [self.homeBarView addSubview:enableButton];
+}
+%new
+-(void)homeBarYes{
+  [pref setObject:[NSNumber numberWithBool:1] forKey:@"hideBar"];
+  [pref setObject:[NSNumber numberWithBool:1] forKey:@"hideBarCover"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.exitView];
+  [UIView commitAnimations];
+[self exitSetup];
+}
+%new
+-(void)homeBarNo{
+  [pref setObject:[NSNumber numberWithBool:0] forKey:@"hideBar"];
+  [pref setObject:[NSNumber numberWithBool:0] forKey:@"hideBarCover"];
+
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:1];
+  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
+
+  [self.view addSubview:self.exitView];
+  [UIView commitAnimations];
+[self exitSetup];
+}
+
+
 %new
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];
