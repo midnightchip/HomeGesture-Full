@@ -30,6 +30,25 @@ int applicationDidFinishLaunching;
 @interface SBDashBoardViewController (HomeGesture)
 -(void)buttonAction;
 @end
+
+//Fancy Button
+@interface fancyButton : UIButton
+@property (nonatomic, assign) CGFloat highlightAlpha;
+@end
+
+@implementation fancyButton
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+
+    if (highlighted) {
+        self.alpha = 0.5;
+    }
+    else {
+        self.alpha = 1.0;
+    }
+}
+@end
+
 %group easySetup
 %hook SBIdleTimerDefaults
 
@@ -70,17 +89,18 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   if(!self.but){
 
     //Next Button
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
-    [nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    nextButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
-    nextButton.layer.cornerRadius = 7.5;
-    nextButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    nextButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
-    nextButton.titleLabel.textColor = [UIColor whiteColor];
-    nextButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    [nextButton addTarget:self action:@selector(secondView) forControlEvents:UIControlEventTouchUpInside];
-    [self.welcomeView addSubview:nextButton];
+    fancyButton *nextButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+        [nextButton setTitle:@"Next" forState:UIControlStateNormal];
+        [nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        nextButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+        nextButton.layer.cornerRadius = 7.5;
+        nextButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        nextButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+        nextButton.titleLabel.textColor = [UIColor whiteColor];
+        nextButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        [nextButton addTarget:self action:@selector(secondView) forControlEvents:UIControlEventTouchUpInside];
+        nextButton.highlightAlpha = 0.5;
+        [self.welcomeView addSubview:nextButton];
 
     //HomeGesture Logo
     UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-(self.welcomeView.frame.size.height*0.15)/2, 140, self.welcomeView.frame.size.height*0.15, self.welcomeView.frame.size.height*0.15)];
