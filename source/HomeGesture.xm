@@ -41,7 +41,7 @@ int applicationDidFinishLaunching;
     [super setHighlighted:highlighted];
 
     if (highlighted) {
-        self.alpha = 0.5;
+        self.alpha = 0.8;
     }
     else {
         self.alpha = 1.0;
@@ -141,26 +141,26 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   //Description below Bold Title
   UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
-  description.text = @"This is a description of what this feature can do.";
-  description.textAlignment = NSTextAlignmentCenter;
-  description.lineBreakMode = NSLineBreakByWordWrapping;
-  description.numberOfLines = 0;
-  description.font = [UIFont systemFontOfSize:20];
-  [self.swipeExplainView addSubview:description];
+    description.text = @"This is a description of what this feature can do.";
+    description.textAlignment = NSTextAlignmentCenter;
+    description.lineBreakMode = NSLineBreakByWordWrapping;
+    description.numberOfLines = 0;
+    description.font = [UIFont systemFontOfSize:20];
+    [self.swipeExplainView addSubview:description];
 
   //Center Image
   UIImageView *centerImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, (self.welcomeView.frame.size.height*0.59)/1.777777777, self.welcomeView.frame.size.height*0.59)];
-  centerImage.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/siri.png"];
-  [self.swipeExplainView addSubview:centerImage];
+    centerImage.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/siri.png"];
+    [self.swipeExplainView addSubview:centerImage];
 
   //Disable Button
   UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-  noButton.titleLabel.font = [UIFont systemFontOfSize:18];
-  noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
-  [noButton setTitle:@"Not Now" forState:UIControlStateNormal];
-  [noButton addTarget:self action:@selector(firstNo) forControlEvents:UIControlEventTouchUpInside];
-  noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
-  [self.swipeExplainView addSubview:noButton];
+    noButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
+    [noButton setTitle:@"Not Now" forState:UIControlStateNormal];
+    [noButton addTarget:self action:@selector(firstNo) forControlEvents:UIControlEventTouchUpInside];
+    noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
+    [self.swipeExplainView addSubview:noButton];
 
   //Animate changing views
   [UIView beginAnimations:nil context:nil];
@@ -171,31 +171,18 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   [UIView commitAnimations];
 
   //Enable Button
-  UIButton *enableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-  [enableButton setTitle:@"Enable Feature" forState:UIControlStateNormal];
-  [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-  enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
-  enableButton.layer.cornerRadius = 7.5;
-  enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-  enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
-  enableButton.titleLabel.textColor = [UIColor whiteColor];
-  enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
-  [enableButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
-  [self.swipeExplainView addSubview:enableButton];
-}
-
-//Enable Button Highlight Effect
-/*
-- (void)setHighlighted:(bool)highlighted {
-  [swipeExplainView setHighlighted:highlighted];
-
-  if (highlighted) {
-    enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:0.5];
-  } else {
+  fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [enableButton setTitle:@"Enable Feature" forState:UIControlStateNormal];
+    [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
-  }
+    enableButton.layer.cornerRadius = 7.5;
+    enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.titleLabel.textColor = [UIColor whiteColor];
+    enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [enableButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
+    [self.swipeExplainView addSubview:enableButton];
 }
-*/
 
 %new
 -(void)firstYes{
@@ -231,19 +218,19 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
     //Bold Title at the top
     UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
-    bigTitle.text = @"Get Home Fast";
-    bigTitle.textAlignment = NSTextAlignmentCenter;
-    bigTitle.font = [UIFont boldSystemFontOfSize:35];
-    [self.swipeExplainView addSubview:bigTitle];
+      bigTitle.text = @"Get Home Fast";
+      bigTitle.textAlignment = NSTextAlignmentCenter;
+      bigTitle.font = [UIFont boldSystemFontOfSize:35];
+      [self.swipeExplainView addSubview:bigTitle];
 
     //Description below Bold Title
     UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width*0.1, 75, self.welcomeView.frame.size.width*0.8, 100)];
-    description.text = @"Swipe up to go Home.";
-    description.textAlignment = NSTextAlignmentCenter;
-    description.lineBreakMode = NSLineBreakByWordWrapping;
-    description.numberOfLines = 0;
-    description.font = [UIFont systemFontOfSize:20];
-    [self.swipeExplainView addSubview:description];
+      description.text = @"Swipe up to go Home.";
+      description.textAlignment = NSTextAlignmentCenter;
+      description.lineBreakMode = NSLineBreakByWordWrapping;
+      description.numberOfLines = 0;
+      description.font = [UIFont systemFontOfSize:20];
+      [self.swipeExplainView addSubview:description];
 
     //Center Video
     CGFloat width = (self.welcomeView.frame.size.height*0.59)/1.777777777;
@@ -273,17 +260,17 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [UIView commitAnimations];
 
     //Next Button
-    UIButton *enableButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    [enableButton setTitle:@"Next" forState:UIControlStateNormal];
-    [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
-    enableButton.layer.cornerRadius = 7.5;
-    enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
-    enableButton.titleLabel.textColor = [UIColor whiteColor];
-    enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    [enableButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
-    [self.swipeExplainView addSubview:enableButton];
+    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+      [enableButton setTitle:@"Next" forState:UIControlStateNormal];
+      [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      enableButton.layer.cornerRadius = 7.5;
+      enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+      enableButton.titleLabel.textColor = [UIColor whiteColor];
+      enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [enableButton addTarget:self action:@selector(firstYes) forControlEvents:UIControlEventTouchUpInside];
+      [self.swipeExplainView addSubview:enableButton];
 
 }
 %new
