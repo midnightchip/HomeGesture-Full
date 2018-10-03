@@ -652,7 +652,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     noButton.titleLabel.font = [UIFont systemFontOfSize:18];
     noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, self.welcomeView.frame.size.width, 100);
-    [noButton setTitle:@"Hold Home for Siri" forState:UIControlStateNormal];
+    [noButton setTitle:@"Hold Lock Button" forState:UIControlStateNormal];
     [noButton addTarget:self action:@selector(siriNo) forControlEvents:UIControlEventTouchUpInside];
     noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
     [self.classicSiriView addSubview:noButton];
@@ -825,24 +825,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       description.font = [UIFont systemFontOfSize:20];
       [self.exitView addSubview:description];
 
-    //Center Video
-    CGFloat width = (self.welcomeView.frame.size.height*0.59)/1.777777777;
-    CGFloat height = self.welcomeView.frame.size.height*0.59;
-    NSString *moviePath = @"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/swipeToClose.mp4";
-    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:moviePath]];
-    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
-    playerLayer.player = player;
-    playerLayer.frame = CGRectMake(self.welcomeView.frame.size.width/2-((self.welcomeView.frame.size.height*0.59)/1.777777777)/2, 150, width, height);
-    playerLayer.backgroundColor = [UIColor blackColor].CGColor;
-    playerLayer.videoGravity = AVLayerVideoGravityResize;
-    player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(playerItemDidReachEnd:)
-                                               name:AVPlayerItemDidPlayToEndTimeNotification
-                                             object:[player currentItem]];
-    [self.exitView.layer addSublayer:playerLayer];
-    [player play];
+      //Center Image
+      UIImageView *centerImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.welcomeView.frame.size.width/2-185, 150, 370, 370)];
+        centerImage.image = [UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/final.png"];
+        [self.exitView addSubview:centerImage];
 
     //Animate changing views
     [UIView beginAnimations:nil context:nil];
