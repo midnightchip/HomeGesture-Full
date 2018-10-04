@@ -19,8 +19,6 @@ bool originalButton;
 long _homeButtonType = 1;
 int applicationDidFinishLaunching;
 
-
-
 //Quick Setup
 @interface SBDashBoardViewController : UIViewController
 @property (retain, nonatomic) UIView *welcomeView;
@@ -122,7 +120,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
         nextButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
         nextButton.layer.cornerRadius = 7.5;
         nextButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        nextButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+        nextButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.09);
         nextButton.titleLabel.textColor = [UIColor whiteColor];
         nextButton.titleLabel.font = [UIFont systemFontOfSize:18];
         [nextButton addTarget:self action:@selector(toSwipeUpHome) forControlEvents:UIControlEventTouchUpInside];
@@ -209,7 +207,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
       enableButton.layer.cornerRadius = 7.5;
       enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.09);
       enableButton.titleLabel.textColor = [UIColor whiteColor];
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(toDoingAlot) forControlEvents:UIControlEventTouchUpInside];
@@ -273,7 +271,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
       enableButton.layer.cornerRadius = 7.5;
       enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.09);
       enableButton.titleLabel.textColor = [UIColor whiteColor];
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(controlOnDemand) forControlEvents:UIControlEventTouchUpInside];
@@ -337,7 +335,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
       enableButton.layer.cornerRadius = 7.5;
       enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.09);
       enableButton.titleLabel.textColor = [UIColor whiteColor];
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(statusInStyle) forControlEvents:UIControlEventTouchUpInside];
@@ -401,12 +399,13 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
       enableButton.layer.cornerRadius = 7.5;
       enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.15);
       enableButton.titleLabel.textColor = [UIColor whiteColor];
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(statusYes) forControlEvents:UIControlEventTouchUpInside];
       [self.statusBarView addSubview:enableButton];
 
+    //Not Now Button
     UIButton *noButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
         noButton.titleLabel.font = [UIFont systemFontOfSize:18];
         noButton.frame= CGRectMake(self.welcomeView.frame.size.width/3, self.welcomeView.frame.size.height, 100, 100);
@@ -498,7 +497,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
       enableButton.layer.cornerRadius = 7.5;
       enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.15);
       enableButton.titleLabel.textColor = [UIColor whiteColor];
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(closeYes) forControlEvents:UIControlEventTouchUpInside];
@@ -590,7 +589,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
     enableButton.layer.cornerRadius = 7.5;
     enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.15);
     enableButton.titleLabel.textColor = [UIColor whiteColor];
     enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [enableButton addTarget:self action:@selector(oneHandYes) forControlEvents:UIControlEventTouchUpInside];
@@ -672,7 +671,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
     enableButton.layer.cornerRadius = 7.5;
     enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.15);
     enableButton.titleLabel.textColor = [UIColor whiteColor];
     enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [enableButton addTarget:self action:@selector(siriYes) forControlEvents:UIControlEventTouchUpInside];
@@ -768,7 +767,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
     enableButton.layer.cornerRadius = 7.5;
     enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    enableButton.center = CGPointMake(self.view.frame.size.width / 2, 580);
+    enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.15);
     enableButton.titleLabel.textColor = [UIColor whiteColor];
     enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [enableButton addTarget:self action:@selector(homeBarYes) forControlEvents:UIControlEventTouchUpInside];
@@ -844,7 +843,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
       enableButton.layer.cornerRadius = 7.5;
       enableButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-      enableButton.center = CGPointMake(self.view.frame.size.width / 2, 610);
+      enableButton.center = CGPointMake(self.view.frame.size.width / 2, self.welcomeView.frame.size.height/1.09);
       enableButton.titleLabel.textColor = [UIColor whiteColor];
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(cleanUp) forControlEvents:UIControlEventTouchUpInside];
@@ -1064,17 +1063,6 @@ static BOOL rotateDisable = YES;
 %hook NCNotificationListSectionRevealHintView
 - (void)_updateHintTitle {
 	if(![prefs boolForKey:@"notificationHint"]){
-		%orig;
-	}else{
-		return;
-	}
-}
-%end
-
-// Hide "Swipe up to unlock" on Coversheet
-%hook SBDashBoardTeachableMomentsContainerViewController
-- (void)_updateTextLabel {
-	if(![prefs boolForKey:@"unlockHint"]){
 		%orig;
 	}else{
 		return;
@@ -1483,8 +1471,19 @@ static NSString *currentApp;
 }
 %end
 
+// Hide "Swipe up to unlock" on Coversheet
+%hook SBDashBoardTeachableMomentsContainerViewController
+- (void)_updateTextLabel {
+  if(![prefs boolForKey:@"unlockHint"]){
+    %orig;
+  }else{
+    return;
+  }
+}
+%end
+
 %ctor {
-	NSFileManager *fileManager = [NSFileManager defaultManager];
+  NSFileManager *fileManager = [NSFileManager defaultManager];
 	if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
 		%init(easySetup);
 	}
