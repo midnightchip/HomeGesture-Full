@@ -67,6 +67,39 @@ int applicationDidFinishLaunching;
 @end
 
 %group easySetup
+//Hide Swipe Up to unlock on first launch.
+%hook SBDashBoardTeachableMomentsContainerViewController
+- (void)_updateTextLabel {
+    return;
+}
+%end
+
+//Status Bar
+%hook UIStatusBar
+
+@interface UIStatusBar : UIView
+@property (nonatomic, retain) UIColor *foregroundColor;
+@end
+
+-(UIColor *)foregroundColor{
+  return [UIColor blackColor];
+}
+
+%end
+
+
+%hook SBDashBoardQuickActionsViewController
+-(BOOL)hasFlashlight{
+	return NO;
+}
+
+// Hide Camera Button on Coversheet
+-(BOOL)hasCamera{
+	return NO;
+}
+%end
+
+//Disable Screen Shutting off while setup
 %hook SBIdleTimerDefaults
 
 -(double)minimumLockscreenIdleTime {
@@ -1486,6 +1519,7 @@ static NSString *currentApp;
   NSFileManager *fileManager = [NSFileManager defaultManager];
 	if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
 		%init(easySetup);
-	}
-	%init(_ungrouped);
+	}else{
+    %init(_ungrouped);
+  }
 }
