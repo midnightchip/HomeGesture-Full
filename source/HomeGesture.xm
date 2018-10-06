@@ -143,6 +143,22 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [self.videoView setBackgroundColor: [UIColor whiteColor]];
     [self.videoView setUserInteractionEnabled:TRUE ];
 
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 50)];
+    // Create a UIBarButtonItem
+    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+    navItem.title = @"Welcome";
+
+    NSString *backArrowString = @"\U000025C0\U0000FE0E"; //BLACK LEFT-POINTING TRIANGLE PLUS VARIATION SELECTOR
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:backArrowString
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(toDoingAlot)];
+    navItem.leftBarButtonItem = backButton;
+
+    navBar.items = @[ navItem ];
+    [self.welcomeView addSubview:navBar];
+
   }
   if(!self.but){
 
