@@ -143,22 +143,6 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [self.videoView setBackgroundColor: [UIColor whiteColor]];
     [self.videoView setUserInteractionEnabled:TRUE ];
 
-    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 50)];
-    // Create a UIBarButtonItem
-    UINavigationItem *navItem = [[UINavigationItem alloc] init];
-    navItem.title = @"Welcome";
-
-    NSString *backArrowString = @"\U000025C0\U0000FE0E"; //BLACK LEFT-POINTING TRIANGLE PLUS VARIATION SELECTOR
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:backArrowString
-                                   style:UIBarButtonItemStylePlain
-                                   target:self
-                                   action:@selector(toDoingAlot)];
-    navItem.leftBarButtonItem = backButton;
-
-    navBar.items = @[ navItem ];
-    [self.welcomeView addSubview:navBar];
-
   }
   if(!self.but){
 
@@ -326,6 +310,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       [enableButton addTarget:self action:@selector(controlOnDemand) forControlEvents:UIControlEventTouchUpInside];
       [self.doingAlot addSubview:enableButton];
 
+      //Create navigation bar
+      UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+      //Make navigation bar background transparent
+      [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+      navBar.shadowImage = [UIImage new];
+      navBar.translucent = YES;
+
+      UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+      //Create the back button view
+      UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+      UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+      leftButton.backgroundColor = [UIColor clearColor];
+      leftButton.frame = leftButtonView.frame;
+      [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+      [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+      leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      leftButton.autoresizesSubviews = YES;
+      leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+      leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [leftButton addTarget:self action:@selector(toSwipeUpHome) forControlEvents:UIControlEventTouchUpInside];
+      [leftButtonView addSubview:leftButton];
+
+      //Add back button to navigation bar
+      UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+      navItem.leftBarButtonItem = leftBarButton;
+
+      navBar.items = @[ navItem ];
+      [self.doingAlot addSubview:navBar];
+
 }
 %new
 -(void) controlOnDemand{
@@ -389,6 +404,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(statusInStyle) forControlEvents:UIControlEventTouchUpInside];
       [self.controlCenterView addSubview:enableButton];
+
+      //Create navigation bar
+      UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+      //Make navigation bar background transparent
+      [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+      navBar.shadowImage = [UIImage new];
+      navBar.translucent = YES;
+
+      UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+      //Create the back button view
+      UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+      UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+      leftButton.backgroundColor = [UIColor clearColor];
+      leftButton.frame = leftButtonView.frame;
+      [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+      [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+      leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      leftButton.autoresizesSubviews = YES;
+      leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+      leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [leftButton addTarget:self action:@selector(toDoingAlot) forControlEvents:UIControlEventTouchUpInside];
+      [leftButtonView addSubview:leftButton];
+
+      //Add back button to navigation bar
+      UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+      navItem.leftBarButtonItem = leftBarButton;
+
+      navBar.items = @[ navItem ];
+      [self.controlCenterView addSubview:navBar];
 
 }
 %new
@@ -462,6 +508,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
         [noButton addTarget:self action:@selector(statusNo) forControlEvents:UIControlEventTouchUpInside];
         noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
         [self.statusBarView addSubview:noButton];
+
+        //Create navigation bar
+        UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+        //Make navigation bar background transparent
+        [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        navBar.shadowImage = [UIImage new];
+        navBar.translucent = YES;
+
+        UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+        //Create the back button view
+        UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+        UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        leftButton.backgroundColor = [UIColor clearColor];
+        leftButton.frame = leftButtonView.frame;
+        [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+        [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+        leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+        leftButton.autoresizesSubviews = YES;
+        leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+        leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        [leftButton addTarget:self action:@selector(controlOnDemand) forControlEvents:UIControlEventTouchUpInside];
+        [leftButtonView addSubview:leftButton];
+
+        //Add back button to navigation bar
+        UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+        navItem.leftBarButtonItem = leftBarButton;
+
+        navBar.items = @[ navItem ];
+        [self.statusBarView addSubview:navBar];
 
 
 }
@@ -560,6 +637,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
         noButton.center = CGPointMake(self.welcomeView.frame.size.width/2, self.welcomeView.frame.size.height/1.05 );
         [self.killStyleView addSubview:noButton];
 
+        //Create navigation bar
+        UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+        //Make navigation bar background transparent
+        [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        navBar.shadowImage = [UIImage new];
+        navBar.translucent = YES;
+
+        UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+        //Create the back button view
+        UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+        UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        leftButton.backgroundColor = [UIColor clearColor];
+        leftButton.frame = leftButtonView.frame;
+        [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+        [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+        leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+        leftButton.autoresizesSubviews = YES;
+        leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+        leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        [leftButton addTarget:self action:@selector(statusInStyle) forControlEvents:UIControlEventTouchUpInside];
+        [leftButtonView addSubview:leftButton];
+
+        //Add back button to navigation bar
+        UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+        navItem.leftBarButtonItem = leftBarButton;
+
+        navBar.items = @[ navItem ];
+        [self.killStyleView addSubview:navBar];
+
 
 }
 %new
@@ -595,7 +703,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   //Bold Title at the top
   UILabel *bigTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, self.welcomeView.frame.size.width, 100)];
-  bigTitle.text = @"One Hand Screenshot";
+  bigTitle.text = @"One Handed?";
   bigTitle.textAlignment = NSTextAlignmentCenter;
   bigTitle.font = [UIFont boldSystemFontOfSize:35];
   [self.oneHandSSView addSubview:bigTitle];
@@ -643,6 +751,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [enableButton addTarget:self action:@selector(oneHandYes) forControlEvents:UIControlEventTouchUpInside];
     [self.oneHandSSView addSubview:enableButton];
+
+    //Create navigation bar
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+    //Make navigation bar background transparent
+    [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    navBar.shadowImage = [UIImage new];
+    navBar.translucent = YES;
+
+    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+    //Create the back button view
+    UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+    UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.frame = leftButtonView.frame;
+    [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+    [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+    leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+    leftButton.autoresizesSubviews = YES;
+    leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [leftButton addTarget:self action:@selector(closeWithEase) forControlEvents:UIControlEventTouchUpInside];
+    [leftButtonView addSubview:leftButton];
+
+    //Add back button to navigation bar
+    UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+    navItem.leftBarButtonItem = leftBarButton;
+
+    navBar.items = @[ navItem ];
+    [self.oneHandSSView addSubview:navBar];
 }
 %new
 -(void)oneHandYes{
@@ -725,6 +864,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [enableButton addTarget:self action:@selector(siriYes) forControlEvents:UIControlEventTouchUpInside];
     [self.classicSiriView addSubview:enableButton];
+
+    //Create navigation bar
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+    //Make navigation bar background transparent
+    [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    navBar.shadowImage = [UIImage new];
+    navBar.translucent = YES;
+
+    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+    //Create the back button view
+    UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+    UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.frame = leftButtonView.frame;
+    [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+    [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+    leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+    leftButton.autoresizesSubviews = YES;
+    leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [leftButton addTarget:self action:@selector(oneHandSS) forControlEvents:UIControlEventTouchUpInside];
+    [leftButtonView addSubview:leftButton];
+
+    //Add back button to navigation bar
+    UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+    navItem.leftBarButtonItem = leftBarButton;
+
+    navBar.items = @[ navItem ];
+    [self.classicSiriView addSubview:navBar];
 }
 %new
 -(void)siriYes{
@@ -821,6 +991,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [enableButton addTarget:self action:@selector(homeBarYes) forControlEvents:UIControlEventTouchUpInside];
     [self.homeBarView addSubview:enableButton];
+
+    //Create navigation bar
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+    //Make navigation bar background transparent
+    [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    navBar.shadowImage = [UIImage new];
+    navBar.translucent = YES;
+
+    UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+    //Create the back button view
+    UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+    UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    leftButton.backgroundColor = [UIColor clearColor];
+    leftButton.frame = leftButtonView.frame;
+    [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+    [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+    leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+    leftButton.autoresizesSubviews = YES;
+    leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [leftButton addTarget:self action:@selector(classicSiri) forControlEvents:UIControlEventTouchUpInside];
+    [leftButtonView addSubview:leftButton];
+
+    //Add back button to navigation bar
+    UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+    navItem.leftBarButtonItem = leftBarButton;
+
+    navBar.items = @[ navItem ];
+    [self.homeBarView addSubview:navBar];
 }
 %new
 -(void)homeBarYes{
@@ -897,6 +1098,37 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       enableButton.titleLabel.font = [UIFont systemFontOfSize:18];
       [enableButton addTarget:self action:@selector(cleanUp) forControlEvents:UIControlEventTouchUpInside];
       [self.exitView addSubview:enableButton];
+
+      //Create navigation bar
+      UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, self.welcomeView.frame.size.width, 50)];
+      //Make navigation bar background transparent
+      [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+      navBar.shadowImage = [UIImage new];
+      navBar.translucent = YES;
+
+      UINavigationItem *navItem = [[UINavigationItem alloc] init];
+
+      //Create the back button view
+      UIView* leftButtonView = [[UIView alloc]initWithFrame:CGRectMake(-12, 0, 75, 50)];
+
+      UIButton* leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+      leftButton.backgroundColor = [UIColor clearColor];
+      leftButton.frame = leftButtonView.frame;
+      [leftButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HomeGesture.bundle/quickSetup/back.png"] forState:UIControlStateNormal];
+      [leftButton setTitle:@"Back" forState:UIControlStateNormal];
+      leftButton.tintColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
+      leftButton.autoresizesSubviews = YES;
+      leftButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+      leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
+      [leftButton addTarget:self action:@selector(homeBar) forControlEvents:UIControlEventTouchUpInside];
+      [leftButtonView addSubview:leftButton];
+
+      //Add back button to navigation bar
+      UIBarButtonItem* leftBarButton = [[UIBarButtonItem alloc]initWithCustomView:leftButtonView];
+      navItem.leftBarButtonItem = leftBarButton;
+
+      navBar.items = @[ navItem ];
+      [self.exitView addSubview:navBar];
 }
 %new
 -(void)cleanUp{
