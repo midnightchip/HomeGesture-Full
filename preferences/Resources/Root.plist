@@ -175,6 +175,7 @@
 				<string>icons/backupRestore</string>
 			</dict>
 
+			<!-- Changelog and Version Cells - waiting for CreatureSurvive to fix libCSPrefs
 			<dict>
 				<key>cell</key>
 				<string>PSLinkCell</string>
@@ -281,7 +282,6 @@
 				</array>
 			</dict>
 
-<!-- Waiting for CreatureSurvive to add Icon support to Version Cell
 			<dict>
 				<key>cell</key>
 				<string>PSStaticTextCell</string>
