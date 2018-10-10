@@ -42,7 +42,7 @@
 				<key>label</key>
 				<string>Round Card Corners</string>
 				<key>sublabel</key>
-				<string>Bug: Also enables iPhone X Dock</string>
+				<string>Also enables iPhone X dock</string>
 				<key>key</key>
 				<string>roundSwitcher</string>
 				<key>PostNotification</key>
