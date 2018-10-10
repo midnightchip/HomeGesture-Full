@@ -35,6 +35,7 @@ int applicationDidFinishLaunching;
 @property (retain, nonatomic) UIView *classicSiriView;
 @property (retain, nonatomic) UIView *homeBarView;
 @property (retain, nonatomic) UIView *exitView;
+@property (retain, nonatomic) UIView *hideView;
 @end
 
 @interface SBDashBoardViewController (HomeGesture)
@@ -109,6 +110,15 @@ int applicationDidFinishLaunching;
 
 %end
 
+@interface SBDashBoardView : UIView 
+@end 
+%hook SBDashBoardView 
+-(void)layoutSubviews{
+  %orig;
+  self.backgroundColor = [UIColor whiteColor];
+}
+%end 
+
 %hook SBDashBoardViewController
 %property (retain, nonatomic) UIView *welcomeView;
 %property (retain, nonatomic) UIButton *but;
@@ -123,13 +133,20 @@ int applicationDidFinishLaunching;
 %property (retain, nonatomic) UIView *classicSiriView;
 %property (retain, nonatomic) UIView *homeBarView;
 %property (retain, nonatomic) UIView *exitView;
+%property (retain, nonatomic) UIView *hideView;
 
 static NSMutableDictionary *pref = @{}.mutableCopy;
 
 -(void)viewDidLoad {
   %orig;
+  //self.view.backgroundColor = [UIColor whiteColor];
   // Creating the welcomeView which will hold all the other stuff we add (centralization)
   if(!self.welcomeView){
+    self.hideView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [self.hideView setBackgroundColor: [UIColor whiteColor]];
+    [self.hideView setUserInteractionEnabled:FALSE ];
+    [self.view addSubview:self.hideView];
+
     self.welcomeView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.welcomeView setBackgroundColor: [UIColor whiteColor]];
     [self.welcomeView setUserInteractionEnabled:TRUE ];
@@ -223,15 +240,17 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                              object:[player currentItem]];
     [self.swipeExplainView.layer addSublayer:playerLayer];
-    [player play];
-
-    //Animate changing views
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-    self.welcomeView.hidden = TRUE;
-    [self.view addSubview:self.swipeExplainView];
-    [UIView commitAnimations];
+    
+    
+    [self.welcomeView addSubview:self.swipeExplainView];
+    self.swipeExplainView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.swipeExplainView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [player play];
+    }];
 
     //Next Button
     fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -287,15 +306,18 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                              object:[player currentItem]];
     [self.doingAlot.layer addSublayer:playerLayer];
-    [player play];
 
     //Animate changing views
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-    self.welcomeView.hidden = TRUE;
-    [self.view addSubview:self.doingAlot];
-    [UIView commitAnimations];
+    [self.welcomeView addSubview: self.doingAlot];
+    self.doingAlot.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.doingAlot.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.swipeExplainView removeFromSuperview];
+      [player play];
+    }];
 
     //Next Button
     fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -382,15 +404,17 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                              object:[player currentItem]];
     [self.controlCenterView.layer addSublayer:playerLayer];
-    [player play];
 
-    //Animate changing views
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-    self.welcomeView.hidden = TRUE;
-    [self.view addSubview:self.controlCenterView];
-    [UIView commitAnimations];
+    [self.welcomeView addSubview: self.controlCenterView];
+    self.controlCenterView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.controlCenterView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.doingAlot removeFromSuperview];
+      [player play];
+    }];
 
     //Next Button
     fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -477,15 +501,18 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                              object:[player currentItem]];
     [self.statusBarView.layer addSublayer:playerLayer];
-    [player play];
 
     //Animate changing views
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-    self.welcomeView.hidden = TRUE;
-    [self.view addSubview:self.statusBarView];
-    [UIView commitAnimations];
+    [self.welcomeView addSubview: self.statusBarView];
+    self.statusBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.statusBarView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.controlCenterView removeFromSuperview];
+      [player play];
+    }];
 
     //Next Button
     fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -546,24 +573,30 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 -(void)statusYes{
   [pref setObject:[NSNumber numberWithBool:1] forKey:@"statusBarX"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.killStyleView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.killStyleView];
+    self.killStyleView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.killStyleView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.statusBarView removeFromSuperview];
+    }];
 [self closeWithEase];
 }
 %new
 -(void)statusNo{
   [pref setObject:[NSNumber numberWithBool:0] forKey:@"statusBarX"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.killStyleView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.killStyleView];
+    self.killStyleView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.killStyleView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.statusBarView removeFromSuperview];
+    }];
 [self closeWithEase];
 }
 %new
@@ -606,15 +639,17 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                              object:[player currentItem]];
     [self.killStyleView.layer addSublayer:playerLayer];
-    [player play];
 
     //Animate changing views
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-    self.welcomeView.hidden = TRUE;
-    [self.view addSubview:self.killStyleView];
-    [UIView commitAnimations];
+    [self.welcomeView addSubview: self.killStyleView];
+    self.killStyleView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.killStyleView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [player play];
+    }];
 
     //Next Button
     fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -674,24 +709,30 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 -(void)closeYes{
   [pref setObject:[NSNumber numberWithBool:1] forKey:@"enableKill"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.oneHandSSView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.oneHandSSView];
+    self.oneHandSSView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.oneHandSSView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.killStyleView removeFromSuperview];
+    }];
 [self oneHandSS];
 }
 %new
 -(void)closeNo{
   [pref setObject:[NSNumber numberWithBool:0] forKey:@"enableKill"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.oneHandSSView];
-  [UIView commitAnimations];
+   [self.welcomeView addSubview: self.oneHandSSView];
+    self.oneHandSSView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.oneHandSSView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.killStyleView removeFromSuperview];
+    }];
 [self oneHandSS];
 }
 %new
@@ -732,12 +773,15 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [self.oneHandSSView addSubview:noButton];
 
   //Animate changing views
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-  self.welcomeView.hidden = TRUE;
-  [self.view addSubview:self.oneHandSSView];
-  [UIView commitAnimations];
+   [self.welcomeView addSubview: self.oneHandSSView];
+    self.oneHandSSView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.oneHandSSView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.killStyleView removeFromSuperview];
+    }];
 
   //Enable Button
   fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -787,24 +831,30 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 -(void)oneHandYes{
   [pref setObject:[NSNumber numberWithBool:0] forKey:@"remapScreen"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.classicSiriView];
-  [UIView commitAnimations];
+   [self.welcomeView addSubview: self.classicSiriView];
+    self.classicSiriView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.classicSiriView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.oneHandSSView removeFromSuperview];
+    }];
 [self classicSiri];
 }
 %new
 -(void)oneHandNo{
   [pref setObject:[NSNumber numberWithBool:1] forKey:@"remapScreen"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.classicSiriView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.classicSiriView];
+    self.classicSiriView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.classicSiriView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.oneHandSSView removeFromSuperview];
+    }];
 [self classicSiri];
 }
 %new
@@ -845,12 +895,15 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [self.classicSiriView addSubview:noButton];
 
   //Animate changing views
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-  self.welcomeView.hidden = TRUE;
-  [self.view addSubview:self.classicSiriView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.classicSiriView];
+    self.classicSiriView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.classicSiriView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.oneHandSSView removeFromSuperview];
+    }];
 
   //Enable Button
   fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -900,24 +953,30 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 -(void)siriYes{
   [pref setObject:[NSNumber numberWithBool:1] forKey:@"siriHome"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.homeBarView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.homeBarView];
+    self.homeBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.homeBarView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.classicSiriView removeFromSuperview];
+    }];
 [self homeBar];
 }
 %new
 -(void)siriNo{
   [pref setObject:[NSNumber numberWithBool:0] forKey:@"siriHome"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.homeBarView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.homeBarView];
+    self.homeBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.homeBarView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.classicSiriView removeFromSuperview];
+    }];
 [self homeBar];
 }
 %new
@@ -972,12 +1031,15 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [self.homeBarView addSubview:noButton];
 
   //Animate changing views
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-  self.welcomeView.hidden = TRUE;
-  [self.view addSubview:self.homeBarView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.homeBarView];
+    self.homeBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.homeBarView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.classicSiriView removeFromSuperview];
+    }];
 
   //Enable Button
   fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -1028,12 +1090,15 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   [pref setObject:[NSNumber numberWithBool:1] forKey:@"hideBar"];
   [pref setObject:[NSNumber numberWithBool:1] forKey:@"hideBarCover"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.exitView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.exitView];
+    self.exitView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.exitView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.homeBarView removeFromSuperview];
+    }];
 
 [self exitSetup];
 
@@ -1043,12 +1108,15 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   [pref setObject:[NSNumber numberWithBool:0] forKey:@"hideBar"];
   [pref setObject:[NSNumber numberWithBool:0] forKey:@"hideBarCover"];
 
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationDuration:1];
-  [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-
-  [self.view addSubview:self.exitView];
-  [UIView commitAnimations];
+  [self.welcomeView addSubview: self.exitView];
+    self.exitView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.exitView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.homeBarView removeFromSuperview];
+    }];
 [self exitSetup];
 }
 %new
@@ -1080,12 +1148,15 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
         [self.exitView addSubview:centerImage];
 
     //Animate changing views
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp  forView:self.view cache:YES];
-    self.welcomeView.hidden = TRUE;
-    [self.view addSubview:self.exitView];
-    [UIView commitAnimations];
+    [self.welcomeView addSubview: self.exitView];
+    self.exitView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    ///Move new view into frame and above old view
+    self.exitView.center = self.welcomeView.center;
+    }  
+    completion:^(BOOL finished){
+      [self.homeBarView removeFromSuperview];
+    }];
 
     fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
       [enableButton setTitle:@"Finish and Respring" forState:UIControlStateNormal];
@@ -1228,7 +1299,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 %end
 %end
 //End Quick Setup
-
+ 
 // Enable Home Gestures
 %hook BSPlatform
 - (NSInteger)homeButtonType {
@@ -1266,6 +1337,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 	}
 }
 %end
+
 
 // Hide HomeBar
 @interface MTLumaDodgePillView : UIView
