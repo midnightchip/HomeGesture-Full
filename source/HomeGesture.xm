@@ -110,14 +110,14 @@ int applicationDidFinishLaunching;
 
 %end
 
-@interface SBDashBoardView : UIView 
-@end 
-%hook SBDashBoardView 
+@interface SBDashBoardView : UIView
+@end
+%hook SBDashBoardView
 -(void)layoutSubviews{
   %orig;
   self.backgroundColor = [UIColor whiteColor];
 }
-%end 
+%end
 
 %hook SBDashBoardViewController
 %property (retain, nonatomic) UIView *welcomeView;
@@ -240,14 +240,14 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                              object:[player currentItem]];
     [self.swipeExplainView.layer addSublayer:playerLayer];
-    
-    
+
+
     [self.welcomeView addSubview:self.swipeExplainView];
     self.swipeExplainView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.swipeExplainView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [player play];
     }];
@@ -310,10 +310,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     //Animate changing views
     [self.welcomeView addSubview: self.doingAlot];
     self.doingAlot.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.doingAlot.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.swipeExplainView removeFromSuperview];
       [player play];
@@ -407,10 +407,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
     [self.welcomeView addSubview: self.controlCenterView];
     self.controlCenterView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.controlCenterView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.doingAlot removeFromSuperview];
       [player play];
@@ -505,10 +505,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     //Animate changing views
     [self.welcomeView addSubview: self.statusBarView];
     self.statusBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.statusBarView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.controlCenterView removeFromSuperview];
       [player play];
@@ -575,10 +575,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.killStyleView];
     self.killStyleView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.killStyleView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.statusBarView removeFromSuperview];
     }];
@@ -590,10 +590,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.killStyleView];
     self.killStyleView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.killStyleView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.statusBarView removeFromSuperview];
     }];
@@ -643,10 +643,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     //Animate changing views
     [self.welcomeView addSubview: self.killStyleView];
     self.killStyleView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.killStyleView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [player play];
     }];
@@ -711,10 +711,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.oneHandSSView];
     self.oneHandSSView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.oneHandSSView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.killStyleView removeFromSuperview];
     }];
@@ -726,10 +726,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
    [self.welcomeView addSubview: self.oneHandSSView];
     self.oneHandSSView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.oneHandSSView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.killStyleView removeFromSuperview];
     }];
@@ -775,10 +775,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   //Animate changing views
    [self.welcomeView addSubview: self.oneHandSSView];
     self.oneHandSSView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.oneHandSSView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.killStyleView removeFromSuperview];
     }];
@@ -833,10 +833,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
    [self.welcomeView addSubview: self.classicSiriView];
     self.classicSiriView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.classicSiriView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.oneHandSSView removeFromSuperview];
     }];
@@ -848,10 +848,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.classicSiriView];
     self.classicSiriView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.classicSiriView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.oneHandSSView removeFromSuperview];
     }];
@@ -897,10 +897,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   //Animate changing views
   [self.welcomeView addSubview: self.classicSiriView];
     self.classicSiriView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.classicSiriView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.oneHandSSView removeFromSuperview];
     }];
@@ -955,10 +955,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.homeBarView];
     self.homeBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.homeBarView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.classicSiriView removeFromSuperview];
     }];
@@ -970,10 +970,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.homeBarView];
     self.homeBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.homeBarView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.classicSiriView removeFromSuperview];
     }];
@@ -1033,10 +1033,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   //Animate changing views
   [self.welcomeView addSubview: self.homeBarView];
     self.homeBarView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.homeBarView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.classicSiriView removeFromSuperview];
     }];
@@ -1092,10 +1092,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.exitView];
     self.exitView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.exitView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.homeBarView removeFromSuperview];
     }];
@@ -1110,10 +1110,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 
   [self.welcomeView addSubview: self.exitView];
     self.exitView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.exitView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.homeBarView removeFromSuperview];
     }];
@@ -1150,10 +1150,10 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     //Animate changing views
     [self.welcomeView addSubview: self.exitView];
     self.exitView.center = CGPointMake(self.welcomeView.frame.size.width/2 + 350, self.welcomeView.center.y);
-    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{ 
+    [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationOptionCurveEaseInOut  animations:^{
     ///Move new view into frame and above old view
     self.exitView.center = self.welcomeView.center;
-    }  
+    }
     completion:^(BOOL finished){
       [self.homeBarView removeFromSuperview];
     }];
@@ -1299,7 +1299,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
 %end
 %end
 //End Quick Setup
- 
+
 // Enable Home Gestures
 %hook BSPlatform
 - (NSInteger)homeButtonType {
@@ -1843,3 +1843,10 @@ static NSString *currentApp;
     %init(_ungrouped);
   }
 }
+
+//Enable Torch/Camera buttons on unsupported devices
+%hook UIDevice
+- (BOOL)_supportsForceTouch {
+		return %orig;
+}
+%end
