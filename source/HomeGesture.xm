@@ -1835,34 +1835,6 @@ static NSString *currentApp;
 }
 %end
 
-//Enable Torch/Camera buttons on unsupported devices
-%hook SBDashBoardQuickActionsViewController
-+ (BOOL)deviceSupportsButtons {
-	return YES;
-}
-%end
-
-//Fix Status Bar in Third Party Apps
-
-//Fix the flickering at top and bottom
-static BOOL (*old__IS_D2x)();
-BOOL _IS_D2x(){
-    return YES;
-}
-
-//Move the UI up/down respectively
-static BOOL (*old___UIScreenHasDevicePeripheryInsets)();
-BOOL __UIScreenHasDevicePeripheryInsets() {
-  return YES;
-}
-
-static void FixTheMotherFuckingStatusBar(){
-  if ([prefs boolForKey:@"statusBarX"]) {
-		MSHookFunction(((void*)MSFindSymbol(NULL, "_IS_D2x")),(void*)_IS_D2x, (void**)&old__IS_D2x);
-		MSHookFunction(((void*)MSFindSymbol(NULL, "__UIScreenHasDevicePeripheryInsets")),(void*)__UIScreenHasDevicePeripheryInsets, (void**)&old___UIScreenHasDevicePeripheryInsets);
-  }
-}
-
 %ctor {
   NSFileManager *fileManager = [NSFileManager defaultManager];
 	if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
@@ -1870,7 +1842,11 @@ static void FixTheMotherFuckingStatusBar(){
 	}else{
     %init(_ungrouped);
   }
-
-  FixTheMotherFuckingStatusBar();
-
 }
+
+//Enable Torch/Camera buttons on unsupported devices
+%hook UIDevice
+- (BOOL)_supportsForceTouch {
+		return %orig;
+}
+%end
