@@ -33,9 +33,9 @@
 			 <key>cell</key>
 			 <string>PSSwitchCell</string>
 			 <key>label</key>
-			 <string>Status Bar</string>
+			 <string>Status_Bar</string>
 			 <key>sublabel</key>
-			 <string>Show the status bar in Control Centre</string>
+			 <string>Show_Centre</string>
 			 <key>key</key>
 			 <string>statusBarCC</string>
 			 <key>PostNotification</key>
@@ -76,9 +76,9 @@
 			 <key>pushToPlist</key>
 			 <string></string>
 			 <key>label</key>
-			 <string>Top Padding</string>
+			 <string>Top_Padding</string>
 			 <key>sublabel</key>
-			 <string>Change top padding in Control Centre</string>
+			 <string>Change_Centre</string>
 			 <key>icon</key>
 			 <string>icons/vertical</string>
 		 </dict>
@@ -138,9 +138,9 @@
 				<key>pushToPlist</key>
 				<string></string>
 				<key>label</key>
-				<string>Top Padding (Landscape)</string>
+				<string>Top_Padding_(Landscape)</string>
 				<key>sublabel</key>
-				<string>Change top padding in Landscape CC</string>
+				<string>Change_CC</string>
 				<key>icon</key>
 				<string>icons/horizontal</string>
 			</dict>
@@ -181,6 +181,6 @@
 
 		</array>
 		<key>title</key>
-		<string>Control Centre</string>
+		<string>Control_Centre</string>
 	</dict>
 </plist>

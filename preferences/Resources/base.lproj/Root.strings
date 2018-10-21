@@ -1,0 +1,15 @@
+{
+    "App_Switcher" = "App Switcher";
+    "Blacklisting" = "Blacklisting";
+    "Control_Center" = "Control Center";
+    "Hardware_Buttons" = "Hardware Buttons";
+    "Home_Bar" = "Home Bar";
+    "Lock_Screen" = "Lock Screen";
+    "Status_Bar" = "Status Bar";
+    "Miscellaneous" = "Miscellaneous";
+    "Support" = "Support";
+    "Backup_Restore" = "Backup and Restore";
+    "Version" = "Version:";
+    "HomeGesture" = "HomeGesture";
+    
+}

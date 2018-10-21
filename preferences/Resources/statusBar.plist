@@ -28,9 +28,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>iPhone X Style Status Bar</string>
+				<string>iPhone_X_Style</string>
 				<key>sublabel</key>
-				<string>Add additional space to simulate a notch</string>
+				<string>Add_additional_space</string>
 				<key>key</key>
 				<string>statusBarX</string>
 				<key>PostNotification</key>
@@ -69,9 +69,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Hide Status Bar Carrier</string>
+				<string>Hide_Carrier</string>
 				<key>sublabel</key>
-				<string>Hide carrier from the Status Bar</string>
+				<string>Hide_carrier_Status</string>
 				<key>key</key>
 				<string>hidecarrier</string>
 				<key>PostNotification</key>
@@ -105,9 +105,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Disable BreadCrumbs</string>
+				<string>Disable_BreadCrumbs</string>
 				<key>sublabel</key>
-				<string>Hide back to app button from Status Bar</string>
+				<string>Hide_back_app</string>
 				<key>key</key>
 				<string>enableBread</string>
 				<key>PostNotification</key>
@@ -150,9 +150,9 @@
 			 <key>cell</key>
 			 <string>PSSwitchCell</string>
 			 <key>label</key>
-			 <string>Status Bar in CC</string>
+			 <string>Status_Bar</string>
 			 <key>sublabel</key>
-			 <string>Show the status bar in Control Centre</string>
+			 <string>Show_Centre</string>
 			 <key>key</key>
 			 <string>statusBarCC</string>
 			 <key>PostNotification</key>
@@ -165,6 +165,6 @@
 
 		</array>
 		<key>title</key>
-		<string>Status Bar</string>
+		<string>Status_Bar</string>
 	</dict>
 </plist>

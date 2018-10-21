@@ -37,7 +37,7 @@
 				<key>pushToPlist</key>
 				<string>appSwitcher</string>
 				<key>label</key>
-				<string>App Switcher</string>
+				<string>App_Switcher</string>
 				<key>icon</key>
 				<string>icons/appSwitcher</string>
 			</dict>
@@ -64,7 +64,7 @@
 				<key>pushToPlist</key>
 				<string>controlCentre</string>
 				<key>label</key>
-				<string>Control Centre</string>
+				<string>Control_Center</string>
 				<key>icon</key>
 				<string>icons/controlCentre</string>
 			</dict>
@@ -77,7 +77,7 @@
 				<key>pushToPlist</key>
 				<string>buttonMapping</string>
 				<key>label</key>
-				<string>Hardware Buttons</string>
+				<string>Hardware_Buttons</string>
 				<key>icon</key>
 				<string>icons/buttons</string>
 			</dict>
@@ -90,7 +90,7 @@
 				<key>pushToPlist</key>
 				<string>homeBar</string>
 				<key>label</key>
-				<string>Home Bar</string>
+				<string>Home_Bar</string>
 				<key>icon</key>
 				<string>icons/homeBar</string>
 			</dict>
@@ -103,7 +103,7 @@
 				<key>pushToPlist</key>
 				<string>lockScreen</string>
 				<key>label</key>
-				<string>Lock Screen</string>
+				<string>Lock_Screen</string>
 				<key>icon</key>
 				<string>icons/lockScreen</string>
 			</dict>
@@ -116,7 +116,7 @@
 				<key>pushToPlist</key>
 				<string>statusBar</string>
 				<key>label</key>
-				<string>Status Bar</string>
+				<string>Status_Bar</string>
 				<key>icon</key>
 				<string>icons/statusBar</string>
 			</dict>
@@ -170,7 +170,7 @@
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle/defaults.plist</string>
 				<key>label</key>
-				<string>Backup &amp; Restore</string>
+				<string>Backup_Restore</string>
 				<key>icon</key>
 				<string>icons/backupRestore</string>
 			</dict>
@@ -290,7 +290,7 @@
 				<key>bundleID</key>
 				<string>com.vitataf.homegesture</string>
 				<key>label</key>
-				<string>Version:</string>
+				<string>Version</string>
 				<key>icon</key>
 				<string>icons/currentVersion</string>
 			</dict>

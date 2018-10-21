@@ -8,9 +8,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Disable Gestures With Keyboard</string>
+				<string>Disable_Gestures_Keyboard</string>
 				<key>sublabel</key>
-				<string>Disables the gestures when keyboard is present.</string>
+				<string>Disables_present.</string>
 				<key>key</key>
 				<string>stopKeyboard</string>
 				<key>PostNotification</key>
@@ -34,7 +34,7 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Enable App Blacklist</string>
+				<string>Enable_App_Blacklist</string>
 				<key>key</key>
 				<string>enableBlacklist</string>
 				<key>PostNotification</key>
@@ -49,9 +49,9 @@
 				<key>cell</key>
 				<string>PSButtonCell</string>
 				<key>label</key>
-				<string>Select Blacklisted Apps</string>
+				<string>Select_Blacklisted_Apps</string>
 				<key>sublabel</key>
-				<string>Disables HomeGestures while in landscape mode</string>
+				<string>Disables_mode</string>
 				<key>action</key>
 				<string>selectExcludeApps</string>
 		</dict>
@@ -59,11 +59,11 @@
 				<key>cell</key>
 				<string>PSButtonCell</string>
 				<key>label</key>
-				<string>Select Apps to be Fully Disabled</string>
+				<string>Select_Apps_Fully_Disabled</string>
 				<key>action</key>
 				<string>selectBlackList</string>
 				<key>sublabel</key>
-				<string>Disables HomeGestures completly in app</string>
+				<string>Disables_app</string>
 		</dict>
 
 		</array>

@@ -37,9 +37,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Round Screenshot Preview</string>
+				<string>Round_Screenshot_Preview</string>
 				<key>sublabel</key>
-				<string>Does not affect the screnshot itself</string>
+				<string>Does_itself</string>
 				<key>key</key>
 				<string>roundScreenshot</string>
 				<key>PostNotification</key>

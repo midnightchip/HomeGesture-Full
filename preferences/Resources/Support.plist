@@ -86,7 +86,7 @@
 				<key>label</key>
 				<string>Depiction</string>
 				<key>sublabel</key>
-                <string>Learn more about HomeGesture</string>
+                <string>Learn</string>
 			</dict>
 
 			<dict>
@@ -110,9 +110,9 @@
 				<key>icon</key>
 				<string/>
 				<key>label</key>
-				<string>Make a Donation To MidnightChips</string>
+				<string>Donation_MidnightChips</string>
 				<key>sublabel</key>
-                <string>Help compensate him for his efforts</string>
+                <string>pay</string>
 			</dict>
 
 			<dict>
@@ -129,9 +129,9 @@
 				<key>icon</key>
 				<string/>
 				<key>label</key>
-				<string>Make a Donation To PINPAL</string>
+				<string>Donation_PINPAL</string>
 				<key>sublabel</key>
-                <string>Help compensate him for his efforts</string>
+                <string>pay</string>
 			</dict>
 
 			<dict>
@@ -149,9 +149,9 @@
 				<key>url</key>
 				<string>https://github.com/midnightchip/HomeGesture-Applist/issues</string>
 				<key>label</key>
-				<string>Submit an Issue</string>
+				<string>Submit_Issue</string>
 				<key>sublabel</key>
-                <string>Report a bug on GitHub and feel warm and fuzzy</string>
+                <string>Report_GitHub</string>
 			</dict>
 
             <dict>
@@ -164,9 +164,9 @@
                 <key>includeLogs</key>
                 <true/>
                 <key>label</key>
-                <string>Email Support</string>
+                <string>Email_Support</string>
 				<key>sublabel</key>
-                <string>Need help? Send me an email and we will do our best.</string>
+                <string>Need_help</string>
             </dict>
 
 			<dict>
@@ -175,9 +175,9 @@
 				<key>cell</key>
 				<string>PSButtonCell</string>
 				<key>label</key>
-				<string>Copy Tweak List</string>
+				<string>Copy_Tweak_List</string>
 				<key>sublabel</key>
-                <string>Needing a list of all installed tweaks?</string>
+                <string>Needing_list</string>
 			</dict>
 
 			<dict>
@@ -246,7 +246,7 @@
 				<key>label</key>
 				<string>u/MidnightChips</string>
 				<key>sublabel</key>
-                <string>Follow MidnightChips</string>
+                <string>Follow_MidnightChips</string>
 			</dict>
 			<dict>
 				<key>action</key>
@@ -260,7 +260,7 @@
 				<key>label</key>
 				<string>u/THE_PINPAL614</string>
 				<key>sublabel</key>
-                <string>Follow PINPAL</string>
+                <string>Follow_PINPAL</string>
 			</dict>
 
 			<dict>
@@ -275,12 +275,12 @@
 				<key>label</key>
 				<string>u/VitaTaf</string>
 				<key>sublabel</key>
-                <string>Follow VitaTaf</string>
+                <string>Follow_VitaTaf</string>
 			</dict>
 
 		</array>
 
 		<key>title</key>
-		<string>HomeGesture support</string>
+		<string>HomeGesture_support</string>
 	</dict>
 </plist>

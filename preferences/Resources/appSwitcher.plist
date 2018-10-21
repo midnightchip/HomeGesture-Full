@@ -14,9 +14,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Swipe Up to Close</string>
+				<string>Swipe_Up_Close</string>
 				<key>sublabel</key>
-				<string>Swipe up app cards to close them</string>
+				<string>Swipe_them</string>
 				<key>key</key>
 				<string>enableKill</string>
 				<key>PostNotification</key>
@@ -40,9 +40,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Round Card Corners</string>
+				<string>Round_Card_Corners</string>
 				<key>sublabel</key>
-				<string>Also enables iPhone X dock</string>
+				<string>Also_dock</string>
 				<key>key</key>
 				<string>roundSwitcher</string>
 				<key>PostNotification</key>
@@ -80,6 +80,6 @@
 
 		</array>
 		<key>title</key>
-		<string>App Switcher</string>
+		<string>App_Switcher</string>
 	</dict>
 </plist>

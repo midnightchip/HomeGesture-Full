@@ -28,7 +28,7 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Hide Torch Button</string>
+				<string>Hide_Torch</string>
 				<key>key</key>
 				<string>hideTorch</string>
 				<key>PostNotification</key>
@@ -43,7 +43,7 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Hide Camera Button</string>
+				<string>Hide_Camera</string>
 				<key>key</key>
 				<string>hideCamera</string>
 				<key>PostNotification</key>
@@ -82,9 +82,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Hide Page Dots</string>
+				<string>Hide_Page_Dots</string>
 				<key>sublabel</key>
-				<string>Hide page dots from the LockScreen</string>
+				<string>Hide_dots_LockScreen</string>
 				<key>key</key>
 				<string>dots</string>
 				<key>PostNotification</key>
@@ -118,9 +118,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Hide "Swipe Up to Unlock"</string>
+				<string>Hide_swipe</string>
 				<key>sublabel</key>
-				<string>Hide the text from the LockScreen</string>
+				<string>Hide_text_LockScreen</string>
 				<key>key</key>
 				<string>unlockHint</string>
 				<key>PostNotification</key>
@@ -163,9 +163,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Hide Control Center Hint</string>
+				<string>Hide_Hint</string>
 				<key>sublabel</key>
-				<string>Hide small top right bar on LockScreen</string>
+				<string>Hide_small_LockScreen</string>
 				<key>key</key>
 				<string>notificationHint</string>
 				<key>PostNotification</key>
@@ -178,6 +178,6 @@
 
 		</array>
 		<key>title</key>
-		<string>Lock Screen</string>
+		<string>Lock_Screen</string>
 	</dict>
 </plist>

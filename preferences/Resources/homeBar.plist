@@ -28,7 +28,7 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Home Bar (HomeScreen)</string>
+				<string>Home_Bar_(HomeScreen)</string>
 				<key>key</key>
 				<string>hideBar</string>
 				<key>PostNotification</key>
@@ -43,7 +43,7 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Home Bar (LockScreen)</string>
+				<string>Home_Bar_(LockScreen)</string>
 				<key>key</key>
 				<string>hideBarCover</string>
 				<key>PostNotification</key>
@@ -67,9 +67,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Custom Homebar Color</string>
+				<string>Custom_Homebar_Color</string>
 				<key>sublabel</key>
-				<string>Only applies to the Lock Screen</string>
+				<string>Only_LockScreen</string>
 				<key>key</key>
 				<string>enablePillColor</string>
 				<key>PostNotification</key>
@@ -92,7 +92,7 @@
 				<key>key</key>
 				<string>customColor</string>
 				<key>label</key>
-				<string>Select HomeBar Color</string>
+				<string>Select_HomeBar_Color</string>
 				<key>fallback</key>
 				<string>FF0000</string>
 				<key>alpha</key>
@@ -103,6 +103,6 @@
 
 		</array>
 		<key>title</key>
-		<string>Home Bar</string>
+		<string>Home_Bar</string>
 	</dict>
 </plist>

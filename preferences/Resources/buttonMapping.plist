@@ -9,9 +9,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Original Screenshot</string>
+				<string>Original_Screenshot</string>
 				<key>sublabel</key>
-				<string>Use Home/Lock instead of Volume Up/Lock</string>
+				<string>Use_Lock</string>
 				<key>key</key>
 				<string>remapScreen</string>
 				<key>PostNotification</key>
@@ -26,9 +26,9 @@
 				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
-				<string>Press Home for Siri</string>
+				<string>Press_Home</string>
 				<key>sublabel</key>
-				<string>Activate Siri by holding the Home Button</string>
+				<string>Activate_Button</string>
 				<key>key</key>
 				<string>siriHome</string>
 				<key>PostNotification</key>
@@ -51,6 +51,6 @@
 
 		</array>
 		<key>title</key>
-		<string>Hardware Buttons</string>
+		<string>Hardware_Buttons</string>
 	</dict>
 </plist>

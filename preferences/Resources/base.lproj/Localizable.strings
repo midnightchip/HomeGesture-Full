@@ -1,0 +1,32 @@
+{
+    "Welcome" = "Welcome";
+    "Thanks_Installing" = "Thanks for installing HomeGesture \n Let's get setup fast...";
+    "Get_Fast" = "Get Home Fast";
+    "Swipe_Home" = "Swipe up to go Home.";
+    "Next" = "Next";
+    "Doing_Lot" = "Doing a lot?";
+    "Multi_Info" = "Swipe up and hold to enter multitasking.";
+    "Back" = "Back";
+    "Control_Demand" = "Control On Demand";
+    "Access_CC" = "Swipe down from the top right for the Control Center.";
+    "Status_Style" = "Status in Style?";
+    "Choose_iPX" = "Style your status bar like the iPhone X?";
+    "Enable_iPX" = "Enable X Status Bar";
+    "Not_Now" = "Not Now";
+    "Close_Ease" = "Close with Ease";
+    "Choose_Swipe" = "Swipe up to close your applications?";
+    "Enable_Swipe" = "Enable Swipe to Close";
+    "One_Hand" = "One Handed?";
+    "Choose_Screen" = "Take screenshots with Volume Up + Lock?";
+    "Enable_Feature" = "Enable Feature";
+    "Classic_Siri" = "Classic Siri?";
+    "Home_Siri" = "Don't like the power button? Hold Home to access Siri!";
+    "Hold_Lock_Button" = "Hold Lock Button";
+    "Hold_Home_Siri" = "Hold Home for Siri";
+    "Forgot_Everything" = "Forgot Everything?";
+    "Ask_Home" = "Enable the Home Bar indicator?";
+    "Enable_Home" = "Enable Home Bar";
+    "Completed" = "All Done";
+    "Notify_Respring" = "Setup must respring to complete changes.";
+    "Finish" = "Finish and Respring";  
+}
