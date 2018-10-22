@@ -1,0 +1,11 @@
+{
+    "Hide_Torch" = "Esconder el botón de linterna";
+    "Hide_Camera" = "Esconder el botón de cámara";
+    "Hide_Page_Dots" = "Esconder el número de páginas";
+    "Hide_swipe" = 'Esconder "Desliza hacia arriba para desbloquear"';
+    "Hide_Hint" = "Esconder indicador de centro de control";
+    "Lock_Screen" = "Pantalla de bloqueo";
+    "Hide_dots_LockScreen" = "Esconder el número de páginas de la pantalla de bloqueo";
+    "Hide_text_LockScreen" = "Esconder el texto de la pantalla de bloqueo";
+    "Hide_small_LockScreen" = "Esconder la barra superior derecha en la pantalla de bloqueo"
+}

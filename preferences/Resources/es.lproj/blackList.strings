@@ -1,0 +1,9 @@
+{
+    "Disable_Gestures_Keyboard" = "Desactiva los gestos con el teclado";
+    "Enable_App_Blacklist" = "Activa la lista negra de apps";
+    "Select_Blacklisted_Apps" = "Elige las apps que estarán en la lista negra";
+    "Select_Apps_Fully_Disabled" = "Elige las apps que se desactivarán por completo";
+    "Disables_present." = "Desactiva los gestos cuando el teclado está presente.";
+    "Disables_mode" = "Desactiva HomeGestures cuando está el dispositivo en horizontal";
+    "Disables_app" = "Desactiva HomeGestures completamente dentro de apps";
+}

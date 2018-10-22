@@ -1,0 +1,32 @@
+{
+    "Welcome" = "Bienvenido";
+    "Thanks_Installing" = "Gracias por installar HomeGestures \n Vamos a configurarlo rápido...";
+    "Get_Fast" = "Vuelve al inicio rápido";
+    "Swipe_Home" = "Desliza hacia arriba para ir a inicio";
+    "Next" = "Siguiente";
+    "Doing_Lot" = "¿Haciendo mucho?";
+    "Multi_Info" = "Desliza hacia arriba y haz una pausa para ir a la multitarea";
+    "Back" = "Atrás";
+    "Control_Demand" = "Controla según la demanda";
+    "Access_CC" = "Desliza hacia abajo desde la esquina derecha para abrir el centro de control.";
+    "Status_Style" = "¿Estado con estilo?";
+    "Choose_iPX" = "¿Personaliza la barra de estado como el iPhone X?";
+    "Enable_iPX" = "Activar la barra de estado del iPhone X";
+    "Not_Now" = "Ahora no";
+    "Close_Ease" = "Cierra con facilidad";
+    "Choose_Swipe" = "¿Desliza hacia arriba para cerrar las apps?";
+    "Enable_Swipe" = "Activar deslizar para cerrar";
+    "One_Hand" = "¿Una mano?";
+    "Choose_Screen" = "¿Haz capturas de pantalla con Subir volumen + Reposo?";
+    "Enable_Feature" = "Activar característica";
+    "Classic_Siri" = "¿Siri clásico?";
+    "Home_Siri" = "¿No te gusta el botón de reposo? ¡Usa el botón de inicio para activar Siri!";
+    "Hold_Lock_Button" = "Mantén el botón de reposo";
+    "Hold_Home_Siri" = "Mantén el botón de inicio para activar Siri";
+    "Forgot_Everything" = "¿Olvidar todo?";
+    "Ask_Home" = "¿Activar el indicador de la barra de inicio?";
+    "Enable_Home" = "Activar barra de inicio";
+    "Completed" = "Todo está listo";
+    "Notify_Respring" = "El asistente debe hacer un respring para que los cambios hagan efecto.";
+    "Finish" = "Acabar y hacer Respring";  
+}

@@ -1,0 +1,8 @@
+{
+    "Home_Bar_(HomeScreen)" = "Barra de inicio (Pantalla de inicio)";
+    "Home_Bar_(LockScreen)" = "Barra de inicio (Pantalla de bloqueo)";
+    "Custom_Homebar_Color" = "Color de la barra de inicio personalizada";
+    "Select_HomeBar_Color" = "Elige el color de la barra de inicio";
+    "Home_Bar" = "Barra de inicio";
+    "Only_LockScreen" = "Sólo se aplica en la pantalla de bloqueo";
+}

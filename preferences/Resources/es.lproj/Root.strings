@@ -1,0 +1,15 @@
+{
+    "App_Switcher" = "Multitarea";
+    "Blacklisting" = "Bloqueando";
+    "Control_Center" = "Centro de control";
+    "Hardware_Buttons" = "Botones físicos";
+    "Home_Bar" = "Barra de inicio";
+    "Lock_Screen" = "Pantalla de bloqueo";
+    "Status_Bar" = "Barra de estado";
+    "Miscellaneous" = "Varios";
+    "Support" = "Soporte";
+    "Backup_Restore" = "Hacer copia de seguridad y restaurar";
+    "Version" = "Versión:";
+    "HomeGesture" = "HomeGesture";
+    
+}

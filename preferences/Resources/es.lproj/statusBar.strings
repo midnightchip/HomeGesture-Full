@@ -1,0 +1,12 @@
+{
+    "iPhone_X_Style" = "Barra de estado del iPhone X";
+    "Add_additional_space" = "Añade espacio adicional para simular el 'notch';
+    "Hide_Carrier" = "Ocultar el operador de la barra de estado";
+    "Hide_carrier_Status" = "Esconder de la barra de estado el operador";
+    "Disable_BreadCrumbs" = "Desactivar BreadCrumbs";
+    "Hide_back_app" = "Ocultar el botón de volver a la aplicación de la barra de estado";
+    "Status_Bar" = "Barra de estado en el centro de control";
+    "Show_CC" = "Mostrar la barra de estado en el centro de control";
+    "Status_Bar" = "Barra de estado";
+    "Show_Centre" = "Mostrar la barra de estado en el centro de control";
+}

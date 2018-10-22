@@ -1,0 +1,10 @@
+{
+    "Status_Bar" = "Barra de estado";
+    "Top_Padding" = "Relleno de arriba";
+    "Top_Padding_(Landscape)" = "Relleno de arriba (Modo horizontal)";
+    "Control_Centre" = "Centro de control";
+    "Show_Centre" = "Muestra la barra de estado en el centro de control";
+    "Change_Centre" = "Cambia el rekkeno de arriba en el centro de control";
+    "Change_CC" = "Cambia el centro de control en el centro de control en modo horizontal";
+
+}

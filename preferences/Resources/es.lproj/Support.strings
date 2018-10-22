@@ -1,0 +1,21 @@
+{
+    "Info" = "Información";
+    "Depiction" = "Representación";
+    "Learn" = "Leer más sobre HomeGesture";
+    "Donations" = "Donaciones";
+    "Donation_MidnightChips" = "Haz una donación a MidnightChips";
+    "pay" = "Ayuda a compensar a él sus esfuerzos";
+    "Donation_PINPAL" = "Haz una donación a PINPAL";
+    "Support" = "Soporte";
+    "Submit_Issue" = "Enviar un problema";
+    "Report_GitHub" = "Reportar un bug en GitHub";
+    "Email_Support" = "Soporte de e-mail";
+    "Need_help" = "¿Necesitas_ayuda? Envíanos un e-mail y haremos lo mejor que podamos.";
+    "Copy_Tweak_List" = "Copiar lista de tweaks";
+    "Needing_list" = "¿Necesitas una lista de todos los tweaks instalados?";
+    "Contact" = "Contacto";
+    "Follow_MidnightChips" = "Sigue a MidnightChips";
+    "Follow_PINPAL" = "Sigue a PINPAL";
+    "Follow_VitaTaf" = "Sigue a VitaTaf";
+    "HomeGesture_support" = "Soporte de HomeGesture";
+}
