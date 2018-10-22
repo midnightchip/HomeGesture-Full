@@ -1,0 +1,9 @@
+{
+    "Disable_Gestures_Keyboard" = "Verwijder Beweging met Keyboard";
+    "Enable_App_Blacklist" = "Zet App Blacklist aan";
+    "Select_Blacklisted_Apps" = "Selecteer Blacklisted Apps";
+    "Select_Apps_Fully_Disabled" = "Selecteer Apps om volledig uit te zetten";
+    "Disables_present." = "Verwijder Beweging met Keyboard nu";
+    "Disables_mode" = "Verwijder ThuisBewegingen in landscape mode";
+    "Disables_app" = "Verwijder ThuisBewegingen in volledig in app";
+}

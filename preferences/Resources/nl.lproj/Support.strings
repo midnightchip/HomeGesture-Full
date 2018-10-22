@@ -1,0 +1,21 @@
+{
+    "Info" = "Info";
+    "Depiction" = "Depiction";
+    "Learn" = "Leer meer over HomeGesture";
+    "Donations" = "Donaties";
+    "Donation_MidnightChips" = "Maak een donatie naar MidnightChips";
+    "pay" = "Help compenseren voor zijn werk";
+    "Donation_PINPAL" = "Maak een donatie naar PINPAL";
+    "Support" = "Support";
+    "Submit_Issue" = "Rapporteer een probleem";
+    "Report_GitHub" = "Rapporteer een probleem op Github";
+    "Email_Support" = "Email Support";
+    "Need_help" = "Hulp nodig? stuur mij een email.";
+    "Copy_Tweak_List" = "Kopieer Tweak lijsr";
+    "Needing_list" = "Heb je een lijst voor geinstalleerde tweaks nodig?";
+    "Contact" = "Contact";
+    "Follow_MidnightChips" = "Volg MidnightChips";
+    "Follow_PINPAL" = "Volg PINPAL";
+    "Follow_VitaTaf" = "Volg VitaTaf";
+    "HomeGesture_support" = "HomeGesture support";
+}

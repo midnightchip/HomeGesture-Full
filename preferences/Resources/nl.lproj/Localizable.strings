@@ -1,0 +1,32 @@
+{
+    "Welcome" = "Welkom";
+    "Thanks_Installing" = "Bedankt voor het installeren van HomeGesture \n Laten we snel klaarkomen...";
+    "Get_Fast" = "Get Home Fast";
+    "Swipe_Home" = "Swipe up to go Home.";
+    "Next" = "Volgende";
+    "Doing_Lot" = "Veel doen?";
+    "Multi_Info" = "Swipe omhoog en houd voor multitasking.";
+    "Back" = "terug";
+    "Control_Demand" = "Control On Demand";
+    "Access_CC" = "Swip naar beneden van rechts boven voor de Control Center.";
+    "Status_Style" = "Status in stijl?";
+    "Choose_iPX" = "Stijl je status bar als de iPhone X?";
+    "Enable_iPX" = "Enable X Status Bar";
+    "Not_Now" = "Niet nu!";
+    "Close_Ease" = "Sluit Zacht";
+    "Choose_Swipe" = "Swipe omhoog om je apps te sluiten";
+    "Enable_Swipe" = "Ze swipe om te sluiten aan";
+    "One_Hand" = "1 hand?";
+    "Choose_Screen" = "Maak screenshot met volume + lock?";
+    "Enable_Feature" = "zet mogenlijkheid aan?";
+    "Classic_Siri" = "Classic Siri?";
+    "Home_Siri" = "Vind je de power button vasthouden niet leuk? Open siri !";
+    "Hold_Lock_Button" = "Houd Lock Knop";
+    "Hold_Home_Siri" = "Houd Home voor Siri";
+    "Forgot_Everything" = "Vergeet alles?";
+    "Ask_Home" = "zet Home Bar indicator aan?";
+    "Enable_Home" = "Zet Home Bar Aan";
+    "Completed" = "Klaar!";
+    "Notify_Respring" = "Moest herstarten om de veranderingen te laten werken.";
+    "Finish" = "Klaar en Respring";  
+}

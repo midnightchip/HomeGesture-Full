@@ -1,0 +1,11 @@
+{
+    "Hide_Torch" = "Verwijder Flash Knop";
+    "Hide_Camera" = "Verwijder Camera Knop";
+    "Hide_Page_Dots" = "Verwijder pagina punten";
+    "Hide_swipe" = 'Verwijder "Swipe Up to Unlock"';
+    "Hide_Hint" = "Verwijder Control Center Hint";
+    "Lock_Screen" = "Lock Screen";
+    "Hide_dots_LockScreen" = "Verwijder pagina punten van de LockScreen";
+    "Hide_text_LockScreen" = "Verwijder text van de  LockScreen";
+    "Hide_small_LockScreen" = "Verwijder kleine bovenaan rechtse bar op de LockScreen"
+}

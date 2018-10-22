@@ -1,0 +1,10 @@
+{
+    "Status_Bar" = "Status Bar";
+    "Top_Padding" = "Boven marge";
+    "Top_Padding_(Landscape)" = "Boven marge (landschap)";
+    "Control_Centre" = "Control Center";
+    "Show_Centre" = "Toon status bar in Control Center";
+    "Change_Centre" = "Verander boven marge in Control Center";
+    "Change_CC" = "Verander Boven Marge in Landschap CC";
+
+}

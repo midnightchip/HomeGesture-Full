@@ -1,0 +1,12 @@
+{
+    "iPhone_X_Style" = "iPhone X Style Status Bar";
+    "Add_additional_space" = "Voeg extra plaats toe om een notch na te bootsen";
+    "Hide_Carrier" = "Verwijder status bar provider";
+    "Hide_carrier_Status" = "Verwijder status bar provider";
+    "Disable_BreadCrumbs" = "Verwijder BreadCrumbs";
+    "Hide_back_app" = "Verwijder terug gaan naar vorige app van de status bar";
+    "Status_Bar" = "Status Bar in CC";
+    "Show_CC" = "toon de status bar in Control Centre";
+    "Status_Bar" = "Status Bar";
+    "Show_Centre" = "Toon de status bar in Control Centre";
+}
