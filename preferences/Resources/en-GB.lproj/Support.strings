@@ -1,0 +1,21 @@
+{
+    "Info" = "Info";
+    "Depiction" = "Depiction";
+    "Learn" = "Learn more about HomeGesture";
+    "Donations" = "Donations";
+    "Donation_MidnightChips" = "Make a Donation To MidnightChips";
+    "pay" = "Help compensate him for his efforts";
+    "Donation_PINPAL" = "Make a Donation To PINPAL";
+    "Support" = "Support";
+    "Submit_Issue" = "Submit an Issue";
+    "Report_GitHub" = "Report a bug on GitHub and feel warm and fuzzy";
+    "Email_Support" = "Email Support";
+    "Need_help" = "Need_help? Send me an email and we will do our best.";
+    "Copy_Tweak_List" = "Copy Tweak List";
+    "Needing_list" = "Needing a list of all installed tweaks?";
+    "Contact" = "Contact";
+    "Follow_MidnightChips" = "Follow MidnightChips";
+    "Follow_PINPAL" = "Follow PINPAL";
+    "Follow_VitaTaf" = "Follow VitaTaf";
+    "HomeGesture_support" = "HomeGesture support";
+}
