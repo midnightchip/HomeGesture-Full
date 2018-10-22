@@ -1,0 +1,10 @@
+{
+    "Status_Bar" = "Status Bar";
+    "Top_Padding" = "Posizionamento dall'alto";
+    "Top_Padding_(Landscape)" = "Posizionamento dall'alto (Landscape)";
+    "Control_Centre" = "Control Center";
+    "Show_Centre" = "Mostra la Status Bar nel Control Center";
+    "Change_Centre" = "Modifca il posizionamento dall'alto nel Control Center";
+    "Change_CC" = "Modifica il posizionamento dall'alto nel Control Center (Landscape)";
+
+}

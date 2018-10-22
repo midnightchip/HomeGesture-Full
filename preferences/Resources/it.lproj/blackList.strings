@@ -1,0 +1,9 @@
+{
+    "Disable_Gestures_Keyboard" = "Disabilita gestures con tastiera attiva";
+    "Enable_App_Blacklist" = "Abilita blacklist App";
+    "Select_Blacklisted_Apps" = "Aggiungi App alla blacklist";
+    "Select_Apps_Fully_Disabled" = "Seleziona App da disabilitare completamente";
+    "Disables_present." = "Disabilita le gestures quando è presente la tastiera.";
+    "Disables_mode" = "Disabilita gestures in modalità landscape";
+    "Disables_app" = "Disabilita completamente le gestures nelle App";
+}

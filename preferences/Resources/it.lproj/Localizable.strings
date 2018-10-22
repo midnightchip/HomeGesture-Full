@@ -1,0 +1,32 @@
+{
+    "Welcome" = "Benvenuto";
+    "Thanks_Installing" = "Grazie per aver installato HomeGesture \n Configuriamo rapidamente...";
+    "Get_Fast" = "Torna rapidamente alla Home";
+    "Swipe_Home" = "Scorri verso l'alto per la Home";
+    "Next" = "Avanti";
+    "Doing_Lot" = "Stai facendo molto?";
+    "Multi_Info" = "Scorri verso l'alto e tieni premuto per il Multitasking";
+    "Back" = "Indietro";
+    "Control_Demand" = "Control Center a richiesta";
+    "Access_CC" = "Scorri da in alto a destra verso il basso per il Centro di Controllo.";
+    "Status_Style" = "Status in Stile?";
+    "Choose_iPX" = "Rendi la Status Bar come quella di iPhone X";
+    "Enable_iPX" = "Abilita la Status Bar di iPhone X";
+    "Not_Now" = "Non ora";
+    "Close_Ease" = "Chiudi facilmente";
+    "Choose_Swipe" = "Scorri verso l'alto per chiudere le App?";
+    "Enable_Swipe" = "Abilita Scorrimento per chiudere";
+    "One_Hand" = "Uso con una mano?";
+    "Choose_Screen" = "Crea screenshot con Volume Su + Tasto di Blocco?";
+    "Enable_Feature" = "Abilita funzione";
+    "Classic_Siri" = "Siri Classico?";
+    "Home_Siri" = "Non ti piace il tasto Power? Tieni premuto Home per Siri!";
+    "Hold_Lock_Button" = "Tieni premuto il tasto di Blocco";
+    "Hold_Home_Siri" = "Tieni premuto Home per Siri";
+    "Forgot_Everything" = "Dimenticato tutto?";
+    "Ask_Home" = "Abilita l'indicatore Barra Home?";
+    "Enable_Home" = "Abilita Barra Home";
+    "Completed" = "Fatto";
+    "Notify_Respring" = "Occorre un Respring per applicare i cambiamenti.";
+    "Finish" = "Concludi e Respringa";  
+}

@@ -1,0 +1,11 @@
+{
+    "Hide_Torch" = "Nascondi Tasto Torcia";
+    "Hide_Camera" = "Nascondi Tasto Fotocamera";
+    "Hide_Page_Dots" = "Nascondi indicatori Pagina";
+    "Hide_swipe" = 'Nascondi "Scorri verso l'alto per sbloccare"';
+    "Hide_Hint" = "Nascondi il suggerimento per il Control Center";
+    "Lock_Screen" = "LockScreen";
+    "Hide_dots_LockScreen" = "Nascondi indicatori pagina dalla LockScreen";
+    "Hide_text_LockScreen" = "Nascondi il testo dalla LockScreen";
+    "Hide_small_LockScreen" = "Nascondi la piccola barra in alto a destra sulla LockScreen"
+}
