@@ -1,0 +1,11 @@
+{
+    "Hide_Torch" = "Hide Torch Button";
+    "Hide_Camera" = "Hide Camera Button";
+    "Hide_Page_Dots" = "Hide Page Dots";
+    "Hide_swipe" = 'Hide "Swipe Up to Unlock"';
+    "Hide_Hint" = "Hide Control Center Hint";
+    "Lock_Screen" = "Lock Screen";
+    "Hide_dots_LockScreen" = "Hide page dots from the LockScreen";
+    "Hide_text_LockScreen" = "Hide the text from the LockScreen";
+    "Hide_small_LockScreen" = "Hide small top right bar on LockScreen"
+}
