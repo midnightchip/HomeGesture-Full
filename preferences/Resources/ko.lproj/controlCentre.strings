@@ -1,0 +1,10 @@
+{
+    "Status_Bar" = "상단바";
+    "Top_Padding" = "상단 패딩";
+    "Top_Padding_(Landscape)" = "상단 패딩 (가로모드)";
+    "Control_Centre" = "제어 센터";
+    "Show_Centre" = "제어 센터에서 상단바를 보입니다";
+    "Change_Centre" = "제어 센터에서의 상단 패딩을 조정합니다";
+    "Change_CC" = "가로모드의 제어 센터에서의 상단 패딩을 조정합니다";
+
+}

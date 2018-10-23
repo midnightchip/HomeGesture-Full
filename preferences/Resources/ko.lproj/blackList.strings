@@ -1,0 +1,9 @@
+{
+    "Disable_Gestures_Keyboard" = "키보드와 함께 제스쳐 비활성화";
+    "Enable_App_Blacklist" = "블랙리스트 앱 활성화";
+    "Select_Blacklisted_Apps" = "블랙리스트 앱 선택";
+    "Select_Apps_Fully_Disabled" = "완벽 블랙리스트 앱 선택";
+    "Disables_present." = "키보드가 올라와 있을 때, 제스쳐를 비활성화 시킵니다";
+    "Disables_mode" = "기기가 가로모드일 때 제스쳐를 비활성화 시킵니다";
+    "Disables_app" = "앱에서 완벽히 제스쳐를 비활성화 시킵니다";
+}
