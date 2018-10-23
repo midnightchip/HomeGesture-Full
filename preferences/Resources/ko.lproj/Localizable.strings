@@ -1,0 +1,32 @@
+{
+    "Welcome" = "안녕하세요";
+    "Thanks_Installing" = "HomeGesture를 설치해주셔서 감사합니다 \n 어서 설정합시다...";
+    "Get_Fast" = "빠르게 홈으로 이동";
+    "Swipe_Home" = "쓸어올려서 홈으로 이동하세요.";
+    "Next" = "다음";
+    "Doing_Lot" = "멀티 태스킹";
+    "Multi_Info" = "쓸어올린 후 잠깐 멈추어 멀티태스킹을 하세요.";
+    "Back" = "뒤로";
+    "Control_Demand" = "제어 센터";
+    "Access_CC" = "우측 상단을 스와이프 하여 제어 센터를 불러오세요.";
+    "Status_Style" = "상단바";
+    "Choose_iPX" = "iPhone X의 상단바로 변경할까요?";
+    "Enable_iPX" = "iPhone X 상단바 활성화";
+    "Not_Now" = "지금 안함";
+    "Close_Ease" = "쉼게 종료하기";
+    "Choose_Swipe" = "쓸어올려서 앱을 종료할까요?";
+    "Enable_Swipe" = "쓸어올려서 종료 활성화";
+    "One_Hand" = "한손 스크린샷";
+    "Choose_Screen" = "볼륨 상 + 잠자기 버튼으로 스크린샷을 찍을까요?";
+    "Enable_Feature" = "기능 활성화";
+    "Classic_Siri" = "Siri";
+    "Home_Siri" = "잠자기 버튼이 싫으세요? 홈버튼을 눌러 Siri를 사용하세요!";
+    "Hold_Lock_Button" = "잠자기 버튼 누르기";
+    "Hold_Home_Siri" = "홈버튼을 눌러 Siri 사용하기";
+    "Forgot_Everything" = "홈바";
+    "Ask_Home" = "홈바를 활성화할까요?";
+    "Enable_Home" = "홈바 활성화";
+    "Completed" = "모두 마쳤습니다";
+    "Notify_Respring" = "리스프링을 하여, 설정을 끝내세요.";
+    "Finish" = "끝내고 리스프링하기";  
+}

@@ -1,0 +1,11 @@
+{
+    "Hide_Torch" = "플래시 버튼 숨기기";
+    "Hide_Camera" = "카메라 버튼 숨기기";
+    "Hide_Page_Dots" = "페이지 도트 숨기기";
+    "Hide_swipe" = '"쓸어올려서 잠금해제" 숨기기';
+    "Hide_Hint" = "제어 센터 손잡이 숨기기";
+    "Lock_Screen" = "잠금화면";
+    "Hide_dots_LockScreen" = "잠금화면에서 페이지 도트를 숨깁니다";
+    "Hide_text_LockScreen" = "잠금화면에서 텍스트를 숨깁니다";
+    "Hide_small_LockScreen" = "잠금화면에서 우측 상단에 있는 작은 막대를 숨깁니다"
+}

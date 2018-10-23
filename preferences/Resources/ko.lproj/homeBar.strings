@@ -1,0 +1,8 @@
+{
+    "Home_Bar_(HomeScreen)" = "홈바 (바탕화면)";
+    "Home_Bar_(LockScreen)" = "홈바 (잠금화면)";
+    "Custom_Homebar_Color" = "홈바 색상 사용자화";
+    "Select_HomeBar_Color" = "홈바 생상을 선택하세요";
+    "Home_Bar" = "홈바";
+    "Only_LockScreen" = "잠금화면에서만 적용시킵니다";
+}

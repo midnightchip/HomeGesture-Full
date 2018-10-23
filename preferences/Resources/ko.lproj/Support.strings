@@ -1,0 +1,21 @@
+{
+    "Info" = "정보";
+    "Depiction" = "설명";
+    "Learn" = "HomeGesture에 대해서 자세히 알아보기";
+    "Donations" = "기부";
+    "Donation_MidnightChips" = "MidnightChips에게 기부하기";
+    "pay" = "노력에 대해 기부해주세요";
+    "Donation_PINPAL" = "PINPAL에게 기부하기";
+    "Support" = "지원";
+    "Submit_Issue" = "문제 보내기";
+    "Report_GitHub" = "GitHub에서 버그를 제보하세요";
+    "Email_Support" = "이메일 지원";
+    "Need_help" = "도움이 필요하세요? 저희에게 이메일을 보내시면, 최선을 다해 도와드리겠습니다.";
+    "Copy_Tweak_List" = "트윅 목록 복사";
+    "Needing_list" = "설치된 트윅의 목록이 필요하세요?";
+    "Contact" = "연락";
+    "Follow_MidnightChips" = "MidnightChips을 팔로우하세요";
+    "Follow_PINPAL" = "PINPAL을 팔로우하세요";
+    "Follow_VitaTaf" = "VitaTaf을 팔로우하세요";
+    "HomeGesture_support" = "HomeGesture 지원";
+}

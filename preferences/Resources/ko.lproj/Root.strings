@@ -1,0 +1,15 @@
+{
+    "App_Switcher" = "앱 스위쳐";
+    "Blacklisting" = "블랙리스트";
+    "Control_Center" = "제어 센터";
+    "Hardware_Buttons" = "하드웨어 버튼";
+    "Home_Bar" = "홈바";
+    "Lock_Screen" = "잠금화면";
+    "Status_Bar" = "상단바";
+    "Miscellaneous" = "기타";
+    "Support" = "지원";
+    "Backup_Restore" = "백업과 복원";
+    "Version" = "버전:";
+    "HomeGesture" = "HomeGesture";
+    
+}

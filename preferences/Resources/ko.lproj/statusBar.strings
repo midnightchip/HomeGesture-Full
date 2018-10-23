@@ -1,0 +1,12 @@
+{
+    "iPhone_X_Style" = "iPhone X 스타일 상단바";
+    "Add_additional_space" = "노치에 대한 추가 공간을 넣습니다";
+    "Hide_Carrier" = "상단바 추노마크 숨기기";
+    "Hide_carrier_Status" = "상단바에서 통신사 추노마크를 숨깁니다";
+    "Disable_BreadCrumbs" = "전 앱으로 이동 비활성화";
+    "Hide_back_app" = "상단바에서 전 앱으로 이동을 비활성화 시킵니다";
+    "Status_Bar" = "제어 센터에서 상단바";
+    "Show_CC" = "제어 센터에서 상단바를 보입니다";
+    "Status_Bar" = "상단바";
+    "Show_Centre" = "제어 센터에서 상단바를 보입니다";
+}
