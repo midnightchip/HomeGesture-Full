@@ -281,7 +281,7 @@
 					</dict>
 				</array>
 			</dict>
-
+-->
 			<dict>
 				<key>cell</key>
 				<string>PSStaticTextCell</string>
@@ -294,8 +294,7 @@
 				<key>icon</key>
 				<string>icons/currentVersion</string>
 			</dict>
--->
-
+			
 		</array>
 		<key>title</key>
 		<string>HomeGesture</string>
