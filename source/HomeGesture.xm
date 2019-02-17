@@ -1863,6 +1863,74 @@ static void FixTheMotherFuckingStatusBar(){
   }
 }
 */
+// Fix iOS 12, need to test if I need to bundle in ctor
+// Status bar also needed for iOS 12 iPX status bar
+%hook _UIStatusBarVisualProvider_iOS
++ (Class)class {
+    return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
+}
+%end
+// Thanks duraid
+@interface _UIStatusBar
++ (void)setVisualProviderClass:(Class)classOb;
+@end
+
+%hook UIStatusBarWindow
++ (void)setStatusBar:(Class)arg1 {
+    %orig(NSClassFromString(@"UIStatusBar_Modern"));
+}
+%end
+
+%hook UIStatusBar_Base
++ (Class)_implementationClass {
+    return NSClassFromString(@"UIStatusBar_Modern");
+}
++ (void)_setImplementationClass:(Class)arg1 {
+    %orig(NSClassFromString(@"UIStatusBar_Modern"));
+}
+%end
+
+@interface UIView (SpringBoardAdditions)
+- (void)sb_removeAllSubviews;
+@end
+
+@interface SBDashBoardQuickActionsView : UIView
+@end
+
+// Reinitialize quick action toggles
+%hook SBDashBoardQuickActionsView
+- (void)_layoutQuickActionButtons {
+    %orig;
+    for (UIView *subview in self.subviews) {
+        if (subview.frame.size.width < 50) {
+            if (subview.frame.origin.x < 50) {
+                CGRect _frame = subview.frame;
+                _frame = CGRectMake(46, _frame.origin.y - 90, 50, 50);
+                subview.frame = _frame;
+                [subview sb_removeAllSubviews];
+                //Stupid Compiler, this does actually work, I have no idea why this is getting flagged
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Wunused-value"
+                [subview init];
+                #pragma clang diagnostic pop
+            }
+            if (subview.frame.origin.x > 100) {
+                CGFloat _screenWidth = subview.frame.origin.x + subview.frame.size.width / 2;
+                CGRect _frame = subview.frame;
+                _frame = CGRectMake(_screenWidth - 96, _frame.origin.y - 90, 50, 50);
+                subview.frame = _frame;
+                [subview sb_removeAllSubviews];
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Wunused-value"
+                [subview init];
+                #pragma clang diagnostic pop
+            }
+        }
+    }
+}
+%end
+
+
 %ctor {
   NSFileManager *fileManager = [NSFileManager defaultManager];
 	if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
