@@ -13,6 +13,7 @@
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 long _dismissalSlidingMode = 0;
 bool originalButton;
@@ -1355,6 +1356,38 @@ static BOOL rotateDisable = YES;
 }
 %end
 
+// Coversheet Home Bar Color
+@interface MTStaticColorPillView : UIView
+@end
+
+%hook MTStaticColorPillView
+-(UIColor *)pillColor {
+	if([prefs boolForKey:@"enablePillColor"]){
+		return [prefs colorForKey:@"customColor"];
+	}else {
+		return %orig;
+	}
+}
+
+-(void)setPillColor:(UIColor *)pillColor {
+	if([prefs boolForKey:@"enablePillColor"]){
+		pillColor = [prefs colorForKey:@"customColor"];
+		%orig(pillColor);
+	}else {
+		%orig;
+	}
+
+}
+-(id)initWithFrame:(CGRect)arg1{
+  if ([prefs boolForKey:@"hideBar"]){
+		return %orig;
+		}else{
+			return NULL;
+		}
+}
+%end
+
+
 // Workaround for TouchID respring bug
 %hook SBCoverSheetSlidingViewController
 - (void)_finishTransitionToPresented:(_Bool)arg1 animated:(_Bool)arg2 withCompletion:(id)arg3 {
@@ -1630,29 +1663,7 @@ static NSString *currentApp;
 }
 %end
 
-// Coversheet Home Bar Color
-@interface MTStaticColorPillView : UIView
-@end
 
-%hook MTStaticColorPillView
--(UIColor *)pillColor {
-	if([prefs boolForKey:@"enablePillColor"]){
-		return [prefs colorForKey:@"customColor"];
-	}else {
-		return %orig;
-	}
-}
-
--(void)setPillColor:(UIColor *)pillColor {
-	if([prefs boolForKey:@"enablePillColor"]){
-		pillColor = [prefs colorForKey:@"customColor"];
-		%orig(pillColor);
-	}else {
-		%orig;
-	}
-
-}
-%end
 
 // Hide Control Center Top Nav Bar (Pocket)
 @interface CCUIHeaderPocketView : UIView
@@ -1733,6 +1744,10 @@ static NSString *currentApp;
 }
 %end
 
+@interface _UIStatusBarVisualProvider_iOS : NSObject
++ (CGSize)intrinsicContentSizeForOrientation:(NSInteger)orientation;
+@end
+
 %hook _UIStatusBar
 + (BOOL)forceSplit {
 	if([prefs boolForKey:@"statusBarX"]){
@@ -1740,6 +1755,13 @@ static NSString *currentApp;
 	}else{
 		return %orig;
 	}
+}
++ (CGFloat)heightForOrientation:(NSInteger)orientation {
+	//if (isActualIPhoneX) return %orig;
+	if ([prefs boolForKey:@"statusBarX"]) {
+		return [NSClassFromString(@"_UIStatusBarVisualProvider_Split58") intrinsicContentSizeForOrientation:orientation].height ;
+	}
+	return [NSClassFromString(@"_UIStatusBarVisualProvider_iOS") intrinsicContentSizeForOrientation:orientation].height;
 }
 %end
 
@@ -1867,7 +1889,11 @@ static void FixTheMotherFuckingStatusBar(){
 // Status bar also needed for iOS 12 iPX status bar
 %hook _UIStatusBarVisualProvider_iOS
 + (Class)class {
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
     return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
+  }else{
+    return %orig;
+  }
 }
 %end
 // Thanks duraid
@@ -1877,16 +1903,40 @@ static void FixTheMotherFuckingStatusBar(){
 
 %hook UIStatusBarWindow
 + (void)setStatusBar:(Class)arg1 {
-    %orig(NSClassFromString(@"UIStatusBar_Modern"));
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
+    if([prefs boolForKey:@"statusBarX"]){
+      %orig(NSClassFromString(@"UIStatusBar_Modern"));
+    }else{
+      %orig;
+    }
+  }else{
+    %orig;
+  }  
 }
 %end
 
 %hook UIStatusBar_Base
 + (Class)_implementationClass {
-    return NSClassFromString(@"UIStatusBar_Modern");
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
+    if([prefs boolForKey:@"statusBarX"]){
+      return NSClassFromString(@"UIStatusBar_Modern");
+    }else{
+      return %orig;
+    }
+  }else{
+    return %orig;
+  }
 }
 + (void)_setImplementationClass:(Class)arg1 {
-    %orig(NSClassFromString(@"UIStatusBar_Modern"));
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
+    if([prefs boolForKey:@"statusBarX"]){
+      %orig(NSClassFromString(@"UIStatusBar_Modern"));
+    }else{
+      %orig;
+    }
+  }else{
+    %orig;
+  }
 }
 %end
 
