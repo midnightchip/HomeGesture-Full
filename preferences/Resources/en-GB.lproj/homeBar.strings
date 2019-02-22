@@ -5,4 +5,6 @@
     "Select_HomeBar_Color" = "Select HomeBar Color";
     "Home_Bar" = "Home Bar";
     "Only_LockScreen" = "Only applies to the Lock Screen";
+    "iPhone_X_INSET" = "iPhone X HomeBar Inset";
+    "iPhone_X_STYLEIN" = "Add Inset to Homebar";
 }

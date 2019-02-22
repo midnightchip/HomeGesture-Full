@@ -53,6 +53,22 @@
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>iPhone_X_INSET</string>
+				<key>sublabel</key>
+				<string>iPhone_X_STYLEIN</string>
+				<key>key</key>
+				<string>inset</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
 
 			<dict>
 				<key>cell</key>
@@ -79,6 +95,8 @@
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 			</dict>
+			
+			
 
 			<dict>
 				<key>PostNotification</key>

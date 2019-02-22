@@ -71,6 +71,27 @@
 
 			<dict>
 				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>CSPDeveloperCell</string>
+				<key>action</key>
+				<string>openInBrowser:</string>
+				<key>username</key>
+				<string>duraidabdul</string>
+				<key>provider</key>
+				<string>0</string>
+				<key>height</key>
+				<string>81</string>
+				<key>devName</key>
+				<string>Duraid Abdul</string>
+				<key>devTitle</key>
+				<string>duraidabdul</string>
+				<key>devSubtitle</key>
+				<string>Developer</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
 				<string>PSGroupCell</string>
 				<key>label</key>
 				<string>Info</string>
@@ -232,6 +253,26 @@
 				<key>devSubtitle</key>
 				<string></string>
 			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>cellClass</key>
+				<string>CSPDeveloperCell</string>
+				<key>action</key>
+				<string>openInBrowser:</string>
+				<key>username</key>
+				<string>duraidabdul</string>
+				<key>provider</key>
+				<string>1</string>
+				<key>height</key>
+				<string>81</string>
+				<key>devName</key>
+				<string></string>
+				<key>devTitle</key>
+				<string>@duraidabdul</string>
+				<key>devSubtitle</key>
+				<string></string>
+			</dict>
 
 
 			<dict>
@@ -276,6 +317,34 @@
 				<string>u/VitaTaf</string>
 				<key>sublabel</key>
                 <string>Follow_VitaTaf</string>
+			</dict>
+			<dict>
+				<key>action</key>
+				<string>openInBrowser:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>url</key>
+				<string>https://www.reddit.com/user/duraidabdul</string>
+				<key>icon</key>
+				<string/>
+				<key>label</key>
+				<string>u/DuraidAbdul</string>
+				<key>sublabel</key>
+                <string>Follow Duraid Abdul</string>
+			</dict>
+			<dict>
+				<key>action</key>
+				<string>openInBrowser:</string>
+				<key>cell</key>
+				<string>PSLinkCell</string>
+				<key>url</key>
+				<string>https://github.com/duraidabdul/Neptune</string>
+				<key>icon</key>
+				<string/>
+				<key>label</key>
+				<string>Checkout Neptune!</string>
+				<key>sublabel</key>
+                <string>An Amazing fork of HomeGesture by Duraid Abdul!</string>
 			</dict>
 
 		</array>

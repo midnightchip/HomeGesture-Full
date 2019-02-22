@@ -8,6 +8,7 @@
 #import <spawn.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import <objc/runtime.h>
 
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
@@ -1749,22 +1750,51 @@ static NSString *currentApp;
 @end
 
 %hook _UIStatusBar
-+ (BOOL)forceSplit {
+//TODO ONLY FOR SPLIT 58
++ (double)heightForOrientation:(long long)arg1 {
+  if([prefs boolForKey:@"statusBarX"]){
+    if (arg1 == 1 || arg1 == 2) {
+        return %orig - 9;
+    } else {
+        return %orig;
+    }
+  }else{
+    return %orig;
+  }
+    
+}
+%end
+/*+ (BOOL)forceSplit {
 	if([prefs boolForKey:@"statusBarX"]){
 		return [prefs boolForKey:@"statusBarX"];
 	}else{
 		return %orig;
 	}
-}
-+ (CGFloat)heightForOrientation:(NSInteger)orientation {
+}*/
+/*+ (CGFloat)heightForOrientation:(NSInteger)orientation {
 	//if (isActualIPhoneX) return %orig;
 	if ([prefs boolForKey:@"statusBarX"]) {
-		return [NSClassFromString(@"_UIStatusBarVisualProvider_Split58") intrinsicContentSizeForOrientation:orientation].height ;
+		return [NSClassFromString(@"_UIStatusBarVisualProvider_Split58") intrinsicContentSizeForOrientation:orientation].height;
 	}
 	return [NSClassFromString(@"_UIStatusBarVisualProvider_iOS") intrinsicContentSizeForOrientation:orientation].height;
-}
-%end
+}*/
+//%end
 
+
+
+@interface _UIStatusBarVisualProvider_Phone : _UIStatusBarVisualProvider_iOS
+@end 
+@interface _UIStatusBarVisualProvider_Split : _UIStatusBarVisualProvider_Phone
+@end 
+@interface _UIStatusBarVisualProvider_Split58 : _UIStatusBarVisualProvider_Split
++(double)referenceWidth;
+@end 
+
+/*%hook _UIStatusBarVisualProvider_Split58
++(double)referenceWidth{
+  return [UIScreen mainScreen].bounds.size.width;
+}
+%end  */
 //Hide Status Bar in Control Center
 %hook CCUIOverlayStatusBarPresentationProvider
 - (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
@@ -1890,7 +1920,12 @@ static void FixTheMotherFuckingStatusBar(){
 %hook _UIStatusBarVisualProvider_iOS
 + (Class)class {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
+    if([prefs boolForKey:@"statusBarX"]){
+      return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
+    }else{
+      return NSClassFromString(@"_UIStatusBarVisualProvider_Pad_ForcedCellular");
+    } 
+    //
   }else{
     return %orig;
   }
@@ -1979,15 +2014,300 @@ static void FixTheMotherFuckingStatusBar(){
     }
 }
 %end
+//Keyboard
+
+%hook UIRemoteKeyboardWindowHosted
+- (UIEdgeInsets)safeAreaInsets {
+  if([prefs boolForKey:@"ipxKeyboard"]){
+    UIEdgeInsets orig = %orig;
+    orig.bottom = 44;
+    return orig;
+  }else{
+    return %orig;
+  }
+    
+}
+%end
+
+%hook UIKeyboardImpl
++(UIEdgeInsets)deviceSpecificPaddingForInterfaceOrientation:(NSInteger)orientation inputMode:(id)mode {
+  if([prefs boolForKey:@"ipxKeyboard"]){
+    UIEdgeInsets orig = %orig;
+    orig.bottom = 44;
+    return orig;
+  }else{
+    return %orig;
+  }
+}
+
+%end
+
+@interface UIKeyboardDockView : UIView
+@end
+
+%hook UIKeyboardDockView
+
+- (CGRect)bounds {
+  if([prefs boolForKey:@"ipxKeyboard"]){
+    CGRect bounds = %orig;
+    if (bounds.origin.y == 0) {
+      bounds.origin.y -=12.5;
+    }
+    return bounds;
+  }else{
+    return %orig;
+  }
+    
+}
+
+- (void)layoutSubviews {
+    %orig;
+}
+
+%end
+
+
+%hook UIInputWindowController
+- (UIEdgeInsets)_viewSafeAreaInsetsFromScene {
+  if([prefs boolForKey:@"ipxKeyboard"]){
+    return UIEdgeInsetsMake(0,0,44,0);
+  }else{
+    return %orig;
+  }  
+}
+%end
+//End Keyboard
+
+// MARK: Control Center media controls transition (from iOS 12.2 beta)
+
+@interface MediaControlsRoutingButtonView : UIView
+- (long long)currentMode;
+@end
+
+long currentCachedMode = 99;
+
+static CALayer* playbackIcon;
+static CALayer* AirPlayIcon;
+
+%hook MediaControlsRoutingButtonView
+- (void)_updateGlyph {
+
+    if (self.currentMode == currentCachedMode) { return; }
+
+    currentCachedMode = self.currentMode;
+
+
+    if (self.layer.sublayers.count >= 1) {
+        if (self.layer.sublayers[0].sublayers.count >= 1) {
+            if (self.layer.sublayers[0].sublayers[0].sublayers.count == 2) {
+
+                playbackIcon = self.layer.sublayers[0].sublayers[0].sublayers[1].sublayers[0];
+                AirPlayIcon = self.layer.sublayers[0].sublayers[0].sublayers[1].sublayers[1];
+
+                if (self.currentMode == 2) { // Play/Pause Mode
+
+                    // Play/Pause Icon
+                    playbackIcon.speed = 0.5;
+
+                    [UIView animateWithDuration:1
+                                          delay:0
+                                        options:UIViewAnimationOptionCurveEaseInOut
+                                     animations:^{
+
+                                         playbackIcon.transform = CATransform3DMakeScale(-1, -1, 1);
+                                         playbackIcon.opacity = 0.75;
+                                     }
+                                     completion:^(BOOL finished){}];
+
+                    // AirPlay Icon
+                    AirPlayIcon.speed = 0.75;
+
+                    [UIView animateWithDuration:1
+                                          delay:0
+                                        options:UIViewAnimationOptionCurveEaseInOut
+                                     animations:^{
+                                         AirPlayIcon.transform = CATransform3DMakeScale(0.85, 0.85, 1);
+                                         AirPlayIcon.opacity = -0.75;
+                                     }
+                                     completion:^(BOOL finished){}];
+
+                } else if (self.currentMode == 0 || self.currentMode == 1) { // AirPlay Mode
+
+                    // Play/Pause Icon
+                    playbackIcon.speed = 0.75;
+
+                    [UIView animateWithDuration:1
+                                          delay:0
+                                        options:UIViewAnimationOptionCurveEaseInOut
+                                     animations:^{
+
+                                         playbackIcon.transform = CATransform3DMakeScale(-0.85, -0.85, 1);
+                                         playbackIcon.opacity = -0.75;
+                                     }
+                                     completion:^(BOOL finished){}];
+
+                    // AirPlay Icon
+                    AirPlayIcon.speed = 0.5;
+
+                    [UIView animateWithDuration:1
+                                          delay:0
+                                        options:UIViewAnimationOptionCurveEaseInOut
+                                     animations:^{
+                                         AirPlayIcon.transform = CATransform3DMakeScale(1, 1, 1);
+                                         AirPlayIcon.opacity = 0.75;
+                                     }
+                                     completion:^(BOOL finished){}];
+                }
+            }
+        }
+    }
+}
+%end
+
+//UIBar
+%hook UITabBar
+
+- (void)layoutSubviews {
+    %orig;
+    if([prefs boolForKey:@"inset"]){
+      CGRect _frame = self.frame;
+      if (_frame.size.height == 49) {
+        _frame.size.height = 70;
+        _frame.origin.y = [[UIScreen mainScreen] bounds].size.height - 70;
+        }
+        self.frame = _frame;
+    }
+}
+
+%end
+
+
+
+%hook UIApplicationSceneSettings
+
+- (UIEdgeInsets)_inferredLayoutMargins {
+  if([prefs boolForKey:@"inset"]){
+    return UIEdgeInsetsMake(32,0,0,0);
+  }else{
+    return %orig;
+  }
+    
+}
+- (UIEdgeInsets)safeAreaInsetsLandscapeLeft {
+  if([prefs boolForKey:@"inset"]){
+    UIEdgeInsets _insets = %orig;
+    _insets.bottom = 21;
+    return _insets;
+  }else{
+    return %orig;
+  }
+}
+- (UIEdgeInsets)safeAreaInsetsLandscapeRight {
+  if([prefs boolForKey:@"inset"]){
+    UIEdgeInsets _insets = %orig;
+    _insets.bottom = 21;
+    return _insets;
+  }else{
+    return %orig;
+  }
+}
+- (UIEdgeInsets)safeAreaInsetsPortrait {
+  if([prefs boolForKey:@"inset"]){
+    UIEdgeInsets _insets = %orig;
+    _insets.bottom = 21;
+    return _insets;
+  }else{
+    return %orig;
+  }
+}
+- (UIEdgeInsets)safeAreaInsetsPortraitUpsideDown {
+  if([prefs boolForKey:@"inset"]){
+    UIEdgeInsets _insets = %orig;
+    _insets.bottom = 21;
+    return _insets;
+  }else{
+    return %orig;
+  }
+}
+
+%end
+//SBIcon Transition
+@interface SBIconView : UIView
+- (void)setHighlighted:(bool)arg1;
+@end
+%hook SBIconView
+- (void)setHighlighted:(bool)arg1 {
+
+    if (arg1 == YES) {
+        [UIView animateWithDuration:0
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{%orig;}
+                         completion:^(BOOL finished){ }];
+    } else {
+        [UIView animateWithDuration:0.15
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{%orig;}
+                         completion:^(BOOL finished){ }];
+    }
+    return;
+}
+%end
+
+// Override Reachability corner radius.
+%hook SBReachabilityBackgroundView
+- (double)_displayCornerRadius {
+    return 5;
+}
+%end
+
+@interface SBAppSwitcherPageView : UIView
+@property(nonatomic, assign) double cornerRadius;
+@end
+
+// Override rendered corner radius in app switcher page, (for anytime the fluid switcher gestures are running).
+%hook SBAppSwitcherPageView
+- (void)_updateCornerRadius {
+    if (self.cornerRadius == 20) {
+        self.cornerRadius = 5;
+    }
+    %orig;
+    return;
+}
+%end
+
+//Pip
+// Override MobileGestalt to always return true for PIP key - Acknowledgements: Andrew Wiik (LittleX)
+extern "C" Boolean MGGetBoolAnswer(CFStringRef);
+%hookf(Boolean, MGGetBoolAnswer, CFStringRef key) {
+#define k(key_) CFEqual(key, CFSTR(key_))
+    if (k("nVh/gwNpy7Jv1NOk00CMrw"))
+        return YES;
+    return %orig;
+}
+
+
 
 
 %ctor {
+  //NSString *bundleIdentifier = [NSBundle mainBundle].bundleIdentifier;
   NSFileManager *fileManager = [NSFileManager defaultManager];
 	if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
 		%init(easySetup);
 	}else{
     %init(_ungrouped);
   }
+  //if ([bundleIdentifier containsString:@"com.apple"]) {
+
+        //if (![bundleIdentifier containsString:@"mobilesafari"]) {
+
+            //if (isHomeIndicatorEnabled) {
+                //%init(TabBarSizing);
+                //%init(ToolbarSizing);
+            //}
+        //}
+    //}
 
   //FixTheMotherFuckingStatusBar();
 

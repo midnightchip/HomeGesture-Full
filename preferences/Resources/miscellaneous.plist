@@ -50,6 +50,25 @@
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 			</dict>
 
+			<dict>
+				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>iPhone_X_KEYBOARD</string>
+				<key>sublabel</key>
+				<string>iPhone_X_STYLE</string>
+				<key>key</key>
+				<string>ipxKeyboard</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			
+
 		</array>
 		<key>title</key>
 		<string>Miscellaneous</string>

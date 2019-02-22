@@ -2,4 +2,7 @@
     "Round_Screenshot_Preview" = "Round Screenshot Preview";
     "Miscellaneous" = "Miscellaneous";
     "Does_itself" = "Does not affect the screenshot itself";
+    "iPhone_X_KEYBOARD" = "iPhone X Keyboard";
+    "iPhone_X_STYLE" = "iPhone X styled keyboard, with bottom inset";
+    
 }

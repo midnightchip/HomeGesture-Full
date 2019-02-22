@@ -10,7 +10,7 @@ include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = HomeGesture
 $(TWEAK_NAME)_FILES = $(wildcard source/*.m source/*.xm)
 $(TWEAK_NAME)_FRAMEWORKS =
-$(TWEAK_NAME)_LIBRARIES = sparkapplist
+$(TWEAK_NAME)_LIBRARIES = sparkapplist MobileGestalt
 $(TWEAK_NAME)_PRIVATE_FRAMEWORKS =
 $(TWEAK_NAME)_CFLAGS += -fobjc-arc -I$(THEOS_PROJECT_DIR)/source
 $(TWEAK_NAME)_LDFLAGS += -lCSColorPicker -lCSPreferencesProvider

@@ -7,5 +7,5 @@
     "Lock_Screen" = "Lock Screen";
     "Hide_dots_LockScreen" = "Hide page dots from the LockScreen";
     "Hide_text_LockScreen" = "Hide the text from the LockScreen";
-    "Hide_small_LockScreen" = "Hide small top right bar on LockScreen"
+    "Hide_small_LockScreen" = "Hide small top right bar on LockScreen";
 }
