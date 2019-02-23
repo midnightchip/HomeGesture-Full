@@ -45,7 +45,7 @@
 
 + (Class)_implementationClass {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"]){
+    if([prefs boolForKey:@"statusBarX"] || [prefs boolForKey:@"statusBarPad"]){
       return NSClassFromString(@"UIStatusBar_Modern");
     }else{
       return %orig;
@@ -56,7 +56,7 @@
 }
 + (void)_setImplementationClass:(Class)arg1 {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"]){
+    if([prefs boolForKey:@"statusBarX"] || [prefs boolForKey:@"statusBarPad"]){
     %orig(NSClassFromString(@"UIStatusBar_Modern"));
     }else{
       %orig;
@@ -106,7 +106,7 @@
 %hook UIStatusBarWindow
 + (void)setStatusBar:(Class)arg1 {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"]){
+    if([prefs boolForKey:@"statusBarX"] || [prefs boolForKey:@"statusBarPad"]){
       %orig(NSClassFromString(@"UIStatusBar_Modern"));
     }else{
       %orig;
