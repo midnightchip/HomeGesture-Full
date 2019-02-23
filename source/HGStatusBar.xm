@@ -40,6 +40,30 @@
 	}else{
 		return %orig;
 	}
+  //return NSClassFromString(@"UIStatusBar_Modern");
+}
+
++ (Class)_implementationClass {
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
+    if([prefs boolForKey:@"statusBarX"]){
+      return NSClassFromString(@"UIStatusBar_Modern");
+    }else{
+      return %orig;
+    }
+  }else{
+    return %orig;
+  }
+}
++ (void)_setImplementationClass:(Class)arg1 {
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
+    if([prefs boolForKey:@"statusBarX"]){
+    %orig(NSClassFromString(@"UIStatusBar_Modern"));
+    }else{
+      %orig;
+    }
+  }else{
+    %orig;
+  }
 }
 %end
 
@@ -66,8 +90,10 @@
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
     if([prefs boolForKey:@"statusBarX"]){
       return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
-    }else{
+    }else if([prefs boolForKey:@"statusBarPad"]){
       return NSClassFromString(@"_UIStatusBarVisualProvider_Pad_ForcedCellular");
+    }else{
+      return NSClassFromString(@"_UIStatusBarVisualProvider_Pad_ForcedCellular");//%orig;
     } 
     //
   }else{
@@ -88,31 +114,6 @@
   }else{
     %orig;
   }  
-}
-%end
-
-%hook UIStatusBar_Base
-+ (Class)_implementationClass {
-  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"]){
-      return NSClassFromString(@"UIStatusBar_Modern");
-    }else{
-      return %orig;
-    }
-  }else{
-    return %orig;
-  }
-}
-+ (void)_setImplementationClass:(Class)arg1 {
-  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"]){
-      %orig(NSClassFromString(@"UIStatusBar_Modern"));
-    }else{
-      %orig;
-    }
-  }else{
-    %orig;
-  }
 }
 %end
 

@@ -9,4 +9,6 @@
     "Show_CC" = "Show the status bar in Control Center";
     "Status_Bar" = "Status Bar";
     "Show_Centre" = "Show the status bar in Control Center";
+    "iPad_STYLE" = "iPad Style Status Bar";
+    "Mimic_iPad" = "Mimics iPad Status Bar, adds date";
 }

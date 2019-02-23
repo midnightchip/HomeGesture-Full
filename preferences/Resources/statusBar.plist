@@ -43,6 +43,23 @@
 
 			<dict>
 				<key>cell</key>
+				<string>PSSwitchCell</string>
+				<key>label</key>
+				<string>iPad_STYLE</string>
+				<key>sublabel</key>
+				<string>Mimic_iPad</string>
+				<key>key</key>
+				<string>statusBarPad</string>
+				<key>PostNotification</key>
+				<string>com.vitataf.homegesture.prefschanged</string>
+				<key>defaults</key>
+				<string>com.vitataf.homegesture</string>
+				<key>defaultsPath</key>
+				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
 				<string>PSGroupCell</string>
 			</dict>
 
