@@ -1,0 +1,15 @@
+{
+    "App_Switcher" = "多任務界面";
+    "Blacklisting" = "黑名單";
+    "Control_Center" = "控制中心";
+    "Hardware_Buttons" = "實體按鍵";
+    "Home_Bar" = "Home 條";
+    "Lock_Screen" = "鎖屏";
+    "Status_Bar" = "狀態欄";
+    "Miscellaneous" = "雜項";
+    "Support" = "支持";
+    "Backup_Restore" = "備份和還原";
+    "Version" = "版本：";
+    "HomeGesture" = "HomeGesture";
+    
+}

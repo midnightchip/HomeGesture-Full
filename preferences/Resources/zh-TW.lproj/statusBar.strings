@@ -1,0 +1,14 @@
+{
+    "iPhone_X_Style" = "iPhone X 樣式狀態欄";
+    "Add_additional_space" = "添加空間來模擬 iPhone X 的劉海";
+    "Hide_Carrier" = "隱藏狀態欄運營商";
+    "Hide_carrier_Status" = "隱藏狀態欄上的運營商標識";
+    "Disable_BreadCrumbs" = "關閉返回";
+    "Hide_back_app" = "隱藏狀態欄上的返回按鈕";
+    "Status_Bar" = "控制中心上的狀態欄";
+    "Show_CC" = "顯示控制中心上的狀態欄";
+    "Status_Bar" = "狀態欄";
+    "Show_Centre" = "顯示控制中心上的狀態欄";
+    "iPad_STYLE" = "iPad 風格狀態欄";
+    "Mimic_iPad" = "模仿iPad狀態欄，添加日期";
+}

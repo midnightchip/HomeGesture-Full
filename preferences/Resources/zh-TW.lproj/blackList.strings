@@ -1,0 +1,9 @@
+{
+    "Disable_Gestures_Keyboard" = "使用鍵盤時禁用手勢";
+    "Enable_App_Blacklist" = "開啟軟體黑名單";
+    "Select_Blacklisted_Apps" = "添加黑名單軟件";
+    "Select_Apps_Fully_Disabled" = "添加完全禁用的軟件";
+    "Disables_present." = "在使用鍵盤時禁用手勢操作";
+    "Disables_mode" = "設備處於橫向模式時禁用手勢";
+    "Disables_app" = "在選中的軟件中完全禁用 HomeGestures 的功能";
+}
