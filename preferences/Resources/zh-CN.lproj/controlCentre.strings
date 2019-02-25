@@ -1,0 +1,10 @@
+{
+    "Status_Bar" = "状态栏";
+    "Top_Padding" = "顶部间距";
+    "Top_Padding_(Landscape)" = "顶部间距（横屏)";
+    "Control_Centre" = "控制面板";
+    "Show_Centre" = "在控制面板显示状态栏";
+    "Change_Centre" = "变更状态栏和控制面板的间距";
+    "Change_CC" = "变更横屏状态下，状态栏和控制面板的间距";
+
+}

@@ -1,0 +1,10 @@
+{
+    "Home_Bar_(HomeScreen)" = "Home 条 (主界面)";
+    "Home_Bar_(LockScreen)" = "Home Bar (锁屏)";
+    "Custom_Homebar_Color" = "自定义 Home 条颜色";
+    "Select_HomeBar_Color" = "选择 Home 条颜色";
+    "Home_Bar" = "Home 条";
+    "Only_LockScreen" = "仅在锁屏界面下启用";
+    "iPhone_X_INSET" = "iPhone X 样式 Home 条 底栏";
+    "iPhone_X_STYLEIN" = "在 Home 条位置添加一条底栏";
+}

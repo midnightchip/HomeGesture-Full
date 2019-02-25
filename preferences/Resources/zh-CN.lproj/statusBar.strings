@@ -1,0 +1,14 @@
+{
+    "iPhone_X_Style" = "iPhone X 样式t状态栏";
+    "Add_additional_space" = "添加空间来模拟 iPhone X 的刘海";
+    "Hide_Carrier" = "隐藏状态栏运营商";
+    "Hide_carrier_Status" = "隐藏状态栏上的运营商标识";
+    "Disable_BreadCrumbs" = "关闭返回";
+    "Hide_back_app" = "隐藏状态栏上的返回按钮";
+    "Status_Bar" = "控制中心上的状态栏";
+    "Show_CC" = "显示控制中心上的状态栏";
+    "Status_Bar" = "状态栏";
+    "Show_Centre" = "显示控制中心上的状态栏";
+    "iPad_STYLE" = "iPad 风格状态栏";
+    "Mimic_iPad" = "模仿iPad状态栏，添加日期";
+}
