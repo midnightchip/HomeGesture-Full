@@ -1,0 +1,9 @@
+{
+    "Disable_Gestures_Keyboard" = "Vô hiệu hóa cử chỉ với bàn phím";
+    "Enable_App_Blacklist" = "Bật danh sách đen ứng dụng";
+    "Select_Blacklisted_Apps" = "Chọn ứng dụng trong danh sách đen";
+    "Select_Apps_Fully_Disabled" = "Chọn ứng dụng được tắt hoàn toàn";
+    "Disables_present." = "Vô hiệu hóa các cử chỉ khi có bàn phím.";
+    "Disables_mode" = "Vô hiệu hóa HomeGestures khi ở chế độ ngang";
+    "Disables_app" = "Vô hiệu hóa HomeGestures hoàn toàn trong ứng dụng";
+}
