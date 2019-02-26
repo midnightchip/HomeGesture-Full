@@ -1,0 +1,10 @@
+{
+    "Home_Bar_(HomeScreen)" = "Thanh Home (Màn hình chính)";
+    "Home_Bar_(LockScreen)" = "Thanh Home (Màn hình khóa)";
+    "Custom_Homebar_Color" = "Tùy biến màu thanh Home";
+    "Select_HomeBar_Color" = "Chọn màu thanh Home";
+    "Home_Bar" = "Thanh Home";
+    "Only_LockScreen" = "Chỉ áp dụng cho Màn hình khóa";
+    "iPhone_X_INSET" = "Chừa khoảng cách trong ứng dụng cho thanh Home";
+    "iPhone_X_STYLEIN" = "Chừa khoảng cách cho thanh Home";
+}
