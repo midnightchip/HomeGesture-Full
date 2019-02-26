@@ -1,0 +1,14 @@
+{
+    "iPhone_X_Style" = "Thanh trạng thái giống iPhone X";
+    "Add_additional_space" = "Thêm không gian bổ sung để mô phỏng tai thỏ";
+    "Hide_Carrier" = "Ẩn tên nhà mạng trên thanh trạng thái";
+    "Hide_carrier_Status" = "Ẩn tên nhà mạng khỏi thanh trạng thái";
+    "Disable_BreadCrumbs" = "Vô hiệu hóa BreadCrumbs";
+    "Hide_back_app" = "Ẩn nút quay trở lại ứng dụng khỏi thanh trạng thái";
+    "Status_Bar" = "Thanh trạng thái trong Trung tâm kiểm soát";
+    "Show_CC" = "Hiển thị thanh trạng thái trong Trung tâm kiểm soát";
+    "Status_Bar" = "Thanh trạng thái";
+    "Show_Centre" = "Hiển thị thanh trạng thái trong Trung tâm kiểm soát";
+    "iPad_STYLE" = "Thanh trạng thái giống iPad";
+    "Mimic_iPad" = "Sao chép thanh trạng thái của iPad, thêm ngày";
+}
