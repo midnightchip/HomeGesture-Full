@@ -1,0 +1,32 @@
+{
+    "Welcome" = "歡迎";
+    "Thanks_Installing" = "感謝安裝 HomeGesture \n 讓我們來快速設置...";
+    "Get_Fast" = "返回主頁面";
+    "Swipe_Home" = "向上滑動返回主頁面。";
+    "Next" = "下一步";
+    "Doing_Lot" = "多任務界面";
+    "Multi_Info" = "上滑後暫停來打開多任務界面。";
+    "Back" = "返回";
+    "Control_Demand" = "控制中心";
+    "Access_CC" = "從右上角向下滑動打開控制中心。";
+    "Status_Style" = "狀態欄風格";
+    "Choose_iPX" = "iPhone X 樣式狀態欄";
+    "Enable_iPX" = "開啟 iPhone X 狀態欄";
+    "Not_Now" = "暫時不用";
+    "Close_Ease" = "關閉應用";
+    "Choose_Swipe" = "上滑關閉程序";
+    "Enable_Swipe" = "啟用上滑關閉程序";
+    "One_Hand" = "單手操作";
+    "Choose_Screen" = "音量鍵+電源鍵截圖";
+    "Enable_Feature" = "已啟用此功能";
+    "Classic_Siri" = "Siri";
+    "Home_Siri" = "長按 Home 鍵";
+    "Hold_Lock_Button" = "長按鎖屏鍵";
+    "Hold_Home_Siri" = "長按 Home 鍵打開Siri";
+    "Forgot_Everything" = "Home 條";
+    "Ask_Home" = "開啟 Home 條";
+    "Enable_Home" = "啟用 Home 條";
+    "Completed" = "全部完成";
+    "Notify_Respring" = "安裝程序必須重新啟動才能完成更改";
+    "Finish" = "安裝完成，正在重啟中";
+}

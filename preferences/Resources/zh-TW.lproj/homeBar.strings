@@ -1,0 +1,10 @@
+{
+    "Home_Bar_(HomeScreen)" = "Home 鍵條 (主界面)";
+    "Home_Bar_(LockScreen)" = "Home 鍵條 (鎖屏)";
+    "Custom_Homebar_Color" = "自定義 Home 鍵條顏色";
+    "Select_HomeBar_Color" = "選擇 Home 鍵條顏色";
+    "Home_Bar" = "Home 鍵條";
+    "Only_LockScreen" = "僅在鎖屏界面下啟用";
+    "iPhone_X_INSET" = "iPhone X 樣式 Home 鍵條 底欄";
+    "iPhone_X_STYLEIN" = "在 Home 鍵條位置添加一條底欄";
+}

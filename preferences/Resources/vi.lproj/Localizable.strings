@@ -1,0 +1,32 @@
+{
+    "Welcome" = "Xin chào";
+    "Thanks_Installing" = "Cảm ơn bạn đã cài đặt HomeGesture \n Hãy nhanh chóng thiết lập...";
+    "Get_Fast" = "Quay về màn hình chính";
+    "Swipe_Home" = "Vuốt từ dưới lên để về home.";
+    "Next" = "Tiếp";
+    "Doing_Lot" = "Giao diện đa nhiệm";
+    "Multi_Info" = "Vuốt lên và giữ để vào giao diện đa nhiệm";
+    "Back" = "Quay lại";
+    "Control_Demand" = "Trung tâm kiểm soát";
+    "Access_CC" = "Vuốt xuống từ cạnh trên cùng bên phải để truy cập Trung tâm kiểm soát.";
+    "Status_Style" = "Kiểu thanh trạng thái";
+    "Choose_iPX" = "Làm cho thanh trạng thái trông giống như iPhone X?";
+    "Enable_iPX" = "Bật thanh trạng thái của iPhone X";
+    "Not_Now" = "Không phải bây giờ";
+    "Close_Ease" = "Đóng ứng dụng chạy nền";
+    "Choose_Swipe" = "Vuốt lên để đóng ứng dụng chạy nền của bạn?";
+    "Enable_Swipe" = "Bật Vuốt lên để đóng";
+    "One_Hand" = "Thao tác bằng một tay?";
+    "Choose_Screen" = "Chụp ảnh màn hình với nút Tăng âm + nút Nguồn?";
+    "Enable_Feature" = "Kích hoạt tính năng";
+    "Classic_Siri" = "Siri";
+    "Home_Siri" = "Không thích nút nguồn? Nhấn giữ nút Home để mở Siri!";
+    "Hold_Lock_Button" = "Giữ nút Nguồn";
+    "Hold_Home_Siri" = "Giữ nút Home cho Siri";
+    "Forgot_Everything" = "Thanh Home";
+    "Ask_Home" = "Bật thanh Home giống iPhone X";
+    "Enable_Home" = "Bật thanh Home";
+    "Completed" = "Tất cả đã xong";
+    "Notify_Respring" = "Bạn cần phải respring lại thiết bị để lưu thay đổi.";
+    "Finish" = "Kết thúc và Respring";  
+}
