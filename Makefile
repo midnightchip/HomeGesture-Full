@@ -9,9 +9,9 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = HomeGesture
 HomeGesture_FILES = $(wildcard source/*.m source/*.xm)
-HomeGesture_FRAMEWORKS =
-HomeGesture_LIBRARIES = sparkapplist MobileGestalt CSColorPicker CSPreferencesProvider
-HomeGesture_PRIVATE_FRAMEWORKS =
+HomeGesture_FRAMEWORKS = 
+HomeGesture_LIBRARIES = sparkapplist MobileGestalt CSColorPicker CSPreferencesProvider 
+HomeGesture_PRIVATE_FRAMEWORKS = 
 HomeGesture_CFLAGS += -fobjc-arc -I$(THEOS_PROJECT_DIR)/source
 #HomeGesture_LDFLAGS += -lCSColorPicker -lCSPreferencesProvider
 

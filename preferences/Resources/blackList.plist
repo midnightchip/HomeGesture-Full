@@ -66,6 +66,17 @@
 				<string>Disables_app</string>
 		</dict>
 
+		<dict>
+				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>PIP_APPS</string>
+				<key>action</key>
+				<string>pipBlack</string>
+				<key>sublabel</key>
+				<string>Disables_PIP_app</string>
+		</dict>
+
 		</array>
 		<key>title</key>
 		<string>Blacklisting</string>

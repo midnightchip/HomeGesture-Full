@@ -423,11 +423,12 @@ static CALayer* AirPlayIcon;
 
 
 %ctor{
-    NSString *bundleID = [NSBundle mainBundle].bundleIdentifier;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-
-    if ([bundleID isEqualToString:@"com.apple.springboard"] &&  [fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]) {
-        %init();
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")){
+        NSString *bundleID = [NSBundle mainBundle].bundleIdentifier;
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([bundleID isEqualToString:@"com.apple.springboard"] &&  [fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]) {
+            %init();
+        }
     }
 }
 

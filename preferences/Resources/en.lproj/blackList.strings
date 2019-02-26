@@ -1,9 +1,11 @@
 {
-    "Disable_Gestures_Keyboard" = "Disable Gestures With Keyboard";
-    "Enable_App_Blacklist" = "Enable App Blacklist";
-    "Select_Blacklisted_Apps" = "Select Blacklisted Apps";
-    "Select_Apps_Fully_Disabled" = "Select Apps to be Fully Disabled";
-    "Disables_present." = "Disables the gestures when keyboard is present.";
-    "Disables_mode" = "Disables HomeGestures while in landscape mode";
-    "Disables_app" = "Disables HomeGestures completely in app";
+    "Disable_Gestures_Keyboard" = "Disable Gestures With Keyboard (iOS 11)";
+    "Enable_App_Blacklist" = "Enable App Blacklist (iOS 11)";
+    "Select_Blacklisted_Apps" = "Select Blacklisted Apps (iOS 11)";
+    "Select_Apps_Fully_Disabled" = "Select Apps to be Fully Disabled (iOS 11)";
+    "Disables_present." = "Disables the gestures when keyboard is present. (iOS 11)";
+    "Disables_mode" = "Disables HomeGestures while in landscape mode (iOS 11)";
+    "Disables_app" = "Disables HomeGestures completely in app (iOS 11)";
+    "PIP_APPS" = "Disable PIP in Specified Apps";
+    "Disables_PIP_app" = "Prevent PIP from crashing some apps";
 }

@@ -1,6 +1,7 @@
 #import "HomeGesture.h"
 
-int applicationDidFinishLaunching;
+
+/*int applicationDidFinishLaunching;
 
 %group loadMe
 static BOOL homeEnable = YES;
@@ -135,4 +136,64 @@ static NSString *currentApp;
 	if ([fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
     %init(kickStart);
   }
+}*/
+/*static BOOL enableGesture(){
+	NSLog(@"")
+	if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"blackList" containBundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]]){
+		return NO;
+	}else{
+		return YES;
+	}
+}*/
+/*@interface PTSettings : NSObject
+@end 
+@interface _UISettings : PTSettings
+@end 
+@interface SBUISettings : _UISettings
+@end 
+@interface SBHomeGestureSettings : SBUISettings
+-(void)setHomeGestureEnabled:(BOOL)arg1 ;
+@end 
+
+%hook SBHomeGestureSettings
+-(BOOL)isHomeGestureEnabled{
+	//return enableGesture();
+	NSLog(@"HOMEGESTURE SETTINGNOTIFS");
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                         		selector:@selector(keyboardDidShow:)
+                                             		name:UIKeyboardDidShowNotification
+                                           		object:nil];
+
+		[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(keyboardDidHide:)
+                                             name:UIKeyboardDidHideNotification
+                                           object:nil];
+		return %orig;
+
 }
+%new 
+-(void)keyboardDidShow:(NSNotification *)sender{
+	NSLog(@"KEYBOARD UP");
+	[self setHomeGestureEnabled:FALSE];
+}
+%new
+-(void)keyboardDidHide:(NSNotification *)sender{
+	NSLog(@"KEYBOARD DOWN");
+	[self setHomeGestureEnabled:TRUE];
+}
+%end */
+/*-(void)setHomeGestureEnabled:(BOOL)arg1{
+	%orig(NO);
+}*/
+
+//%end 
+
+//%ctor{
+	//if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")){
+		//NSString *bundleID = [NSBundle mainBundle].bundleIdentifier;
+		/*if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"blackList" containBundleIdentifier:bundleID]){
+			%init(stopGesture);
+			}*/
+		//}
+	
+//}

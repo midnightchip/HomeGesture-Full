@@ -1,6 +1,65 @@
-#import <HomeGesture.h>
+//This is here so I can retain iOS 11 support, without screwing up iOS 12. Yes its a mess. Im sorry :/
+#include <CSColorPicker/CSColorPicker.h>
+#import <HGPProvider.h>
+#import <SpringBoard/SpringBoard.h>
+#import <SpringBoard/SBApplication.h>
+#import <SparkAppList.h>
+#import <objc/runtime.h>
+#import <spawn.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
-@implementation fancyButton
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define SYSTEM_VERSION_LESS_THAN(v)   ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+
+long _dismissalSlidingMode11 = 0;
+bool originalButton11;
+long _homeButtonType11 = 1;
+int applicationDidFinishLaunching11;
+
+
+//Quick Setup
+@interface SBDashBoardViewController : UIViewController
+@property (retain, nonatomic) UIView *welcomeView;
+@property (retain, nonatomic) UIView *swipeExplainView;
+@property (retain, nonatomic) UIView *thirdView;
+@property (retain, nonatomic) UIButton *but;
+@property (retain, nonatomic) UIView *swipeUpView;
+@property (retain, nonatomic) UIView *videoView;
+@property (retain, nonatomic) UIView *doingAlot;
+@property (retain, nonatomic) UIView *controlCenterView;
+@property (retain, nonatomic) UIView *statusBarView;
+@property (retain, nonatomic) UIView *killStyleView;
+@property (retain, nonatomic) UIView *oneHandSSView;
+@property (retain, nonatomic) UIView *classicSiriView;
+@property (retain, nonatomic) UIView *homeBarView;
+@property (retain, nonatomic) UIView *exitView;
+@property (retain, nonatomic) UIView *hideView;
+@end
+
+@interface SBDashBoardViewController (HomeGesture)
+-(void)buttonAction;
+-(void)closeWithEase;
+-(void)oneHandSS;
+-(void)classicSiri;
+-(void)homeBar;
+-(void)exitSetup;
+-(void)graduallyAdjustBrightnessToValue:(CGFloat)endValue;
+- (void)startRespring;
+@end
+
+//Fancy Button
+@interface fancyButton11 : UIButton
+@property (nonatomic, assign) CGFloat highlightAlpha;
+@end
+
+@implementation fancyButton11
 - (void)setHighlighted:(BOOL)highlighted {
     [super setHighlighted:highlighted];
 
@@ -13,6 +72,7 @@
 }
 @end
 
+%group easySetup
 //Hide Swipe Up to unlock on first launch.
 %hook SBDashBoardTeachableMomentsContainerViewController
 - (void)_updateTextLabel {
@@ -109,7 +169,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
   if(!self.but){
 
     //Next Button
-    fancyButton *nextButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    fancyButton11 *nextButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
         [nextButton setTitle:@"Next" forState:UIControlStateNormal];
         [nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         nextButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -198,7 +258,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
     //Next Button
-    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
       [enableButton setTitle:@"Next" forState:UIControlStateNormal];
       [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -265,7 +325,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
     //Next Button
-    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
       [enableButton setTitle:@"Next" forState:UIControlStateNormal];
       [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -362,7 +422,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
     //Next Button
-    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
       [enableButton setTitle:@"Next" forState:UIControlStateNormal];
       [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -460,7 +520,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
     //Next Button
-    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
       [enableButton setTitle:@"Enable X Status Bar" forState:UIControlStateNormal];
       [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -597,7 +657,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
     //Next Button
-    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
       [enableButton setTitle:@"Enable Swipe to Close" forState:UIControlStateNormal];
       [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -729,7 +789,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
   //Enable Button
-  fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+  fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     [enableButton setTitle:@"Enable Feature" forState:UIControlStateNormal];
     [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -851,7 +911,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
   //Enable Button
-  fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+  fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     [enableButton setTitle:@"Hold Home for Siri" forState:UIControlStateNormal];
     [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -987,7 +1047,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     }];
 
   //Enable Button
-  fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+  fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     [enableButton setTitle:@"Enable Home Bar" forState:UIControlStateNormal];
     [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -1103,7 +1163,7 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
       [self.homeBarView removeFromSuperview];
     }];
 
-    fancyButton *enableButton = [[fancyButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    fancyButton11 *enableButton = [[fancyButton11 alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
       [enableButton setTitle:@"Finish and Respring" forState:UIControlStateNormal];
       [enableButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       enableButton.backgroundColor = [UIColor colorWithRed:10 / 255.0 green:106 / 255.0 blue:255 / 255.0 alpha:1.0];
@@ -1242,11 +1302,558 @@ static NSMutableDictionary *pref = @{}.mutableCopy;
     [p seekToTime:kCMTimeZero];
 }
 %end
-%ctor {
-  if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")){
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
-      %init();
+%end
+//End Quick Setup
+
+// Enable Home Gestures
+%hook BSPlatform
+- (NSInteger)homeButtonType {
+	_homeButtonType11 = %orig;
+	if (originalButton11) {
+		originalButton11 = NO;
+		return %orig;
+	} else {
+		return 2;
+	}
+}
+%end
+
+// Hide Carrier Text in Status Bar
+%hook UIStatusBarServiceItemView
+- (id)_serviceContentsImage {
+	if ([prefs boolForKey: @"hidecarrier"]){
+		return nil;
+		}else{
+			return %orig;
+		}
+	}
+- (CGFloat)extraRightPadding {
+	if ([prefs boolForKey: @"hidecarrier"]){
+		return 0.0f;
+		}else{
+			return %orig;
+		}
+	}
+- (CGFloat)standardPadding {
+	if ([prefs boolForKey: @"hidecarrier"]){
+		return 2.0f;
+		}else{
+			return %orig;
+	}
+}
+%end
+
+
+// Hide HomeBar
+@interface MTLumaDodgePillView : UIView
+@end
+
+static BOOL homeEnable = YES;
+static BOOL rotateDisable = YES;
+%hook MTLumaDodgePillView
+- (id)initWithFrame:(struct CGRect)arg1 {
+	if ([prefs boolForKey:@"hideBar"]){
+		return %orig;
+		}else{
+			return NULL;
+		}
+}
+%end
+
+// Workaround for TouchID respring bug
+%hook SBCoverSheetSlidingViewController
+- (void)_finishTransitionToPresented:(_Bool)arg1 animated:(_Bool)arg2 withCompletion:(id)arg3 {
+	if ((_dismissalSlidingMode11 != 1) && (arg1 == 0)) {
+		return;
+	} else {
+		%orig;
+	}
+}
+- (long long)dismissalSlidingMode {
+	_dismissalSlidingMode11 = %orig;
+	return %orig;
+}
+%end
+
+// Hide home bar in cover sheet
+@interface SBDashboardHomeAffordanceView : UIView
+@end
+
+%hook SBDashboardHomeAffordanceView
+- (void)_createStaticHomeAffordance {
+	if ([prefs boolForKey:@"hideBarCover"]){
+		return %orig;
+		}else{
+			return;
+		}
+}
+%end
+
+// Restore Footer Indicators
+%hook SBDashBoardViewController
+- (void)viewDidLoad {
+	originalButton11 = YES;
+	%orig;
+}
+%end
+
+// Press Home Button for Siri
+%hook SBLockHardwareButtonActions
+- (id)initWithHomeButtonType:(long long)arg1 proximitySensorManager:(id)arg2 {
+	if([prefs boolForKey:@"siriHome"]){
+		return %orig(_homeButtonType11, arg2);
+	}else{
+		return %orig;
+	}
+}
+%end
+%hook SBHomeHardwareButtonActions
+- (id)initWitHomeButtonType:(long long)arg1 {
+	if([prefs boolForKey:@"siriHome"]){
+		return %orig(_homeButtonType11);
+	}else{
+		return %orig;
+	}
+}
+%end
+
+// Hide Notification Hints
+%hook NCNotificationListSectionRevealHintView
+- (void)_updateHintTitle {
+	if(![prefs boolForKey:@"notificationHint"]){
+		%orig;
+	}else{
+		return;
+	}
+}
+%end
+
+// Disable Breadcrumb
+%hook SBWorkspaceDefaults
+- (bool)isBreadcrumbDisabled {
+	if (![prefs boolForKey:@"enableBread"]){
+		return NO;
+	}else{
+		return YES;
+	}
+}
+%end
+
+// Swipe to Kill in App Switcher
+%hook SBAppSwitcherSettings
+- (long long)effectiveKillAffordanceStyle {
+	if([prefs boolForKey:@"enableKill"]){
+		return 2;
+	}else{
+		return %orig;
+	}
+}
+- (NSInteger)killAffordanceStyle {
+	if([prefs boolForKey:@"enableKill"]){
+		return 2;
+	}else{
+		return %orig;
+	}
+}
+- (void)setKillAffordanceStyle:(NSInteger)style {
+	if([prefs boolForKey:@"enableKill"]){
+		%orig(2);
+	}else{
+		%orig;
+	}
+}
+
+//Grid Swicher
+/*
+-(NSInteger)switcherStyle {
+			return 2;
+		}
+		*/
+
+%end
+
+//Grid Switcher
+/*
+%hook SBGridSwitcherPersonality
+	-(BOOL)shouldShowControlCenter {
+		return NO;
+	}
+%end
+*/
+
+// Enable Simutaneous Scrolling and Dismissing
+%hook SBFluidSwitcherViewController
+- (double)_killGestureHysteresis {
+  if([prefs boolForKey:@"enableKill"]){
+    double orig = %orig;
+    return orig == 30 ? 10 : orig;
+  }else{
+    return %orig;
+  }
+}
+%end
+
+// Hide Control Center Indicator on Coversheet
+%hook SBDashBoardTeachableMomentsContainerView
+-(void)_addControlCenterGrabber {
+	if ([prefs boolForKey:@"notificationHint"]){
+
+	}else{
+		return %orig;
+	}
+}
+%end
+
+// Hide Torch Button on CoverSheet
+%hook SBDashBoardQuickActionsViewController
+-(BOOL)hasFlashlight{
+	if([prefs boolForKey:@"hideTorch"]){
+		return NO;
+		}else{
+			return %orig;
+		}
+}
+
+// Hide Camera Button on Coversheet
+-(BOOL)hasCamera{
+	if([prefs boolForKey:@"hideCamera"]){
+		return NO;
+	}else{
+		return %orig;
+	}
+}
+%end
+
+// Disable Gestures Switch
+%hook SBHomeGestureSettings
+-(BOOL)isHomeGestureEnabled{
+	if(![prefs boolForKey:@"disableGestures"]){
+		NSString *currentApp;
+		SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
+		SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
+		currentApp = [frontApp valueForKey:@"_bundleIdentifier"];
+		if(homeEnable && rotateDisable && ![SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"blackList" containBundleIdentifier:currentApp]){
+			return YES;
+		}else{
+			return NO;
+		}
+	}else{
+		return NO;
+	}
+}
+%end
+
+// Disable Gestures (SpringBoard applicationDidFinishLaunching also used in Screenshot Remap!)
+static NSString *currentApp;
+
+%hook SpringBoard
+-(void)applicationDidFinishLaunching:(id)application {
+	applicationDidFinishLaunching11 = 2;
+	%orig;
+
+// Disable Gestures When Keyboard is Visible
+	if([prefs boolForKey:@"stopKeyboard"]){
+		[[NSNotificationCenter defaultCenter] addObserver:self
+                                         		selector:@selector(keyboardDidShow:)
+                                             		name:UIKeyboardDidShowNotification
+                                           		object:nil];
+
+		[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(keyboardDidHide:)
+                                             name:UIKeyboardDidHideNotification
+                                           object:nil];
+			}
+
+// Disable Gestures in Blacklisted Apps
+		if ([prefs boolForKey:@"enableBlacklist"]){
+			[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+			[[NSNotificationCenter defaultCenter]
+   		addObserver:self selector:@selector(yourMethod:)
+   		name:UIDeviceOrientationDidChangeNotification
+   		object:[UIDevice currentDevice]];
+		}
+}
+
+%new
+-(void)keyboardDidShow:(NSNotification *)sender
+{
+    homeEnable = NO;
+}
+
+%new
+-(void)keyboardDidHide:(NSNotification *)sender
+{
+    homeEnable = YES;
+}
+
+%new
+-(void)yourMethod:(NSNotification *)sender {
+    UIDevice *currentDevice = sender.object;
+    if(currentDevice.orientation == UIDeviceOrientationPortrait) {
+			rotateDisable = YES;
+    }
+		if(currentDevice.orientation == UIDeviceOrientationLandscapeLeft) {
+			SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
+			SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
+			currentApp = [frontApp valueForKey:@"_bundleIdentifier"];
+			if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:currentApp]){
+			rotateDisable = NO;
+			}
+		}
+		if(currentDevice.orientation == UIDeviceOrientationLandscapeRight) {
+			SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
+			SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
+			currentApp = [frontApp valueForKey:@"_bundleIdentifier"];
+			if([SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"excludedApps" containBundleIdentifier:currentApp]){
+			rotateDisable = NO;
+			}
+		}
+		if(currentDevice.orientation == UIDeviceOrientationPortraitUpsideDown) {
+			rotateDisable = YES;
+		}
+}
+%end
+
+// Hide Coversheet Page Dots
+@interface SBDashBoardPageControl : UIView
+@end
+
+%hook SBDashBoardPageControl
+-(id)_pageIndicatorColor{
+	if ([prefs boolForKey:@"dots"]){
+		return [UIColor clearColor];
+	}else{
+		return %orig;
+	}
+}
+-(id)_currentPageIndicatorColor{
+	if ([prefs boolForKey:@"dots"]){
+		return [UIColor clearColor];
+	}else{
+		return %orig;
+	}
+}
+%end
+
+// Coversheet Home Bar Color
+@interface MTStaticColorPillView : UIView
+@end
+
+%hook MTStaticColorPillView
+-(UIColor *)pillColor {
+	if([prefs boolForKey:@"enablePillColor"]){
+		return [prefs colorForKey:@"customColor"];
+	}else {
+		return %orig;
+	}
+}
+
+-(void)setPillColor:(UIColor *)pillColor {
+	if([prefs boolForKey:@"enablePillColor"]){
+		pillColor = [prefs colorForKey:@"customColor"];
+		%orig(pillColor);
+	}else {
+		%orig;
+	}
+
+}
+%end
+
+// Hide Control Center Top Nav Bar (Pocket)
+@interface CCUIHeaderPocketView : UIView
+@end
+
+%hook CCUIHeaderPocketView
+-(void)layoutSubviews{
+  %orig;
+  if ([self valueForKey:@"_headerBackgroundView"]) {
+    UIView *backgroundView = (UIView *)[self valueForKey:@"_headerBackgroundView"];
+    backgroundView.hidden = YES;
+  }
+  if ([self valueForKey:@"_headerLineView"]) {
+    UIView *lineView = (UIView *)[self valueForKey:@"_headerLineView"];
+    lineView.hidden = YES;
+  }
+}
+
+//Start FUGap
+@interface CCUIStatusLabelViewController : UIViewController
+-(void)setEdgeInsets:(UIEdgeInsets)arg1 ;
+@end
+
+@interface CCUIScrollView : UIScrollView
+@end
+
+-(CGRect)contentBounds{
+      if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
+        return CGRectMake (0,0,SCREEN_WIDTH,30);
+      }
+      else{
+        return CGRectMake (0,0,SCREEN_WIDTH,65);
       }
   }
+  //Make Frame Match our Inset
+  -(CGRect)frame {
+      return CGRectMake (0,0,SCREEN_WIDTH,[prefs floatForKey:@"vertical"]);
+  }
+  //Hide Header Blur
+  -(void)setBackgroundAlpha:(double)arg1{
+      arg1 = 0.0;
+      %orig;
+  }
+  //Nedded to Make Buttons Work
+  -(BOOL)isUserInteractionEnabled {
+      return NO;
+  }
+%end
+
+%hook CCUIScrollView
+-(void)setContentInset:(UIEdgeInsets)arg1 {
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
+       arg1 = UIEdgeInsetsMake([prefs floatForKey:@"verticalLandscape"],0,0,0);
+       %orig;
+    }
+    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
+     arg1 = UIEdgeInsetsMake([prefs floatForKey:@"vertical"],0,0,0);
+     %orig;
+    }
+  }
+%end
+
+// iPhone X Status bar
+%hook UIStatusBar_Base
++ (BOOL)forceModern {
+	if([prefs boolForKey:@"statusBarX"]){
+		return [prefs boolForKey:@"statusBarX"];
+	}else{
+		return %orig;
+	}
+}
++ (Class)_statusBarImplementationClass {
+	if([prefs boolForKey:@"statusBarX"]){
+		return [prefs boolForKey:@"statusBarX"] ? NSClassFromString(@"UIStatusBar_Modern") : NSClassFromString(@"UIStatusBar");
+	}else{
+		return %orig;
+	}
+}
+%end
+
+%hook _UIStatusBar
++ (BOOL)forceSplit {
+	if([prefs boolForKey:@"statusBarX"]){
+		return [prefs boolForKey:@"statusBarX"];
+	}else{
+		return %orig;
+	}
+}
+%end
+
+//Hide Status Bar in Control Center
+%hook CCUIOverlayStatusBarPresentationProvider
+- (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
+	if ([prefs boolForKey:@"statusBarCC"]){
+		return %orig;
+	}
+	else {
+		return;
+	}
+}
+%end
+
+//Round Screenshot Preview
+%hook UITraitCollection
++ (id)traitCollectionWithDisplayCornerRadius:(CGFloat)arg1 {
+	if([prefs boolForKey:@"roundScreenshot"]){
+		return %orig(19);
+	}else{
+		return %orig;
+	}
+}
+
+//Round App Switcher (Bug: Enables Rounded Dock)
+- (CGFloat)displayCornerRadius {
+	if([prefs boolForKey:@"roundSwitcher"]){
+		return [prefs floatForKey:@"switcherRoundness"];
+	}else{
+		return %orig;
+	}
+}
+%end
+
+// Workaround for crash when launching app and invoking control center simultaneously
+%hook SBSceneHandle
+- (id)scene {
+	@try {
+		return %orig;
+	}
+	@catch (NSException *e) {
+		return nil;
+	}
+}
+%end
+
+// Screenshot Remap
+%hook SBPressGestureRecognizer
+- (void)setAllowedPressTypes:(NSArray *)arg1 {
+	NSArray * lockHome = @[@104, @101];
+	NSArray * lockVol = @[@104, @102, @103];
+	if ([arg1 isEqual:lockVol] && applicationDidFinishLaunching11 == 2 && [prefs boolForKey:@"remapScreen"]) {
+		%orig(lockHome);
+		applicationDidFinishLaunching11--;
+		return;
+	}
+	%orig;
+}
+%end
+%hook SBClickGestureRecognizer
+- (void)addShortcutWithPressTypes:(id)arg1 {
+	if (applicationDidFinishLaunching11 == 1 && [prefs boolForKey:@"remapScreen"]) {
+		applicationDidFinishLaunching11--;
+		return;
+	}
+	%orig;
+}
+%end
+%hook SBHomeHardwareButton
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 buttonActions:(id)arg3 gestureRecognizerConfiguration:(id)arg4 {
+	if ([prefs boolForKey:@"remapScreen"]) {
+		return %orig(arg1, _homeButtonType11, arg3, arg4);
+	}
+	return %orig;
+}
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 {
+	if ([prefs boolForKey:@"remapScreen"]) {
+		return %orig(arg1, _homeButtonType11);
+	}
+	return %orig;
+}
+%end
+
+// Hide "Swipe up to unlock" on Coversheet
+%hook SBDashBoardTeachableMomentsContainerViewController
+- (void)_updateTextLabel {
+  if(![prefs boolForKey:@"unlockHint"]){
+    %orig;
+  }else{
+    return;
+  }
+}
+%end
+
+//Enable Torch/Camera buttons on unsupported devices
+%hook SBDashBoardQuickActionsViewController
++ (BOOL)deviceSupportsButtons {
+	return YES;
+}
+%end
+
+%ctor {
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  if(SYSTEM_VERSION_LESS_THAN(@"12.0")){
+    if (![fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]){
+        %init(easySetup);
+        }else{
+            %init(_ungrouped);
+        }
+    }
 }
