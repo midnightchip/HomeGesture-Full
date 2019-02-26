@@ -1,0 +1,11 @@
+{
+    "Hide_Torch" = "Ẩn nút đèn pin";
+    "Hide_Camera" = "Ẩn nút camera";
+    "Hide_Page_Dots" = "Ẩn dấu chấm trang";
+    "Hide_swipe" = 'Ẩn "Vuốt lên để mở khóa"';
+    "Hide_Hint" = "Ẩn gợi ý của Trung tâm kiểm soát";
+    "Lock_Screen" = "Màn hình khóa";
+    "Hide_dots_LockScreen" = "Ẩn dấu chấm trang khỏi màn hình khóa";
+    "Hide_text_LockScreen" = "Ẩn dòng chữ khởi màn hình khóa";
+    "Hide_small_LockScreen" = "Ẩn thanh ngang nhỏ ở góc trên bên phải trên màn hình khóa";
+}

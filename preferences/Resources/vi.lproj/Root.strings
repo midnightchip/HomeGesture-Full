@@ -1,0 +1,15 @@
+{
+    "App_Switcher" = "Giao diện đa nhiệm";
+    "Blacklisting" = "Danh sách đen";
+    "Control_Center" = "Trung tâm kiểm soát";
+    "Hardware_Buttons" = "Nút cứng";
+    "Home_Bar" = "Thanh Home";
+    "Lock_Screen" = "Màn hình khóa";
+    "Status_Bar" = "Thanh trạng thái";
+    "Miscellaneous" = "Linh tinh";
+    "Support" = "Hỗ trợ";
+    "Backup_Restore" = "Sao lưu và Khôi phục";
+    "Version" = "Phiên bản:";
+    "HomeGesture" = "HomeGesture";
+    
+}
