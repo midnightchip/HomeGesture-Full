@@ -1,0 +1,10 @@
+{
+    "Status_Bar" = "Thanh trạng thái";
+    "Top_Padding" = "Khoảng cách phía trên";
+    "Top_Padding_(Landscape)" = "Khoảng cách phía trên (nằm ngang)";
+    "Control_Centre" = "Trung tâm kiểm soát";
+    "Show_Centre" = "Hiển thị thanh trạng thái trong Trung tâm kiểm soát";
+    "Change_Centre" = "Thay đổi khoảng cách phía trên trong Trung tâm kiểm soát";
+    "Change_CC" = "Thay đổi khoảng cách phía trên trong Trung tâm kiểm soát nằm ngang";
+
+}
