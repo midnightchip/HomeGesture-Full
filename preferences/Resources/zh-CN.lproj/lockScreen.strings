@@ -1,0 +1,11 @@
+{
+    "Hide_Torch" = "隐藏手电筒按钮";
+    "Hide_Camera" = "隐藏相机按钮";
+    "Hide_Page_Dots" = "隐藏页面指示器";
+    "Hide_swipe" = '隐藏“向上轻扫以解锁”"';
+    "Hide_Hint" = "隐藏控制中心标线";
+    "Lock_Screen" = "锁屏";
+    "Hide_dots_LockScreen" = "在锁屏界面隐藏页面指示器";
+    "Hide_text_LockScreen" = "隐藏锁屏界面下方的文字";
+    "Hide_small_LockScreen" = "隐藏右上角的小标线";
+}

@@ -1,0 +1,21 @@
+{
+    "Info" = "信息";
+    "Depiction" = "说明";
+    "Learn" = "查看关于 HomeGesture 更多的信息";
+    "Donations" = "捐赠";
+    "Donation_MidnightChips" = "向 MidnightChips 捐赠";
+    "pay" = "以感谢他对这款插件的付出";
+    "Donation_PINPAL" = "向 PINPAL 捐赠";
+    "Support" = "支持";
+    "Submit_Issue" = "提交问题";
+    "Report_GitHub" = "在 GitHub 上提交问题";
+    "Email_Support" = "电子邮件支持";
+    "Need_help" = "需要帮助？发送邮件给我们。我们会尽力而为的。";
+    "Copy_Tweak_List" = "复制调整列表";
+    "Needing_list" = "需要所有改动的调整列表吗？";
+    "Contact" = "联系方式";
+    "Follow_MidnightChips" = "关注 MidnightChips";
+    "Follow_PINPAL" = "关注 PINPAL";
+    "Follow_VitaTaf" = "关注 VitaTaf";
+    "HomeGesture_support" = "HomeGesture 支持";
+}
