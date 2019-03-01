@@ -186,7 +186,7 @@ static CALayer* AirPlayIcon;
                 [subview init];
                 #pragma clang diagnostic pop
             }
-            if (subview.frame.origin.x > 100) {
+            else if (subview.frame.origin.x > 100) {
                 CGFloat _screenWidth = subview.frame.origin.x + subview.frame.size.width / 2;
                 CGRect _frame = subview.frame;
                 _frame = CGRectMake(_screenWidth - 96, _frame.origin.y - 90, 50, 50);
