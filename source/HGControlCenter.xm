@@ -7,7 +7,7 @@
     UIView *backgroundView = (UIView *)[self valueForKey:@"_headerBackgroundView"];
     backgroundView.hidden = YES;
   }
-  if ([self valueForKey:@"_headerLineView"]) {
+  else if ([self valueForKey:@"_headerLineView"]) {
     UIView *lineView = (UIView *)[self valueForKey:@"_headerLineView"];
     lineView.hidden = YES;
   }
