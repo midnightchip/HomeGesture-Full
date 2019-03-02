@@ -11,4 +11,6 @@
     "Show_Centre" = "Show the status bar in Control Centre";
     "iPad_STYLE" = "iPad Style Status Bar";
     "Mimic_iPad" = "Mimics iPad Status Bar, adds date (iOS 12+)";
+    "Disable_IPX_IN_APPS" = "Disable the iPhone X Status bar in incompatible apps (iOS 12)";
+    "Turn_ON_iPad_FallBack"= "You can also enable the iPad status bar for those apps as a fallback"; 
 }

@@ -1,4 +1,6 @@
 #import "HomeGesture.h"
+#define CURRENT_BUNDLE [NSBundle mainBundle].bundleIdentifier
+#define IS_ALLOWED [SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"statusBlack" containBundleIdentifier:CURRENT_BUNDLE]
 
 // Hide Carrier Text in Status Bar
 %hook UIStatusBarServiceItemView
@@ -28,15 +30,15 @@
 // iPhone X Status bar
 %hook UIStatusBar_Base
 + (BOOL)forceModern {
-	if([prefs boolForKey:@"statusBarX"]){
+	if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
 		return [prefs boolForKey:@"statusBarX"];
 	}else{
 		return %orig;
 	}
 }
 + (Class)_statusBarImplementationClass {
-	if([prefs boolForKey:@"statusBarX"]){
-		return [prefs boolForKey:@"statusBarX"] ? NSClassFromString(@"UIStatusBar_Modern") : NSClassFromString(@"UIStatusBar");
+	if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+		return NSClassFromString(@"UIStatusBar_Modern");
 	}else{
 		return %orig;
 	}
@@ -45,7 +47,9 @@
 
 + (Class)_implementationClass {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"] || [prefs boolForKey:@"statusBarPad"]){
+    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+      return NSClassFromString(@"UIStatusBar_Modern");
+    }else if([prefs boolForKey:@"statusBarPad"]){
       return NSClassFromString(@"UIStatusBar_Modern");
     }else{
       return %orig;
@@ -56,8 +60,10 @@
 }
 + (void)_setImplementationClass:(Class)arg1 {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"] || [prefs boolForKey:@"statusBarPad"]){
+    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
     %orig(NSClassFromString(@"UIStatusBar_Modern"));
+    }else if([prefs boolForKey:@"statusBarPad"]){
+      %orig(NSClassFromString(@"UIStatusBar_Modern"));
     }else{
       %orig;
     }
@@ -72,7 +78,7 @@
 %hook _UIStatusBar
 //TODO ONLY FOR SPLIT 58
 + (double)heightForOrientation:(long long)arg1 {
-  if([prefs boolForKey:@"statusBarX"]){
+  if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED ){
     if (arg1 == 1 || arg1 == 2) {
         return %orig - 9;
     } else {
@@ -87,8 +93,16 @@
 
 %hook _UIStatusBarVisualProvider_iOS
 + (Class)class {
+  /*NSString *currentApp;
+  if (![CURRENT_BUNDLE isEqualToString:@"com.apple.springboard"]){
+	  SpringBoard *springBoard = (SpringBoard *)[UIApplication sharedApplication];
+	  SBApplication *frontApp = (SBApplication *)[springBoard _accessibilityFrontMostApplication];
+	  currentApp = [frontApp valueForKey:@"_bundleIdentifier"];
+  }else{
+    currentApp = CURRENT_BUNDLE;
+  }*/
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"]){
+    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
       return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
     }else if([prefs boolForKey:@"statusBarPad"]){
       return NSClassFromString(@"_UIStatusBarVisualProvider_Pad_ForcedCellular");
@@ -106,7 +120,9 @@
 %hook UIStatusBarWindow
 + (void)setStatusBar:(Class)arg1 {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"] || [prefs boolForKey:@"statusBarPad"]){
+    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+      %orig(NSClassFromString(@"UIStatusBar_Modern"));
+    }else if([prefs boolForKey:@"statusBarPad"]){
       %orig(NSClassFromString(@"UIStatusBar_Modern"));
     }else{
       %orig;

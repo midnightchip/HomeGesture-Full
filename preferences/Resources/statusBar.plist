@@ -43,6 +43,17 @@
 
 			<dict>
 				<key>cell</key>
+				<string>PSButtonCell</string>
+				<key>label</key>
+				<string>Disable_IPX_IN_APPS</string>
+				<key>sublabel</key>
+				<string>Turn_ON_iPad_FallBack</string>
+				<key>action</key>
+				<string>selectStatusBlacklist</string>
+			</dict>
+
+			<dict>
+				<key>cell</key>
 				<string>PSSwitchCell</string>
 				<key>label</key>
 				<string>iPad_STYLE</string>

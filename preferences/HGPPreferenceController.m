@@ -54,6 +54,11 @@ if ([self respondsToSelector:@selector(suspend)])
   [self.navigationController pushViewController:s animated:YES];
   self.navigationItem.hidesBackButton = FALSE;
 }
+-(void)selectStatusBlacklist{
+  SparkAppListTableViewController* s = [[SparkAppListTableViewController alloc] initWithIdentifier:@"com.midnight.homegesture.plist" andKey:@"statusBlack"];
+  [self.navigationController pushViewController:s animated:YES];
+  self.navigationItem.hidesBackButton = FALSE;
+}
 @end
 
 @implementation HGPPreferenceController
