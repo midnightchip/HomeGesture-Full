@@ -25,7 +25,7 @@
 - (CGRect)bounds {
   CGRect bounds = %orig;
   if (bounds.origin.y == 0) {
-    bounds.origin.y -=12.5;
+    bounds.origin.y -=13;
   }
   return bounds; 
 }

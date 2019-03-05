@@ -66,6 +66,7 @@ long currentCachedMode = 99;
 
 static CALayer* playbackIcon;
 static CALayer* AirPlayIcon;
+static CALayer* platterLayer;
 
 %hook MediaControlsRoutingButtonView
 - (void)_updateGlyph {
@@ -81,66 +82,63 @@ static CALayer* AirPlayIcon;
 
                 playbackIcon = self.layer.sublayers[0].sublayers[0].sublayers[1].sublayers[0];
                 AirPlayIcon = self.layer.sublayers[0].sublayers[0].sublayers[1].sublayers[1];
+								platterLayer = self.layer.sublayers[0].sublayers[0].sublayers[1];
 
                 if (self.currentMode == 2) { // Play/Pause Mode
 
                     // Play/Pause Icon
                     playbackIcon.speed = 0.5;
 
-                    [UIView animateWithDuration:1
-                                          delay:0
-                                        options:UIViewAnimationOptionCurveEaseInOut
-                                     animations:^{
-
-                                         playbackIcon.transform = CATransform3DMakeScale(-1, -1, 1);
-                                         playbackIcon.opacity = 0.75;
-                                     }
-                                     completion:^(BOOL finished){}];
+                    UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:1 dampingRatio:1 animations:^{
+                        playbackIcon.transform = CATransform3DMakeScale(-1, -1, 1);
+                        playbackIcon.opacity = 0.75;
+                    }];
+                    [animator startAnimation];
 
                     // AirPlay Icon
                     AirPlayIcon.speed = 0.75;
 
-                    [UIView animateWithDuration:1
-                                          delay:0
-                                        options:UIViewAnimationOptionCurveEaseInOut
-                                     animations:^{
-                                         AirPlayIcon.transform = CATransform3DMakeScale(0.85, 0.85, 1);
-                                         AirPlayIcon.opacity = -0.75;
-                                     }
-                                     completion:^(BOOL finished){}];
+                    UIViewPropertyAnimator *animator2 = [[UIViewPropertyAnimator alloc] initWithDuration:1 dampingRatio:1 animations:^{
+                        AirPlayIcon.transform = CATransform3DMakeScale(0.85, 0.85, 1);
+                        AirPlayIcon.opacity = -0.75;
+                    }];
+                    [animator2 startAnimation];
+
+										platterLayer.backgroundColor = [[UIColor colorWithRed:0 green:0.478 blue:1.0 alpha:0.0] CGColor];
 
                 } else if (self.currentMode == 0 || self.currentMode == 1) { // AirPlay Mode
 
                     // Play/Pause Icon
                     playbackIcon.speed = 0.75;
 
-                    [UIView animateWithDuration:1
-                                          delay:0
-                                        options:UIViewAnimationOptionCurveEaseInOut
-                                     animations:^{
-
-                                         playbackIcon.transform = CATransform3DMakeScale(-0.85, -0.85, 1);
-                                         playbackIcon.opacity = -0.75;
-                                     }
-                                     completion:^(BOOL finished){}];
+                    UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:1 dampingRatio:1 animations:^{
+                        playbackIcon.transform = CATransform3DMakeScale(-0.85, -0.85, 1);
+                        playbackIcon.opacity = -0.75;
+                    }];
+                    [animator startAnimation];
 
                     // AirPlay Icon
                     AirPlayIcon.speed = 0.5;
 
-                    [UIView animateWithDuration:1
-                                          delay:0
-                                        options:UIViewAnimationOptionCurveEaseInOut
-                                     animations:^{
-                                         AirPlayIcon.transform = CATransform3DMakeScale(1, 1, 1);
-                                         AirPlayIcon.opacity = 0.75;
-                                     }
-                                     completion:^(BOOL finished){}];
+                    UIViewPropertyAnimator *animator2 = [[UIViewPropertyAnimator alloc] initWithDuration:1 dampingRatio:1 animations:^{
+                        AirPlayIcon.transform = CATransform3DMakeScale(1, 1, 1);
+												if (self.currentMode == 0) {
+													AirPlayIcon.opacity = 0.75;
+													platterLayer.backgroundColor = [[UIColor colorWithRed:0 green:0.478 blue:1.0 alpha:0.0] CGColor];
+												} else if (self.currentMode == 1) {
+													AirPlayIcon.opacity = 1;
+													platterLayer.backgroundColor = [[UIColor colorWithRed:0 green:0.478 blue:1.0 alpha:1.0] CGColor];
+													platterLayer.cornerRadius = 18;
+												}
+                    }];
+                    [animator2 startAnimation];
                 }
             }
         }
     }
 }
 %end
+
 
 // Hide Torch Button on CoverSheet
 %hook SBDashBoardQuickActionsViewController
@@ -180,13 +178,11 @@ static CALayer* AirPlayIcon;
                 _frame = CGRectMake(46, _frame.origin.y - 90, 50, 50);
                 subview.frame = _frame;
                 [subview sb_removeAllSubviews];
-                //Stupid Compiler, this does actually work, I have no idea why this is getting flagged
                 #pragma clang diagnostic push
                 #pragma clang diagnostic ignored "-Wunused-value"
                 [subview init];
                 #pragma clang diagnostic pop
-            }
-            if (subview.frame.origin.x > 100) {
+            } else if (subview.frame.origin.x > 100) {
                 CGFloat _screenWidth = subview.frame.origin.x + subview.frame.size.width / 2;
                 CGRect _frame = subview.frame;
                 _frame = CGRectMake(_screenWidth - 96, _frame.origin.y - 90, 50, 50);
@@ -221,21 +217,96 @@ static CALayer* AirPlayIcon;
 %end
 
 //Icon transition
+long _iconHighlightInitiationSkipper = 0;
+
 %hook SBIconView
 - (void)setHighlighted:(bool)arg1 {
 
+    if (_iconHighlightInitiationSkipper) {
+      %orig;
+      return;
+    }
+
     if (arg1 == YES) {
-        [UIView animateWithDuration:0
-                              delay:0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{%orig;}
-                         completion:^(BOOL finished){ }];
+
+        if (!self.highlighted) {
+          _iconHighlightInitiationSkipper = 1;
+          %orig;
+          %orig(NO);
+          _iconHighlightInitiationSkipper = 0;
+        }
+
+        UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:0.125 dampingRatio:1 animations:^{
+            %orig;
+        }];
+        [animator startAnimation];
     } else {
-        [UIView animateWithDuration:0.15
-                              delay:0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{%orig;}
-                         completion:^(BOOL finished){ }];
+        UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:0.25 dampingRatio:1 animations:^{
+            %orig;
+        }];
+        [animator startAnimation];
+    }
+    return;
+}
+%end
+
+
+@interface NCToggleControl : UIView
+- (void)setHighlighted:(bool)arg1;
+@end
+
+%hook NCToggleControl
+- (void)setHighlighted:(bool)arg1 {
+    if (arg1 == YES) {
+
+        UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:0.125 curve:UIViewAnimationCurveEaseOut animations:^{
+            %orig;
+        }];
+        [animator startAnimation];
+    } else {
+        UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:0.5 dampingRatio:1 animations:^{
+            %orig;
+        }];
+        [animator startAnimation];
+    }
+    return;
+}
+%end
+
+
+@interface SBEditingDoneButton : UIView
+- (void)setHighlighted:(bool)arg1;
+@end
+
+%hook SBEditingDoneButton
+-(void)layoutSubviews {
+    %orig;
+
+    if (!self.layer.masksToBounds) {
+        self.layer.continuousCorners = YES;
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 13;
+    }
+
+    /*
+     CGRect _frame = self.frame;
+     if (_frame.origin.y != 16) {
+     _frame.origin.y = 16;
+     self.frame = _frame;
+     }*/
+}
+- (void)setHighlighted:(bool)arg1 {
+    if (arg1 == YES) {
+
+        UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:0.1 curve:UIViewAnimationCurveEaseOut animations:^{
+            %orig;
+        }];
+        [animator startAnimation];
+    } else {
+        UIViewPropertyAnimator *animator = [[UIViewPropertyAnimator alloc] initWithDuration:0.5 dampingRatio:1 animations:^{
+            %orig;
+        }];
+        [animator startAnimation];
     }
     return;
 }
@@ -414,6 +485,14 @@ static CALayer* AirPlayIcon;
   }else{
     return;
   }
+}
+%end
+
+//Fix Reachability from neptune
+
+%hook SBReachabilitySettings
+- (void)setSystemWideSwipeDownHeight:(double) systemWideSwipeDownHeight {
+    return %orig(100);
 }
 %end
 

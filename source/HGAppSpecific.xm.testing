@@ -1,0 +1,39 @@
+%group Twitter
+
+@interface TFNCustomTabBar : UIView
+@end
+
+%hook TFNCustomTabBar
+
+- (void)layoutSubviews {
+    %orig;
+    CGRect _frame = self.frame;
+    if (_frame.origin.y != [[UIScreen mainScreen] bounds].size.height - _frame.size.height) {
+        _frame.origin.y = _frame.origin.y - 3.5;
+    }
+    self.frame = _frame;
+}
+
+%end
+
+%end
+
+// MARK: - Calendar
+%group Calendar
+
+@interface CompactMonthDividedListSwitchButton : UIView
+@end
+
+%hook CompactMonthDividedListSwitchButton
+- (void)layoutSubviews {
+    %orig;
+
+    self.layer.cornerRadius = 3;
+    self.layer.continuousCorners = YES;
+    self.clipsToBounds = YES;
+}
+%end;
+
+%ctor{
+    
+}

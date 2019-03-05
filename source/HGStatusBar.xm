@@ -27,6 +27,16 @@
 }
 %end
 
+%hook _UIStatusBarData
+- (void)setBackNavigationEntry:(id)arg1 {
+  if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+    return;
+  }else{
+    %orig;
+  }
+}
+%end
+
 // iPhone X Status bar
 %hook UIStatusBar_Base
 + (BOOL)forceModern {
@@ -44,6 +54,7 @@
 	}
   //return NSClassFromString(@"UIStatusBar_Modern");
 }
+
 
 + (Class)_implementationClass {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
@@ -80,7 +91,7 @@
 + (double)heightForOrientation:(long long)arg1 {
   if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED ){
     if (arg1 == 1 || arg1 == 2) {
-        return %orig - 9;
+        return %orig - 10;
     } else {
         return %orig;
     }
@@ -106,6 +117,8 @@
       return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
     }else if([prefs boolForKey:@"statusBarPad"]){
       return NSClassFromString(@"_UIStatusBarVisualProvider_Pad_ForcedCellular");
+    }else if (@available(iOS 12.1, *)){
+      return NSClassFromString(@"_UIStatusBarVisualProvider_RoundedPad_ForcedCellular");
     }else{
       return NSClassFromString(@"_UIStatusBarVisualProvider_Pad_ForcedCellular");//%orig;
     } 

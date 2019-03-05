@@ -113,9 +113,16 @@
 
 @interface SBIconView : UIView
 - (void)setHighlighted:(bool)arg1;
+@property(nonatomic, getter=isHighlighted) _Bool highlighted;
 @end
 
 @interface SBAppSwitcherPageView : UIView
 @property(nonatomic, assign) double cornerRadius;
+@end
+
+@interface CALayer (CornerAddition)
+-(bool)continuousCorners;
+@property (assign) bool continuousCorners;
+-(void)setContinuousCorners:(bool)arg1;
 @end
 
