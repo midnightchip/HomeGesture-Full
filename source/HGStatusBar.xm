@@ -1,6 +1,4 @@
 #import "HomeGesture.h"
-#define CURRENT_BUNDLE [NSBundle mainBundle].bundleIdentifier
-#define IS_ALLOWED [SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"statusBlack" containBundleIdentifier:CURRENT_BUNDLE]
 
 // Hide Carrier Text in Status Bar
 %hook UIStatusBarServiceItemView
@@ -29,7 +27,7 @@
 
 %hook _UIStatusBarData
 - (void)setBackNavigationEntry:(id)arg1 {
-  if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+  if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
     return;
   }else{
     %orig;
@@ -40,14 +38,14 @@
 // iPhone X Status bar
 %hook UIStatusBar_Base
 + (BOOL)forceModern {
-	if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+	if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
 		return [prefs boolForKey:@"statusBarX"];
 	}else{
 		return %orig;
 	}
 }
 + (Class)_statusBarImplementationClass {
-	if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+	if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
 		return NSClassFromString(@"UIStatusBar_Modern");
 	}else{
 		return %orig;
@@ -58,7 +56,7 @@
 
 + (Class)_implementationClass {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+    if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
       return NSClassFromString(@"UIStatusBar_Modern");
     }else if([prefs boolForKey:@"statusBarPad"]){
       return NSClassFromString(@"UIStatusBar_Modern");
@@ -71,7 +69,7 @@
 }
 + (void)_setImplementationClass:(Class)arg1 {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+    if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
     %orig(NSClassFromString(@"UIStatusBar_Modern"));
     }else if([prefs boolForKey:@"statusBarPad"]){
       %orig(NSClassFromString(@"UIStatusBar_Modern"));
@@ -89,7 +87,7 @@
 %hook _UIStatusBar
 //TODO ONLY FOR SPLIT 58
 + (double)heightForOrientation:(long long)arg1 {
-  if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED ){
+  if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED ){
     if (arg1 == 1 || arg1 == 2) {
         return %orig - 10;
     } else {
@@ -113,7 +111,7 @@
     currentApp = CURRENT_BUNDLE;
   }*/
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+    if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
       return NSClassFromString(@"_UIStatusBarVisualProvider_Split58");
     }else if([prefs boolForKey:@"statusBarPad"]){
       return NSClassFromString(@"_UIStatusBarVisualProvider_Pad_ForcedCellular");
@@ -133,7 +131,7 @@
 %hook UIStatusBarWindow
 + (void)setStatusBar:(Class)arg1 {
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")) {
-    if([prefs boolForKey:@"statusBarX"] && !IS_ALLOWED){
+    if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
       %orig(NSClassFromString(@"UIStatusBar_Modern"));
     }else if([prefs boolForKey:@"statusBarPad"]){
       %orig(NSClassFromString(@"UIStatusBar_Modern"));

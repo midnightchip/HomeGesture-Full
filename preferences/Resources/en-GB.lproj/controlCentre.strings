@@ -6,5 +6,6 @@
     "Show_Centre" = "Show the status bar in Control Centre";
     "Change_Centre" = "Change top padding in Control Centre";
     "Change_CC" = "Change top padding in Landscape CC";
-
+    "Enable_Padding" = "Enable Padding options below";
+    "Padding_Info" = "This will cause the status bar to glitch when returning from the control center";
 }

@@ -3,6 +3,13 @@
 %hook CCUIHeaderPocketView
 -(void)layoutSubviews{
   %orig;
+  CGRect _frame = self.frame;
+  if([prefs boolForKey:@"statusBarX"] && !IS_BLOCKED){
+    _frame.origin.y = -10;
+  }else{
+    _frame.origin.y = -24;
+  }
+  self.frame = _frame;
   if ([self valueForKey:@"_headerBackgroundView"]) {
     UIView *backgroundView = (UIView *)[self valueForKey:@"_headerBackgroundView"];
     backgroundView.hidden = YES;
@@ -12,9 +19,23 @@
     lineView.hidden = YES;
   }
 }
+%end 
 
+//Hide Status Bar in Control Center
+%hook CCUIOverlayStatusBarPresentationProvider
+- (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
+	if ([prefs boolForKey:@"statusBarCC"]){
+		return %orig;
+	}
+	else {
+		return;
+	}
+}
+%end
+
+%group FUGap
 //Start FUGap
-
+%hook CCUIHeaderPocketView
 
 -(CGRect)contentBounds{
       if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)){
@@ -51,18 +72,7 @@
     }
   }
 %end
-
-//Hide Status Bar in Control Center
-%hook CCUIOverlayStatusBarPresentationProvider
-- (void)_addHeaderContentTransformAnimationToBatch:(id)arg1 transitionState:(id)arg2 {
-	if ([prefs boolForKey:@"statusBarCC"]){
-		return %orig;
-	}
-	else {
-		return;
-	}
-}
-%end
+%end 
 
 %ctor{
     //NSString *bundleID = [NSBundle mainBundle].bundleIdentifier;
@@ -70,6 +80,9 @@
       NSFileManager *fileManager = [NSFileManager defaultManager];
       if ([fileManager fileExistsAtPath:@"/var/mobile/Library/Preferences/HomeGesture/setup"]) {
         %init();
+        if([prefs boolForKey:@"enableFUGAP"]){
+          %init(FUGap);
+          }
         }
     }
 }

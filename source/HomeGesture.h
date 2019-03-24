@@ -18,7 +18,8 @@
 #define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-
+#define CURRENT_BUNDLE [NSBundle mainBundle].bundleIdentifier
+#define IS_BLOCKED [SparkAppList doesIdentifier:@"com.midnight.homegesture.plist" andKey:@"statusBlack" containBundleIdentifier:CURRENT_BUNDLE]
 
 //Quick Setup
 @interface SBDashBoardViewController : UIViewController
@@ -125,4 +126,17 @@
 @property (assign) bool continuousCorners;
 -(void)setContinuousCorners:(bool)arg1;
 @end
+
+@interface PTSettings : NSObject
+@end 
+
+@interface _UISettings : PTSettings
+@end 
+
+@interface SBUISettings : _UISettings
+@end 
+
+@interface SBHomeGestureSettings : SBUISettings
++ (SBHomeGestureSettings *)sharedInstance;
+@end 
 

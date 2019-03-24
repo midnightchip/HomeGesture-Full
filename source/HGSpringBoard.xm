@@ -35,7 +35,14 @@ long _dismissalSlidingMode = 0;
 		return %orig;
 	}
 }
+%end 
+
+%hook SBVolumeHardwareButton
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 shutdownGestureRecognizer:(id)arg2 homeButtonType:(long long)arg3 {
+    return %orig(arg1,arg2,_homeButtonType);
+}
 %end
+
 %hook SBHomeHardwareButtonActions
 - (id)initWitHomeButtonType:(long long)arg1 {
 	if([prefs boolForKey:@"siriHome"]){
@@ -447,11 +454,22 @@ long _iconHighlightInitiationSkipper = 0;
 }
 %end
 
+
+typedef enum {
+    Tall=0,
+    Regular=1
+} NEPStatusBarHeightStyle;
+
+@interface SBDashBoardTeachableMomentsContainerView : UIView
+@property(retain, nonatomic) UIView *controlCenterGrabberView;
+@property(retain, nonatomic) UIView *controlCenterGrabberEffectContainerView;
+@end
+
 // Hide Control Center Indicator on Coversheet
 %hook SBDashBoardTeachableMomentsContainerView
 -(void)_addControlCenterGrabber {
 	if ([prefs boolForKey:@"notificationHint"]){
-
+        return;
 	}else{
 		return %orig;
 	}

@@ -53,6 +53,23 @@
 
 		 <dict>
 			 <key>cell</key>
+			 <string>PSSwitchCell</string>
+			 <key>label</key>
+			 <string>Enable_Padding</string>
+			 <key>sublabel</key>
+			 <string>Padding_Info</string>
+			 <key>key</key>
+			 <string>enableFUGAP</string>
+			 <key>PostNotification</key>
+			 <string>com.vitataf.homegesture.prefschanged</string>
+			 <key>defaults</key>
+			 <string>com.vitataf.homegesture</string>
+			 <key>defaultsPath</key>
+			 <string>/Library/PreferenceBundles/HomeGesture.bundle</string>
+		 </dict>
+
+		 <dict>
+			 <key>cell</key>
 			 <string>PSTableCell</string>
 			 <key>cellClass</key>
 			 <string>CSPImageCell</string>
@@ -131,6 +148,8 @@
 				<key>defaultsPath</key>
 				<string>/Library/PreferenceBundles/HomeGesture.bundle</string>
 			</dict>
+			
+			
 
 			<dict>
 				<key>cell</key>

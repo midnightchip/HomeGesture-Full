@@ -32,14 +32,15 @@ long _homeButtonTypeRemap = 1;
 }
 %end
 
-%hook SBHomeHardwareButton
-- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 buttonActions:(id)arg3 gestureRecognizerConfiguration:(id)arg4 {
-return %orig(arg1, _homeButtonTypeRemap, arg3, arg4);
+%hook SBVolumeHardwareButton
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 shutdownGestureRecognizer:(id)arg2 proximitySensorManager:(id)arg3 homeHardwareButton:(id)arg4 volumeHardwareButton:(id)arg5 buttonActions:(id)arg6 homeButtonType:(long long)arg7 createGestures:(_Bool)arg8 {
+    return %orig(arg1,arg2,arg3,arg4,arg5,arg6,_homeButtonTypeRemap,arg8);
 }
-- (id)initWithScreenshotGestureRecognizer:(id)arg1 homeButtonType:(long long)arg2 {
-return %orig(arg1, _homeButtonTypeRemap);
+- (id)initWithScreenshotGestureRecognizer:(id)arg1 shutdownGestureRecognizer:(id)arg2 proximitySensorManager:(id)arg3 homeHardwareButton:(id)arg4 volumeHardwareButton:(id)arg5 homeButtonType:(long long)arg6 {
+    return %orig(arg1,arg2,arg3,arg4,arg5,_homeButtonTypeRemap);
 }
 %end
+
 %ctor{
 	if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.0")){
       NSFileManager *fileManager = [NSFileManager defaultManager];
