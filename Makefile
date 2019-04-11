@@ -5,6 +5,8 @@ DEBUG = 0
 FINALPACKAGE = 0
 GO_EASY_ON_ME = 0
 
+<package>_CFLAGS = -fobjc-arc
+
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = HomeGesture
