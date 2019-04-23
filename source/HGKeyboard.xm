@@ -1,14 +1,6 @@
 #import "HomeGesture.h"
 //Keyboard
 
-%hook UIRemoteKeyboardWindowHosted
-- (UIEdgeInsets)safeAreaInsets {
-  UIEdgeInsets orig = %orig;
-  orig.bottom = 44;
-  return orig; 
-}
-%end
-
 %hook UIKeyboardImpl
 +(UIEdgeInsets)deviceSpecificPaddingForInterfaceOrientation:(NSInteger)orientation inputMode:(id)mode {
   UIEdgeInsets orig = %orig;
@@ -17,8 +9,6 @@
 }
 
 %end
-
-
 
 %hook UIKeyboardDockView
 
